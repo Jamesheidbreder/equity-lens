@@ -16,8 +16,26 @@ from equity_lens.data import edgar, macro, market
 from equity_lens.universe import UNIVERSE
 from equity_lens.analysis import ratios, valuation
 
-DCF_WEIGHT, COMPS_WEIGHT = 0.60, 0.40
 ROE_NORMALIZATION_YEARS = 5
+
+# Target blend for operating companies: intrinsic value (DCF), what peers
+# trade at (comps), and what the company's own franchise has historically
+# commanded (own multiple). No single lens dominates.
+WEIGHTS = {"dcf": 0.40, "comps": 0.30, "own_multiple": 0.30}
+
+
+def _own_average_pe(ticker: str, eps_by_year: dict, years: int = 5) -> float:
+    """The company's average trailing P/E over recent fiscal years:
+    mean price during each fiscal year / that year's diluted EPS."""
+    import statistics as _st
+    hist = market.get_history(ticker, period=f"{years + 1}y")
+    pes = []
+    for y, eps in list(eps_by_year.items())[-years:]:
+        if eps and eps > 0:
+            yr_prices = hist[hist.index.year == y]["Close"]
+            if len(yr_prices):
+                pes.append(yr_prices.mean() / eps)
+    return _st.median(pes) if pes else None
 
 
 def _normalized_roe(ratio_data: dict) -> float:
@@ -46,38 +64,81 @@ def analyze(ticker: str) -> dict:
     method = profile["method"]
     models = {}
 
+    peers = market.get_peer_multiples(profile["peers"])
+
     if method == "dcf_comps":
         fcf_years = {y: r["free_cash_flow"] for y, r in ratio_data["per_year"].items()
                      if "free_cash_flow" in r}
-        fcf_base = list(fcf_years.values())[-1] if fcf_years else None
-        growth = ratio_data["fcf_cagr_5y"] or ratio_data["revenue_cagr_5y"]
+        # Base = 5-year median: robust to one-off years (a single acquisition
+        # payout or windfall year can't set the base), unlike a mean.
+        recent_fcf = list(fcf_years.values())[-5:]
+        fcf_base = statistics.median(recent_fcf) if recent_fcf else None
+
+        # Forward-looking growth (consensus) preferred; history as fallback.
+        growth = (snap["earnings_growth"] or snap["revenue_growth"]
+                  or ratio_data["fcf_cagr_5y"] or ratio_data["revenue_cagr_5y"])
+
+        # Exit multiple: average of what peers trade at and what this company
+        # has historically commanded — industry potential and franchise
+        # premium both enter the terminal value.
+        pe_f = peers["forward_pe"].dropna()
+        pe_t = peers["trailing_pe"].dropna()
+        peer_mult = (pe_f.median() if not pe_f.empty
+                     else (pe_t.median() if not pe_t.empty else None))
+        own_pe = _own_average_pe(ticker, fin["eps_diluted"])
+        mults = [x for x in (peer_mult, own_pe) if x]
+        exit_mult = sum(mults) / len(mults) if mults else None
+
         debt = fin["long_term_debt"]
         cash = fin["cash"]
         net_debt = ((list(debt.values())[-1] if debt else 0)
                     - (list(cash.values())[-1] if cash else 0))
-        models["dcf"] = valuation.dcf_value(fcf_base, growth, coe, net_debt, shares)
+        models["dcf"] = valuation.dcf_value(fcf_base, growth, coe, net_debt,
+                                            shares, exit_multiple=exit_mult)
 
-        peers = market.get_peer_multiples(profile["peers"])
         # Current trailing EPS; last 10-K EPS can be ~3 quarters stale.
         eps_10k = fin["eps_diluted"]
-        eps_latest = snap["trailing_eps"] or (list(eps_10k.values())[-1] if eps_10k else None)
-        models["comps"] = valuation.comps_value(eps_latest, peers)
+        eps_trailing = snap["trailing_eps"] or (list(eps_10k.values())[-1] if eps_10k else None)
+        models["comps"] = valuation.comps_value(eps_trailing, snap["forward_eps"], peers)
+        models["own_multiple"] = valuation.own_multiple_value(
+            own_pe, snap["forward_eps"], eps_trailing)
 
         vals, weights = [], []
-        if models["dcf"]["per_share"]:
-            vals.append(models["dcf"]["per_share"]); weights.append(DCF_WEIGHT)
-        if models["comps"]["per_share"]:
-            vals.append(models["comps"]["per_share"]); weights.append(COMPS_WEIGHT)
+        for name, w in WEIGHTS.items():
+            if models[name]["per_share"]:
+                vals.append(models[name]["per_share"]); weights.append(w)
         target = (sum(v * w for v, w in zip(vals, weights)) / sum(weights)
                   if vals else None)
 
-    else:  # bank or conglomerate: justified P/B on normalized ROE
+    else:
         eq = fin["total_equity"]
         book = list(eq.values())[-1] if eq else None
         bvps = book / shares if book and shares else None
         models["justified_pb"] = valuation.justified_pb_value(
             bvps, _normalized_roe(ratio_data), coe)
-        target = models["justified_pb"]["per_share"]
+
+        if method == "bank":
+            # Banks: justified P/B cross-checked with peer P/E and the bank's
+            # own historical P/E — regionals are commonly valued on both.
+            models["comps"] = valuation.comps_value(
+                snap["trailing_eps"], snap["forward_eps"], peers)
+            own_pe = _own_average_pe(ticker, fin["eps_diluted"])
+            models["own_multiple"] = valuation.own_multiple_value(
+                own_pe, snap["forward_eps"], snap["trailing_eps"])
+        else:
+            # Holdcos like BRK: GAAP runs unrealized portfolio gains through
+            # earnings, so P/E is noise. Cross-check on peer P/B instead.
+            peer_pb = peers["price_to_book"].dropna()
+            if bvps and not peer_pb.empty:
+                models["peer_pb"] = {
+                    "per_share": bvps * peer_pb.median(),
+                    "assumptions": {"book_per_share": bvps,
+                                    "peer_median_pb": peer_pb.median(),
+                                    "peers_used": list(peer_pb.index)},
+                }
+
+        vals = [m["per_share"] for m in models.values() if m.get("per_share")]
+        target = sum(vals) / len(vals) if vals else None
 
     return {
         "ticker": ticker,

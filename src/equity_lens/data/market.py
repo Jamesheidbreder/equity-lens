@@ -23,6 +23,13 @@ def get_snapshot(ticker: str) -> dict:
         "trailing_pe": info.get("trailingPE"),
         "trailing_eps": info.get("trailingEps"),
         "forward_pe": info.get("forwardPE"),
+        "forward_eps": info.get("forwardEps"),
+        "earnings_growth": info.get("earningsGrowth"),
+        "revenue_growth": info.get("revenueGrowth"),
+        # Street consensus, kept as a sanity benchmark only — never an input
+        # to our own valuation.
+        "street_target_mean": info.get("targetMeanPrice"),
+        "street_analyst_count": info.get("numberOfAnalystOpinions"),
         "price_to_book": info.get("priceToBook"),
         "dividend_yield": info.get("dividendYield"),
         "52w_high": info.get("fiftyTwoWeekHigh"),
