@@ -31,7 +31,7 @@ UNIVERSE = {
         "method": "dcf_comps",
         "peers": ["AAPL", "GOOGL", "ORCL", "CRM", "AMZN"],
         "cik": "0000789019",
-        "traits": [],
+        "traits": ["enterprise_software"],
         "intl_revenue_share": 0.49,
     },
     "KO": {

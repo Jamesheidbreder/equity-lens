@@ -47,6 +47,17 @@ def _vs_median(series_id: str, years: int = 10) -> tuple:
     return s.iloc[-1], s.iloc[-1] - s.median()
 
 
+def _yoy_vs_trend(series_id: str, trend_years: int = 5) -> tuple:
+    """(yoy growth, N-year trend growth, deviation). For 'is demand running
+    above or below its own trend?' style rules."""
+    import pandas as pd
+    s = macro.get_series(series_id, years=trend_years + 1)
+    yoy = s.iloc[-1] / s[s.index <= s.index[-1] - pd.DateOffset(years=1)].iloc[-1] - 1
+    span = (s.index[-1] - s.index[0]).days / 365.25
+    trend = (s.iloc[-1] / s.iloc[0]) ** (1 / span) - 1 if span > 0 else 0.0
+    return yoy, trend, yoy - trend
+
+
 def compute_adjustments(profile: dict, cash_to_book: float = None) -> list:
     """All applicable macro adjustments for a company profile.
 
@@ -170,6 +181,126 @@ def compute_adjustments(profile: dict, cash_to_book: float = None) -> list:
                          "running above/below trend leans on near-term growth.",
         }
     try_rule(durables_demand)
+
+    # ---- Banks: card delinquencies -> earlier-turning credit stress ------
+    def card_delinquency_roe():
+        if "bank" not in traits:
+            return None
+        import pandas as pd
+        s = macro.get_series("DRCCLACBS", years=10)
+        latest = s.iloc[-1]
+        year_ago = s[s.index <= s.index[-1] - pd.DateOffset(years=1)].iloc[-1]
+        rising = latest - year_ago
+        adj = _clamp(-max(rising, 0) / 100 * 0.5, CAPS["roe"])  # penalty only
+        if adj == 0:
+            return None
+        return {
+            "rule": "card_delinquency_roe", "indicator": "DRCCLACBS",
+            "reading": f"Card delinquency {latest:.2f}%, {rising:+.2f}pp y/y",
+            "target": "roe", "adjustment": adj,
+            "rationale": "Card delinquencies turn before total loan "
+                         "delinquencies; rising consumer credit stress leads "
+                         "provisions.",
+        }
+    try_rule(card_delinquency_roe)
+
+    # ---- Staples w/ limited pricing power: PPI vs CPI margin gap ---------
+    def ppi_cpi_margin():
+        if "cost_passthrough_limited" not in traits:
+            return None
+        ppi = _yoy_change("PPIACO")
+        cpi = _yoy_change("CPIAUCSL")
+        gap = ppi - cpi
+        adj = _clamp(-max(gap, 0) * 0.3, CAPS["growth"])  # penalty only
+        if adj == 0:
+            return None
+        return {
+            "rule": "ppi_cpi_margin", "indicator": "PPIACO vs CPIAUCSL",
+            "reading": f"Producer prices {ppi:+.1%} vs consumer prices {cpi:+.1%} y/y",
+            "target": "growth", "adjustment": adj,
+            "rationale": "Input costs outrunning shelf prices squeeze margins "
+                         "for companies that can't fully pass costs through.",
+        }
+    try_rule(ppi_cpi_margin)
+
+    # ---- Enterprise software: corporate software investment demand -------
+    def software_investment_demand():
+        if "enterprise_software" not in traits:
+            return None
+        yoy, trend, dev = _yoy_vs_trend("B985RC1Q027SBEA")
+        adj = _clamp(dev * 0.3, CAPS["growth"])
+        return {
+            "rule": "software_investment_demand", "indicator": "B985RC1Q027SBEA",
+            "reading": f"Business software investment {yoy:+.1%} y/y vs {trend:+.1%} trend",
+            "target": "growth", "adjustment": adj,
+            "rationale": "National-accounts software investment is the demand "
+                         "pool for enterprise IT; spend above/below trend leans "
+                         "on growth.",
+        }
+    try_rule(software_investment_demand)
+
+    # ---- Energy producers: the commodity IS the top line -----------------
+    def oil_price_revenue():
+        if "energy_producer" not in traits:
+            return None
+        chg = _yoy_change("DCOILWTICO")
+        adj = _clamp(chg * 0.10, CAPS["growth"])
+        return {
+            "rule": "oil_price_revenue", "indicator": "DCOILWTICO",
+            "reading": f"WTI crude {chg:+.1%} y/y",
+            "target": "growth", "adjustment": adj,
+            "rationale": "Producer revenue is price x volume; the oil price "
+                         "moves the top line directly.",
+        }
+    try_rule(oil_price_revenue)
+
+    # ---- Homebuilders: starts volume + mortgage-rate affordability -------
+    def housing_cycle():
+        if "homebuilder_housing" not in traits:
+            return None
+        starts_yoy = _yoy_change("HOUST")
+        _, rate_dev = _vs_median("MORTGAGE30US")
+        adj = _clamp(starts_yoy * 0.2 - max(rate_dev, 0) / 100 * 0.3,
+                     CAPS["growth"])
+        return {
+            "rule": "housing_cycle", "indicator": "HOUST + MORTGAGE30US",
+            "reading": f"Housing starts {starts_yoy:+.1%} y/y; mortgage rate "
+                       f"{rate_dev:+.2f}pp vs 10y median",
+            "target": "growth", "adjustment": adj,
+            "rationale": "Starts are the volume driver; above-normal mortgage "
+                         "rates throttle affordability and future demand.",
+        }
+    try_rule(housing_cycle)
+
+    # ---- Autos: where the sales pace sits in the cycle -------------------
+    def auto_sales_cycle():
+        if "auto_cycle" not in traits:
+            return None
+        yoy, trend, dev = _yoy_vs_trend("TOTALSA")
+        adj = _clamp(dev * 0.3, CAPS["growth"])
+        return {
+            "rule": "auto_sales_cycle", "indicator": "TOTALSA",
+            "reading": f"Vehicle sales pace {yoy:+.1%} y/y vs {trend:+.1%} trend",
+            "target": "growth", "adjustment": adj,
+            "rationale": "Industry volume vs its own trend locates the point "
+                         "in the auto cycle.",
+        }
+    try_rule(auto_sales_cycle)
+
+    # ---- Retail: demand vs trend ------------------------------------------
+    def retail_sales_demand():
+        if "retail_consumer" not in traits:
+            return None
+        yoy, trend, dev = _yoy_vs_trend("RSXFS")
+        adj = _clamp(dev * 0.3, CAPS["growth"])
+        return {
+            "rule": "retail_sales_demand", "indicator": "RSXFS",
+            "reading": f"Retail sales {yoy:+.1%} y/y vs {trend:+.1%} trend",
+            "target": "growth", "adjustment": adj,
+            "rationale": "Retail sales measure the demand pool directly; "
+                         "above/below-trend spending leans on growth.",
+        }
+    try_rule(retail_sales_demand)
 
     # ---- Cash-heavy holdcos: T-bill yields -> earnings on the cash pile --
     def cash_yield_roe():

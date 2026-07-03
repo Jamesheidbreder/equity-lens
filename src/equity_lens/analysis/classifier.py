@@ -28,6 +28,15 @@ TRAIT_MENU = {
                          "the durable-goods spending cycle.",
     "holdco_cash": "Holding company with a large cash/T-bill pile whose "
                    "yield follows short rates.",
+    "enterprise_software": "Sells software/cloud services to businesses; "
+                           "demand follows corporate IT investment.",
+    "energy_producer": "Produces oil/gas; revenue moves with the commodity price.",
+    "homebuilder_housing": "Builds homes or supplies the housing chain; "
+                           "driven by starts and mortgage rates.",
+    "auto_cycle": "Makes or supplies vehicles; follows the auto sales cycle.",
+    "retail_consumer": "Retailer; demand follows retail sales and sentiment.",
+    "cost_passthrough_limited": "Limited pricing power; margins squeezed when "
+                                "producer prices outrun consumer prices.",
 }
 
 # Keyword backend: substrings matched against Yahoo industry/sector strings.
@@ -37,6 +46,14 @@ INDUSTRY_KEYWORDS = {
     "consumer_hardware": ["consumer electronics", "computer hardware",
                           "electronic gaming"],
     "holdco_cash": ["insurance—diversified", "conglomerate"],
+    "enterprise_software": ["software", "information technology services"],
+    "energy_producer": ["oil & gas e&p", "oil & gas integrated",
+                        "oil & gas midstream", "thermal coal"],
+    "homebuilder_housing": ["residential construction", "building products"],
+    "auto_cycle": ["auto manufacturers", "auto parts"],
+    "retail_consumer": ["specialty retail", "department stores",
+                        "apparel retail", "home improvement retail",
+                        "discount stores", "internet retail"],
 }
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
