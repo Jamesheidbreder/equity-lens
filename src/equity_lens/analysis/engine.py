@@ -193,6 +193,7 @@ def analyze(ticker: str) -> dict:
 
     return {
         "ticker": ticker,
+        "as_of": __import__("datetime").date.today().isoformat(),
         "profile": profile,
         "snapshot": snap,
         "financials": fin,
@@ -207,3 +208,32 @@ def analyze(ticker: str) -> dict:
         "target_price": final_target,
         **valuation.make_rating(price, final_target),
     }
+
+
+def _relative_label(rank: int, n: int) -> str:
+    """Position within coverage -> relative stance. The top name is always
+    the Top Pick and the bottom always Least Preferred: relative ratings
+    force a distribution regardless of the absolute market level."""
+    if rank == 0:
+        return "Top Pick"
+    if rank == n - 1:
+        return "Least Preferred"
+    p = rank / (n - 1)
+    return "Overweight" if p < 0.45 else ("Neutral" if p < 0.7 else "Underweight")
+
+
+def analyze_universe(tickers: list = None) -> dict:
+    """Analyze every covered company and assign relative ratings by ranking
+    upside within the coverage universe.
+
+    Absolute rating answers "is it cheap vs our value estimate?";
+    relative rating answers "which would we own first?". Both are reported.
+    """
+    tickers = tickers or list(UNIVERSE)
+    results = {tk: analyze(tk) for tk in tickers}
+    ranked = sorted((tk for tk in results if results[tk]["upside"] is not None),
+                    key=lambda tk: results[tk]["upside"], reverse=True)
+    for rank, tk in enumerate(ranked):
+        results[tk]["relative_rank"] = rank + 1
+        results[tk]["relative_rating"] = _relative_label(rank, len(ranked))
+    return results

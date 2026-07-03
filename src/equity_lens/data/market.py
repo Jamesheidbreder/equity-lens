@@ -38,6 +38,7 @@ def get_snapshot(ticker: str) -> dict:
         "held_by_institutions": info.get("heldPercentInstitutions"),
         "long_name": info.get("longName"),
         "currency": info.get("currency"),
+        "business_summary": info.get("longBusinessSummary"),
     }
 
 
