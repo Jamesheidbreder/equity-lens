@@ -14,7 +14,8 @@ import statistics
 
 from equity_lens.data import edgar, macro, market
 from equity_lens.universe import UNIVERSE
-from equity_lens.analysis import macro_links, ratios, sensitivity, valuation
+from equity_lens.analysis import (macro_links, overlays, ratios, sensitivity,
+                                  valuation)
 
 ROE_NORMALIZATION_YEARS = 5
 
@@ -185,6 +186,11 @@ def analyze(ticker: str) -> dict:
         sens = (sensitivity.build_grid(_target_at, roe, coe, "Normalized ROE")
                 if roe is not None and target else None)
 
+    # Analyst judgment overlays: dated, disclosed adjustments on top of the
+    # frozen mechanical base (see overlays.py). Rating uses the final target.
+    overlay = overlays.apply(ticker, target)
+    final_target = overlay["adjusted_target"]
+
     return {
         "ticker": ticker,
         "profile": profile,
@@ -196,6 +202,8 @@ def analyze(ticker: str) -> dict:
         "macro_adjustments": macro_adjs,
         "sensitivity": sens,
         "models": models,
-        "target_price": target,
-        **valuation.make_rating(price, target),
+        "base_target": target,
+        "overlay": overlay,
+        "target_price": final_target,
+        **valuation.make_rating(price, final_target),
     }

@@ -1,0 +1,11 @@
+{
+  "AAPL": [
+    {
+      "date": "2026-07-03",
+      "type": "target_pct",
+      "value": 0.15,
+      "rationale": "Partial credit for AI services optionality the base engine refuses to price: street consensus embeds an AI-gateway narrative (est. up to $15B/yr services revenue long-term, per Wedbush). We credit roughly half the gap on the services portion only - hardware replacement-cycle acceleration remains unproven. DRAFT: analyst to confirm or revise.",
+      "review_by": "2026-10-30"
+    }
+  ]
+}
