@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Cached API data (regenerated on demand, not source of truth)
+data/cache/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
