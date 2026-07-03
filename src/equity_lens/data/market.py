@@ -21,6 +21,7 @@ def get_snapshot(ticker: str) -> dict:
         "float_shares": info.get("floatShares"),
         "beta": info.get("beta"),
         "trailing_pe": info.get("trailingPE"),
+        "trailing_eps": info.get("trailingEps"),
         "forward_pe": info.get("forwardPE"),
         "price_to_book": info.get("priceToBook"),
         "dividend_yield": info.get("dividendYield"),
