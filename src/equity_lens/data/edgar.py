@@ -1,0 +1,93 @@
+"""SEC EDGAR: as-filed financial statement data via the XBRL companyfacts API.
+
+This is the primary source for the financial analysis and valuation
+sections — numbers come from what the company actually filed with the SEC,
+not from a third-party aggregator.
+
+The SEC requires a descriptive User-Agent on all requests.
+"""
+
+import pandas as pd
+import requests
+
+COMPANYFACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json"
+# SEC fair-access policy requires identifying requests with a contact email.
+HEADERS = {"User-Agent": "Equity-Lens research h8y8vqzpc5@privaterelay.appleid.com"}
+
+# us-gaap concepts to extract, with fallback tags because filers differ in
+# which tag they use for the same line item.
+CONCEPTS = {
+    "revenue": ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues",
+                "SalesRevenueNet", "RevenuesNetOfInterestExpense",
+                "InterestAndDividendIncomeOperating"],
+    "net_income": ["NetIncomeLoss"],
+    # Bank-specific lines; empty for non-banks.
+    "net_interest_income": ["InterestIncomeExpenseNet",
+                            "InterestIncomeExpenseAfterProvisionForLoanLoss"],
+    "noninterest_income": ["NoninterestIncome"],
+    "provision_for_credit_losses": ["ProvisionForLoanLeaseAndOtherLosses",
+                                    "ProvisionForCreditLossExpenseReversal",
+                                    "ProvisionForLoanAndLeaseLosses"],
+    "operating_income": ["OperatingIncomeLoss"],
+    "total_assets": ["Assets"],
+    "total_equity": ["StockholdersEquity",
+                     "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
+    "operating_cash_flow": ["NetCashProvidedByUsedInOperatingActivities"],
+    "capex": ["PaymentsToAcquirePropertyPlantAndEquipment"],
+    "cash": ["CashAndCashEquivalentsAtCarryingValue"],
+    "long_term_debt": ["LongTermDebtNoncurrent", "LongTermDebt"],
+    "shares_diluted": ["WeightedAverageNumberOfDilutedSharesOutstanding"],
+    "eps_diluted": ["EarningsPerShareDiluted"],
+    "dividends_paid": ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends"],
+}
+
+
+def fetch_companyfacts(cik: str) -> dict:
+    """Raw XBRL companyfacts JSON for a company (cik is 10-digit, zero-padded)."""
+    resp = requests.get(COMPANYFACTS_URL.format(cik=cik), headers=HEADERS, timeout=30)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def _annual_values(facts: dict, tags: list) -> dict:
+    """Extract annual (10-K) values for the first tag that has data.
+
+    Values are keyed by the year of the period END date, not the SEC's "fy"
+    label — 10-K filings restate prior-year comparatives under the current
+    filing's fy label, so trusting "fy" mislabels historical years.
+
+    Duration concepts (revenue, income) are kept only for ~full-year periods;
+    instant concepts (assets, equity) are point-in-time balances.
+    """
+    gaap = facts.get("facts", {}).get("us-gaap", {})
+    for tag in tags:
+        if tag not in gaap:
+            continue
+        units = gaap[tag].get("units", {})
+        series = {}
+        for unit_vals in units.values():
+            for item in unit_vals:
+                if item.get("form") != "10-K" or "end" not in item:
+                    continue
+                end = item["end"]
+                if "start" in item:  # duration concept: keep full-year periods only
+                    days = (pd.Timestamp(end) - pd.Timestamp(item["start"])).days
+                    if not 330 <= days <= 400:
+                        continue
+                year = int(end[:4])
+                prev = series.get(year)
+                if prev is None or item.get("filed", "") > prev["filed"]:
+                    series[year] = {"val": item["val"], "filed": item.get("filed", "")}
+        if series:
+            return {year: rec["val"] for year, rec in sorted(series.items())}
+    return {}
+
+
+def get_annual_financials(cik: str) -> dict:
+    """Annual history for every concept in CONCEPTS.
+
+    Returns {concept_name: {fiscal_year: value}}. Concepts a company does not
+    report (e.g. capex for a bank) come back empty rather than invented.
+    """
+    facts = fetch_companyfacts(cik)
+    return {name: _annual_values(facts, tags) for name, tags in CONCEPTS.items()}
