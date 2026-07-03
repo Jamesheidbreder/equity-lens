@@ -19,6 +19,10 @@ UNIVERSE = {
         "method": "dcf_comps",
         "peers": ["MSFT", "GOOGL", "DELL", "HPQ", "SONY"],
         "cik": "0000320193",
+        # Macro-linkage traits (see analysis/macro_links.py). Rules key on
+        # these, never on the ticker, so new companies just need tagging.
+        "traits": ["consumer_hardware"],
+        "intl_revenue_share": 0.58,   # per 10-K geographic segment data
     },
     "MSFT": {
         "name": "Microsoft Corporation",
@@ -27,6 +31,8 @@ UNIVERSE = {
         "method": "dcf_comps",
         "peers": ["AAPL", "GOOGL", "ORCL", "CRM", "AMZN"],
         "cik": "0000789019",
+        "traits": [],
+        "intl_revenue_share": 0.49,
     },
     "KO": {
         "name": "The Coca-Cola Company",
@@ -35,6 +41,8 @@ UNIVERSE = {
         "method": "dcf_comps",
         "peers": ["PEP", "KDP", "MNST", "MDLZ", "PG"],
         "cik": "0000021344",
+        "traits": ["beverage_commodity"],
+        "intl_revenue_share": 0.64,
     },
     "FITB": {
         "name": "Fifth Third Bancorp",
@@ -43,6 +51,8 @@ UNIVERSE = {
         "method": "bank",
         "peers": ["HBAN", "RF", "KEY", "CFG", "TFC"],
         "cik": "0000035527",
+        "traits": ["bank"],
+        "intl_revenue_share": None,   # domestic
     },
     "BRK-B": {
         "name": "Berkshire Hathaway Inc.",
@@ -51,6 +61,8 @@ UNIVERSE = {
         "method": "conglomerate",
         "peers": ["PGR", "CB", "ALL", "MKL", "L"],
         "cik": "0001067983",
+        "traits": ["holdco_cash"],
+        "intl_revenue_share": None,
     },
 }
 

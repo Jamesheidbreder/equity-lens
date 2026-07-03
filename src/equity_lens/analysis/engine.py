@@ -14,7 +14,7 @@ import statistics
 
 from equity_lens.data import edgar, macro, market
 from equity_lens.universe import UNIVERSE
-from equity_lens.analysis import ratios, valuation
+from equity_lens.analysis import macro_links, ratios, sensitivity, valuation
 
 ROE_NORMALIZATION_YEARS = 5
 
@@ -56,6 +56,14 @@ def analyze(ticker: str) -> dict:
     risk_free = macro.get_series("DGS10").iloc[-1] / 100
     coe = valuation.cost_of_equity(risk_free, snap["beta"])
 
+    # Macro linkages: bounded, trait-based adjustments (see macro_links.py).
+    cash_hist = fin["cash"]
+    eq_hist = fin["total_equity"]
+    cash_to_book = (list(cash_hist.values())[-1] / list(eq_hist.values())[-1]
+                    if cash_hist and eq_hist else None)
+    macro_adjs = macro_links.compute_adjustments(profile, cash_to_book)
+    coe += macro_links.net_adjustment(macro_adjs, "cost_of_equity")
+
     price = snap["price"]
     # Derive share count from market cap so dual-class companies (BRK) get
     # the economically correct all-class count, not one class's shares.
@@ -74,9 +82,15 @@ def analyze(ticker: str) -> dict:
         recent_fcf = list(fcf_years.values())[-5:]
         fcf_base = statistics.median(recent_fcf) if recent_fcf else None
 
-        # Forward-looking growth (consensus) preferred; history as fallback.
+        # Forward-looking growth (consensus) preferred; history as fallback;
+        # macro linkages lean on the result within their caps.
         growth = (snap["earnings_growth"] or snap["revenue_growth"]
                   or ratio_data["fcf_cagr_5y"] or ratio_data["revenue_cagr_5y"])
+        if growth is not None:
+            growth += macro_links.net_adjustment(macro_adjs, "growth")
+            # Effective (capped) growth: the base the model actually uses,
+            # and the honest center for the sensitivity grid.
+            growth = min(max(growth, valuation.TERMINAL_GROWTH), valuation.GROWTH_CAP)
 
         # Exit multiple: average of what peers trade at and what this company
         # has historically commanded — industry potential and franchise
@@ -110,12 +124,31 @@ def analyze(ticker: str) -> dict:
         target = (sum(v * w for v, w in zip(vals, weights)) / sum(weights)
                   if vals else None)
 
+        # Sensitivity: flex growth and CoE through the DCF, holding the
+        # market-based models fixed, and re-blend at each grid point.
+        def _target_at(g, c):
+            # clamp_growth=False: the grid explores hypotheticals around the
+            # effective assumption; re-capping would flatten the rows.
+            d = valuation.dcf_value(fcf_base, g, c, net_debt, shares,
+                                    exit_multiple=exit_mult, clamp_growth=False)
+            vs, ws = [], []
+            for name, w in WEIGHTS.items():
+                ps = d["per_share"] if name == "dcf" else models[name]["per_share"]
+                if ps:
+                    vs.append(ps); ws.append(w)
+            return sum(v * w for v, w in zip(vs, ws)) / sum(ws) if vs else None
+
+        sens = (sensitivity.build_grid(_target_at, growth, coe, "FCF growth")
+                if growth is not None and target else None)
+
     else:
         eq = fin["total_equity"]
         book = list(eq.values())[-1] if eq else None
         bvps = book / shares if book and shares else None
-        models["justified_pb"] = valuation.justified_pb_value(
-            bvps, _normalized_roe(ratio_data), coe)
+        roe = _normalized_roe(ratio_data)
+        if roe is not None:
+            roe += macro_links.net_adjustment(macro_adjs, "roe")
+        models["justified_pb"] = valuation.justified_pb_value(bvps, roe, coe)
 
         if method == "bank":
             # Banks: justified P/B cross-checked with peer P/E and the bank's
@@ -140,6 +173,18 @@ def analyze(ticker: str) -> dict:
         vals = [m["per_share"] for m in models.values() if m.get("per_share")]
         target = sum(vals) / len(vals) if vals else None
 
+        # Sensitivity: flex ROE and CoE through the justified P/B model,
+        # holding market-based cross-checks fixed.
+        def _target_at(r, c):
+            j = valuation.justified_pb_value(bvps, r, c)
+            vs = [j["per_share"]] if j["per_share"] else []
+            vs += [m["per_share"] for name, m in models.items()
+                   if name != "justified_pb" and m.get("per_share")]
+            return sum(vs) / len(vs) if vs else None
+
+        sens = (sensitivity.build_grid(_target_at, roe, coe, "Normalized ROE")
+                if roe is not None and target else None)
+
     return {
         "ticker": ticker,
         "profile": profile,
@@ -148,6 +193,8 @@ def analyze(ticker: str) -> dict:
         "ratios": ratio_data,
         "cost_of_equity": coe,
         "risk_free_rate": risk_free,
+        "macro_adjustments": macro_adjs,
+        "sensitivity": sens,
         "models": models,
         "target_price": target,
         **valuation.make_rating(price, target),

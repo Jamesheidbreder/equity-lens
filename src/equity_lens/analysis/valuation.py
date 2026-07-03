@@ -32,7 +32,8 @@ def cost_of_equity(risk_free: float, beta: float) -> float:
 
 
 def dcf_value(fcf_base: float, growth: float, coe: float, net_debt: float,
-              shares: float, exit_multiple: float = None) -> dict:
+              shares: float, exit_multiple: float = None,
+              clamp_growth: bool = True) -> dict:
     """Per-share equity value from a 5-year FCF projection + terminal value.
 
     Growth fades linearly from the starting rate to terminal growth — the
@@ -48,8 +49,9 @@ def dcf_value(fcf_base: float, growth: float, coe: float, net_debt: float,
     Averaging both is common sell-side practice: pure Gordon is too harsh
     on quality compounders, pure exit-multiple imports any peer bubble.
     """
-    growth = min(growth if growth is not None else TERMINAL_GROWTH, GROWTH_CAP)
-    growth = max(growth, TERMINAL_GROWTH)
+    if clamp_growth:
+        growth = min(growth if growth is not None else TERMINAL_GROWTH, GROWTH_CAP)
+        growth = max(growth, TERMINAL_GROWTH)
     if fcf_base is None or fcf_base <= 0 or shares in (None, 0):
         return {"per_share": None, "reason": "no positive FCF base or share count"}
 
