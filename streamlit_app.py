@@ -57,21 +57,66 @@ def run_analysis(ticker: str) -> dict:
 
 @st.cache_data(ttl=900, show_spinner=False)
 def current_price(ticker: str):
+    import time
     import yfinance as yf
-    h = yf.Ticker(ticker).history(period="5d")["Close"]
-    return float(h.iloc[-1]) if len(h) else None
+    for _ in range(3):  # Yahoo's chart API intermittently returns nothing
+        try:
+            h = yf.Ticker(ticker).history(period="5d")["Close"]
+            if len(h):
+                return float(h.iloc[-1])
+        except Exception:
+            pass
+        time.sleep(1)
+    return None
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def price_history(ticker: str, period: str = "5y") -> pd.Series:
+    import time
     from equity_lens.data import market
-    return market.get_history(ticker, period=period)["Close"]
+    for _ in range(3):
+        try:
+            h = market.get_history(ticker, period=period)["Close"]
+            if len(h):
+                return h
+        except Exception:
+            pass
+        time.sleep(1)
+    return pd.Series(dtype=float)
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def macro_series(series_id: str, years: int = 10) -> pd.Series:
+    from equity_lens.data import macro
+    return macro.get_series(series_id, years=years)
 
 
 def load_calls() -> pd.DataFrame:
     if not CALLS_CSV.exists():
         return pd.DataFrame()
     return pd.read_csv(CALLS_CSV, parse_dates=["date"])
+
+
+# Chart colors: validated categorical pair (dataviz palette slots 1-2).
+C_BLUE, C_AQUA = "#2a78d6", "#1baf7a"
+
+
+def latest_and_prior(series: dict):
+    """(latest value, prior-year value) from a {year: value} dict."""
+    vals = list(series.values()) if series else []
+    return (vals[-1] if vals else None,
+            vals[-2] if len(vals) > 1 else None)
+
+
+def yoy_delta(latest, prior):
+    """Streamlit metric delta string: change vs prior fiscal year."""
+    if latest is None or not prior:
+        return None
+    return f"{latest / prior - 1:+.1%} vs prior year"
+
+
+def bn(x):
+    return f"${x / 1e9:,.1f}B" if x is not None else "n/a"
 
 
 def verdict_sentence(a: dict) -> str:
@@ -103,9 +148,10 @@ st.caption(
     "Educational project, not investment advice."
 )
 
-tab_overview, tab_company, tab_scorecard, tab_reports, tab_method = st.tabs(
-    ["🏠 Coverage", "🔍 Company Analysis", "🎯 Scorecard", "📄 Reports",
-     "⚙️ How It Works"])
+(tab_overview, tab_company, tab_macro, tab_scorecard, tab_reports,
+ tab_method) = st.tabs(
+    ["🏠 Coverage", "🔍 Company Analysis", "📈 Macro Monitor", "🎯 Scorecard",
+     "📄 Reports", "⚙️ How It Works"])
 
 
 # ---------- Coverage tab ----------
@@ -173,7 +219,7 @@ with tab_company:
             "*How It Works* for why our numbers run more conservative than "
             "the street's.")
 
-    c1, c2, c3, c4, c5 = st.columns(5)
+    c1, c2, c3, c4 = st.columns(4)
     c1.metric("Market price", f"${s['price']:,.2f}",
               help="What one share costs right now.")
     c2.metric("Our fair value", f"${a['target_price']:,.2f}",
@@ -188,10 +234,62 @@ with tab_company:
               help="The average price target of professional Wall Street "
                    "analysts covering this stock. Shown for comparison — "
                    "never used in our math.")
-    c5.metric("Required return", f"{a['cost_of_equity']:.1%}",
-              help="The yearly return an investor should demand for holding a "
-                   "stock this risky (built from the 10-year Treasury yield "
-                   "plus a risk premium). Used to discount future cash.")
+
+    # ---- The financial statements, at a glance ----
+    st.markdown("#### 📄 From the financial statements — latest fiscal year")
+    st.caption("Straight off the company's audited SEC filings (10-K). "
+               "Hover any number for what it means.")
+    fin = a["financials"]
+    rev, rev_p = latest_and_prior(fin["revenue"])
+    ni, ni_p = latest_and_prior(fin["net_income"])
+    eps, eps_p = latest_and_prior(fin["eps_diluted"])
+    fcf_series = {y: r["free_cash_flow"] for y, r in
+                  a["ratios"]["per_year"].items() if "free_cash_flow" in r}
+    fcf, fcf_p = latest_and_prior(fcf_series)
+    nii, nii_p = latest_and_prior(fin.get("net_interest_income", {}))
+    cash, _ = latest_and_prior(fin["cash"])
+    debt, _ = latest_and_prior(fin["long_term_debt"])
+    equity, _ = latest_and_prior(fin["total_equity"])
+    divs, _ = latest_and_prior(fin.get("dividends_paid", {}))
+
+    f1, f2, f3, f4 = st.columns(4)
+    f1.metric("Revenue", bn(rev), yoy_delta(rev, rev_p),
+              help="Total sales for the year — the top line of the income "
+                   "statement.")
+    f2.metric("Net profit", bn(ni), yoy_delta(ni, ni_p),
+              help="What's left after all costs and taxes — the bottom line. "
+                   f"That's {ni / rev:.0%} of every sales dollar."
+              if ni and rev else "The bottom line of the income statement.")
+    f3.metric("Earnings per share", f"${eps:,.2f}" if eps else "n/a",
+              yoy_delta(eps, eps_p),
+              help="Profit divided by shares — your slice of the earnings "
+                   "for each share you own.")
+    if fcf is not None:
+        f4.metric("Free cash flow", bn(fcf), yoy_delta(fcf, fcf_p),
+                  help="Cash generated after running and reinvesting in the "
+                       "business — the cash that could be paid out to owners.")
+    else:
+        f4.metric("Net interest income", bn(nii), yoy_delta(nii, nii_p),
+                  help="A bank's core profit engine: interest earned on loans "
+                       "minus interest paid on deposits.")
+
+    g1, g2, g3, g4 = st.columns(4)
+    g1.metric("Cash held", bn(cash),
+              help="Cash and equivalents on the balance sheet — the rainy-day "
+                   "fund and war chest.")
+    g2.metric("Long-term debt", bn(debt),
+              help="Money borrowed and owed beyond the next year, from the "
+                   "balance sheet.")
+    g3.metric("Shareholders' equity", bn(equity),
+              help="Assets minus everything owed — the owners' stake, also "
+                   "called book value.")
+    yield_note = (f"{s['dividend_yield']:.2f}% yield at today's price"
+                  if s["dividend_yield"] else "no regular dividend")
+    g4.metric("Dividends paid", bn(divs) if divs else "n/a",
+              help="Cash actually mailed to shareholders during the year "
+                   f"({yield_note}).")
+
+    st.divider()
 
     left, right = st.columns(2)
 
@@ -253,24 +351,77 @@ with tab_company:
 
     with right:
         st.subheader("The stock — last 5 years")
-        st.line_chart(price_history(tk), height=220)
+        hist = price_history(tk)
+        if len(hist):
+            st.line_chart(hist, height=220, color=C_BLUE)
+        else:
+            st.caption("Price chart temporarily unavailable.")
 
-        st.subheader("The business — straight from SEC filings")
+        st.subheader("The business — trend over time")
         per_year = a["ratios"]["per_year"]
         fy = pd.DataFrame(per_year).T.sort_index()
         if "revenue" in fy:
-            st.caption("Revenue — total sales, in billions of dollars")
-            st.bar_chart(fy["revenue"] / 1e9, height=180)
+            st.caption("Revenue ($B) — is the business growing?")
+            st.bar_chart(fy["revenue"] / 1e9, height=180, color=C_BLUE)
         if "free_cash_flow" in fy:
-            st.caption("Free cash flow — cash left after running and "
-                       "reinvesting in the business ($B)")
-            st.bar_chart(fy["free_cash_flow"] / 1e9, height=180)
+            st.caption("Free cash flow ($B) — does growth turn into cash?")
+            st.bar_chart(fy["free_cash_flow"] / 1e9, height=180, color=C_AQUA)
         margins = fy[[c for c in ("net_margin", "operating_margin")
-                      if c in fy]]
+                      if c in fy]].rename(columns={
+            "net_margin": "net margin", "operating_margin": "operating margin"})
         if not margins.empty:
             st.caption("Profit margins — how many cents of each sales dollar "
                        "become profit")
-            st.line_chart(margins, height=180)
+            st.line_chart(margins, height=180,
+                          color=[C_AQUA, C_BLUE][:margins.shape[1]])
+
+
+# ---------- Macro Monitor tab ----------
+
+with tab_macro:
+    st.subheader("The economic backdrop")
+    st.markdown(
+        "The same Federal Reserve data our valuation engine reads, charted. "
+        "These series feed the models directly — see *How It Works* and the "
+        "[macro catalog](https://github.com/Jamesheidbreder/equity-lens/blob/main/MACRO_CATALOG.md).")
+
+    mc1, mc2 = st.columns(2)
+    with mc1:
+        st.caption("**Interest rates (%)** — the gravity of all valuations: "
+                   "higher rates pull every fair value down. The 10-year "
+                   "Treasury is the base of our required return.")
+        rates = pd.DataFrame({
+            "Fed funds rate": macro_series("FEDFUNDS"),
+            "10-year Treasury": macro_series("DGS10"),
+        })
+        st.line_chart(rates, height=220, color=[C_BLUE, C_AQUA])
+
+        st.caption("**Yield-curve slope (10y − 2y, %)** — banks earn this "
+                   "spread. Below zero (inverted) is the classic recession "
+                   "warning and squeezes bank profits.")
+        st.line_chart(macro_series("T10Y2Y"), height=180, color=C_BLUE)
+
+        st.caption("**Inflation (% change vs year ago)** — eats real returns "
+                   "and squeezes margins for companies that can't raise "
+                   "prices as fast as their costs.")
+        cpi = macro_series("CPIAUCSL")
+        st.line_chart((cpi / cpi.shift(12) - 1) * 100, height=180, color=C_BLUE)
+
+    with mc2:
+        st.caption("**Unemployment rate (%)** — consumer health; when it "
+                   "rises, spending and loan repayment follow it down.")
+        st.line_chart(macro_series("UNRATE"), height=220, color=C_BLUE)
+
+        st.caption("**Consumer sentiment (U. Michigan)** — how households "
+                   "feel, which leads what they buy, especially big-ticket "
+                   "items.")
+        st.line_chart(macro_series("UMCSENT"), height=180, color=C_BLUE)
+
+        st.caption("**Credit spreads (Baa vs Treasury, %)** — the bond "
+                   "market's fear gauge. Wider = investors demanding more "
+                   "for risk; our engine raises its required returns when "
+                   "this runs above normal.")
+        st.line_chart(macro_series("BAA10Y"), height=180, color=C_BLUE)
 
 
 # ---------- Scorecard tab ----------
@@ -297,17 +448,33 @@ with tab_scorecard:
             return "✅ so far" if abs(row["stock since call"]) < 0.10 else "❌ so far"
 
         sc["working?"] = sc.apply(direction, axis=1)
+
+        def progress_to_target(row):
+            """How far the stock has traveled toward our target since the
+            call, as a fraction of the move we predicted."""
+            predicted = row["final_target"] - row["price"]
+            if not predicted:
+                return None
+            return (row["current"] - row["price"]) / predicted
+
+        sc["progress to target"] = sc.apply(progress_to_target, axis=1)
         sc["rating"] = sc["rating"].map(RATING_BADGE)
         show = sc[["date", "ticker", "rating", "price", "final_target",
-                   "current", "stock since call", "working?"]].rename(columns={
+                   "current", "stock since call", "progress to target",
+                   "working?"]].rename(columns={
             "price": "price at call", "final_target": "our target",
             "current": "price now"})
         show["date"] = show["date"].dt.date
         st.dataframe(
             show.style.format({
                 "price at call": "${:.2f}", "our target": "${:.2f}",
-                "price now": "${:.2f}", "stock since call": "{:+.1%}"}),
+                "price now": "${:.2f}", "stock since call": "{:+.1%}",
+                "progress to target": "{:+.0%}"}),
             width="stretch", hide_index=True)
+        st.caption(
+            "*Progress to target*: how much of the move we predicted has "
+            "happened. +100% = target reached; negative = the stock moved "
+            "against the call.")
 
         n = len(sc)
         right_n = int((sc["working?"] == "✅ so far").sum())
