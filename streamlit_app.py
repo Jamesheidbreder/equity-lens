@@ -26,11 +26,15 @@ st.set_page_config(page_title="Equity-Lens", page_icon="📊", layout="wide")
 # with soft depth, quiet chrome. Theme colors live in .streamlit/config.toml.
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap');
 html, body, [data-testid="stAppViewContainer"] * {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
                Roboto, Helvetica, Arial, sans-serif;
 }
-h1, h2, h3 { letter-spacing: -0.02em; }
+h1, h2, h3 {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif !important;
+  letter-spacing: -0.01em;
+}
 div[data-testid="stMetric"] {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -127,6 +131,101 @@ def load_calls() -> pd.DataFrame:
 
 # Chart colors: validated categorical pair (dataviz palette slots 1-2).
 C_BLUE, C_AQUA = "#2a78d6", "#1baf7a"
+INK, INK_MUTED, GRID = "#1d1d1f", "#6e6e73", "#e9e9e6"
+
+
+def _base_layout(height: int, y_title: str = None, y_format: str = None):
+    """One institutional chart chrome for every figure: quiet horizontal
+    grid only, no borders, tight margins, unified hover."""
+    return dict(
+        height=height,
+        margin=dict(l=0, r=8, t=8, b=0),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(family="-apple-system, 'SF Pro Text', 'Segoe UI', Roboto, "
+                         "Helvetica, Arial, sans-serif",
+                  size=12, color=INK_MUTED),
+        xaxis=dict(showgrid=False, zeroline=False, showline=False,
+                   ticks="outside", tickcolor=GRID, ticklen=4),
+        yaxis=dict(title=y_title, gridcolor=GRID, zeroline=False,
+                   showline=False, tickformat=y_format),
+        hovermode="x unified",
+        hoverlabel=dict(bgcolor="#ffffff", bordercolor=GRID,
+                        font=dict(size=12, color=INK)),
+        showlegend=False,
+        dragmode=False,
+    )
+
+
+def line_fig(data, height=220, y_format=None, colors=None,
+             hover_format=",.2f"):
+    """Themed line chart. data: Series or DataFrame (one line per column)."""
+    import plotly.graph_objects as go
+    df = data.to_frame() if isinstance(data, pd.Series) else data
+    colors = colors or [C_BLUE, C_AQUA]
+    fig = go.Figure()
+    for i, col in enumerate(df.columns):
+        fig.add_trace(go.Scatter(
+            x=df.index, y=df[col], name=str(col), mode="lines",
+            line=dict(color=colors[i % len(colors)], width=2.2),
+            hovertemplate="%{y:" + hover_format + "}<extra>" + str(col) + "</extra>"))
+    fig.update_layout(**_base_layout(height, y_format=y_format))
+    if df.shape[1] > 1:
+        fig.update_layout(showlegend=True, legend=dict(
+            orientation="h", y=1.08, x=0, bgcolor="rgba(0,0,0,0)",
+            font=dict(size=11)))
+    return fig
+
+
+def bar_fig(series: pd.Series, height=200, color=C_BLUE, y_format=None,
+            hover_format=",.1f"):
+    """Themed bar chart for annual fundamentals."""
+    import plotly.graph_objects as go
+    fig = go.Figure(go.Bar(
+        x=[str(i) for i in series.index], y=series.values,
+        marker=dict(color=color, cornerradius=4),
+        hovertemplate="%{y:" + hover_format + "}<extra></extra>"))
+    fig.update_layout(**_base_layout(height, y_format=y_format))
+    fig.update_layout(bargap=0.45)
+    return fig
+
+
+def models_fig(model_rows: list, base_target: float, final_target: float,
+               market_price: float, height=260):
+    """Valuation lenses as horizontal bars with a market-price reference
+    line — the chart version of 'our estimates vs what the market says'."""
+    import plotly.graph_objects as go
+    labels = [r["lens"] for r in model_rows] + ["Blended fair value"]
+    values = [r["value"] for r in model_rows] + [base_target]
+    colors = [C_BLUE] * len(model_rows) + [INK]
+    if final_target and abs(final_target - base_target) > 0.01:
+        labels.append("After analyst judgment")
+        values.append(final_target)
+        colors.append(INK)
+    fig = go.Figure(go.Bar(
+        y=labels[::-1], x=values[::-1], orientation="h",
+        marker=dict(color=colors[::-1], cornerradius=4),
+        hovertemplate="$%{x:,.0f}<extra></extra>"))
+    layout = _base_layout(height)
+    layout["xaxis"], layout["yaxis"] = (
+        dict(gridcolor=GRID, zeroline=False, showline=False,
+             tickprefix="$", rangemode="tozero"),
+        dict(showgrid=False, zeroline=False, tickfont=dict(color=INK)))
+    layout["hovermode"] = "closest"
+    fig.update_layout(**layout, bargap=0.35)
+    fig.add_vline(x=market_price, line_width=1.5, line_dash="dot",
+                  line_color=INK_MUTED,
+                  annotation_text=f"  market ${market_price:,.0f}",
+                  annotation_position="top",
+                  annotation_font=dict(size=11, color=INK_MUTED))
+    return fig
+
+
+PLOTLY_CONFIG = {"displayModeBar": False, "scrollZoom": False}
+
+
+def source_note(text: str):
+    st.caption(f":gray[Source: {text}]")
 
 
 def latest_and_prior(series: dict):
@@ -333,12 +432,9 @@ with tab_company:
                 label, blurb = MODEL_EXPLAINERS.get(name, (name, ""))
                 rows.append({"lens": label, "value": m["per_share"]})
                 st.markdown(f"- **{label}: ${m['per_share']:,.0f}** — {blurb}")
-        mdf = pd.DataFrame(rows).set_index("lens")
-        mdf.loc["→ blended fair value"] = a["base_target"]
-        if a["overlay"]["overlays"]:
-            mdf.loc["→ after analyst judgment"] = a["target_price"]
-        mdf.loc["market price today"] = s["price"]
-        st.bar_chart(mdf, horizontal=True)
+        st.plotly_chart(
+            models_fig(rows, a["base_target"], a["target_price"], s["price"]),
+            config=PLOTLY_CONFIG)
 
         if a["overlay"]["overlays"]:
             with st.expander("Analyst judgment applied — dated and disclosed"):
@@ -383,7 +479,9 @@ with tab_company:
         st.subheader("Share price — five years")
         hist = price_history(tk)
         if len(hist):
-            st.line_chart(hist, height=220, color=C_BLUE)
+            st.plotly_chart(line_fig(hist, 220, hover_format="$,.2f"),
+                            config=PLOTLY_CONFIG)
+            source_note("Yahoo Finance")
         else:
             st.caption("Price chart temporarily unavailable.")
 
@@ -392,18 +490,27 @@ with tab_company:
         fy = pd.DataFrame(per_year).T.sort_index()
         if "revenue" in fy:
             st.caption("Revenue ($B) — is the business growing?")
-            st.bar_chart(fy["revenue"] / 1e9, height=180, color=C_BLUE)
+            rev_fig = bar_fig(fy["revenue"] / 1e9, 180, C_BLUE,
+                              hover_format="$,.1f")
+            rev_fig.update_yaxes(tickprefix="$", ticksuffix="B")
+            st.plotly_chart(rev_fig, config=PLOTLY_CONFIG)
         if "free_cash_flow" in fy:
             st.caption("Free cash flow ($B) — does growth turn into cash?")
-            st.bar_chart(fy["free_cash_flow"] / 1e9, height=180, color=C_AQUA)
+            fcf_fig = bar_fig(fy["free_cash_flow"] / 1e9, 180, C_AQUA,
+                              hover_format="$,.1f")
+            fcf_fig.update_yaxes(tickprefix="$", ticksuffix="B")
+            st.plotly_chart(fcf_fig, config=PLOTLY_CONFIG)
         margins = fy[[c for c in ("net_margin", "operating_margin")
                       if c in fy]].rename(columns={
             "net_margin": "net margin", "operating_margin": "operating margin"})
         if not margins.empty:
             st.caption("Profit margins — how many cents of each sales dollar "
                        "become profit")
-            st.line_chart(margins, height=180,
-                          color=[C_AQUA, C_BLUE][:margins.shape[1]])
+            st.plotly_chart(line_fig(margins, 180, y_format=".0%",
+                                     hover_format=".1%",
+                                     colors=[C_AQUA, C_BLUE]),
+                            config=PLOTLY_CONFIG)
+        source_note("SEC EDGAR, as-filed 10-K data")
 
 
 # ---------- Macro Monitor tab ----------
@@ -424,34 +531,47 @@ with tab_macro:
             "Fed funds rate": macro_series("FEDFUNDS"),
             "10-year Treasury": macro_series("DGS10"),
         })
-        st.line_chart(rates, height=220, color=[C_BLUE, C_AQUA])
+        st.plotly_chart(line_fig(rates, 220, hover_format=".2f"),
+                        config=PLOTLY_CONFIG)
 
         st.caption("**Yield-curve slope (10y − 2y, %)** — banks earn this "
                    "spread. Below zero (inverted) is the classic recession "
                    "warning and squeezes bank profits.")
-        st.line_chart(macro_series("T10Y2Y"), height=180, color=C_BLUE)
+        st.plotly_chart(line_fig(macro_series("T10Y2Y").rename("10y − 2y"),
+                                 180, hover_format=".2f"),
+                        config=PLOTLY_CONFIG)
 
         st.caption("**Inflation (% change vs year ago)** — eats real returns "
                    "and squeezes margins for companies that can't raise "
                    "prices as fast as their costs.")
         cpi = macro_series("CPIAUCSL")
-        st.line_chart((cpi / cpi.shift(12) - 1) * 100, height=180, color=C_BLUE)
+        infl = ((cpi / cpi.shift(12) - 1) * 100).rename("CPI % y/y")
+        st.plotly_chart(line_fig(infl.dropna(), 180, hover_format=".1f"),
+                        config=PLOTLY_CONFIG)
+        source_note("Federal Reserve Economic Data (FRED)")
 
     with mc2:
         st.caption("**Unemployment rate (%)** — consumer health; when it "
                    "rises, spending and loan repayment follow it down.")
-        st.line_chart(macro_series("UNRATE"), height=220, color=C_BLUE)
+        st.plotly_chart(line_fig(macro_series("UNRATE").rename("unemployment %"),
+                                 220, hover_format=".1f"),
+                        config=PLOTLY_CONFIG)
 
         st.caption("**Consumer sentiment (U. Michigan)** — how households "
                    "feel, which leads what they buy, especially big-ticket "
                    "items.")
-        st.line_chart(macro_series("UMCSENT"), height=180, color=C_BLUE)
+        st.plotly_chart(line_fig(macro_series("UMCSENT").rename("sentiment index"),
+                                 180, hover_format=".1f"),
+                        config=PLOTLY_CONFIG)
 
         st.caption("**Credit spreads (Baa vs Treasury, %)** — the bond "
                    "market's fear gauge. Wider = investors demanding more "
                    "for risk; our engine raises its required returns when "
                    "this runs above normal.")
-        st.line_chart(macro_series("BAA10Y"), height=180, color=C_BLUE)
+        st.plotly_chart(line_fig(macro_series("BAA10Y").rename("Baa spread %"),
+                                 180, hover_format=".2f"),
+                        config=PLOTLY_CONFIG)
+        source_note("Federal Reserve Economic Data (FRED)")
 
 
 # ---------- Scorecard tab ----------
