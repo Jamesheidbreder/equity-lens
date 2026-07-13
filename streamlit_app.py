@@ -22,6 +22,34 @@ from equity_lens.universe import UNIVERSE
 
 st.set_page_config(page_title="Equity-Lens", page_icon="📊", layout="wide")
 
+# Apple-inflected fintech look: system font stack, card-style metric tiles
+# with soft depth, quiet chrome. Theme colors live in .streamlit/config.toml.
+st.markdown("""
+<style>
+html, body, [data-testid="stAppViewContainer"] * {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+}
+h1, h2, h3 { letter-spacing: -0.02em; }
+div[data-testid="stMetric"] {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  padding: 14px 16px 12px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+div[data-testid="stMetric"] label p { color: #6e6e73; font-size: 0.82rem; }
+div[data-testid="stExpander"] {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+div[data-testid="stDataFrame"] { border-radius: 12px; overflow: hidden; }
+button[data-baseweb="tab"] { font-weight: 500; }
+</style>
+""", unsafe_allow_html=True)
+
 CALLS_CSV = REPO_ROOT / "data" / "calls.csv"
 REPORTS_DIR = REPO_ROOT / "reports"
 
@@ -124,13 +152,13 @@ def verdict_sentence(a: dict) -> str:
     up = a["upside"]
     name = a["profile"]["name"]
     if a["rating"] == "BUY":
-        stance = (f"looks **undervalued**: we estimate it's worth about "
-                  f"**{up:+.0%}** more than today's price")
+        stance = (f"trades **below our estimate of fair value** — we see "
+                  f"roughly **{up:+.0%}** upside")
     elif a["rating"] == "SELL":
-        stance = (f"looks **expensive**: we estimate its fair value is about "
-                  f"**{abs(up):.0%} below** today's price")
+        stance = (f"trades **above our estimate of fair value** — by roughly "
+                  f"**{abs(up):.0%}**")
     else:
-        stance = "looks **roughly fairly priced** at today's level"
+        stance = "trades **close to our estimate of fair value**"
     return (f"{RATING_BADGE[a['rating']]} — **{name}** {stance}. "
             f"Our fair-value estimate is **${a['target_price']:,.2f}** per share; "
             f"the market price is **${a['snapshot']['price']:,.2f}**.")
@@ -140,29 +168,29 @@ def verdict_sentence(a: dict) -> str:
 
 st.title("📊 Equity-Lens")
 st.caption(
-    "**What is this?** A research platform that estimates what stocks are "
-    "actually worth — computed from official SEC filings, market data, and "
-    "Federal Reserve statistics, not opinions. Every call it makes is dated "
-    "and kept on a public scorecard, right or wrong. "
+    "Independent equity research, computed rather than opined — fair-value "
+    "estimates built from SEC filings, market data, and Federal Reserve "
+    "statistics. Every call is dated and kept on a public scorecard, right "
+    "or wrong. "
     "[GitHub](https://github.com/Jamesheidbreder/equity-lens) · "
     "Educational project, not investment advice."
 )
 
 (tab_overview, tab_company, tab_macro, tab_scorecard, tab_reports,
  tab_method) = st.tabs(
-    ["🏠 Coverage", "🔍 Company Analysis", "📈 Macro Monitor", "🎯 Scorecard",
-     "📄 Reports", "⚙️ How It Works"])
+    ["Coverage", "Company Analysis", "Macro Monitor", "Scorecard",
+     "Reports", "How It Works"])
 
 
 # ---------- Coverage tab ----------
 
 with tab_overview:
-    st.subheader("The coverage board")
+    st.subheader("Coverage")
     st.markdown(
-        "The five companies we cover, ranked from **most attractive to own** "
-        "to least. *Our target* is what we compute the stock is worth; "
-        "*street target* is the average Wall Street analyst's number, shown "
-        "for comparison only.")
+        "Five companies under coverage, ranked most to least attractive. "
+        "*Our target* is the fair value our models compute; *street target* "
+        "is the Wall Street consensus — shown for comparison, never used as "
+        "an input.")
     calls = load_calls()
     if calls.empty:
         st.info("No calls logged yet — generate reports to start the record.")
@@ -215,9 +243,9 @@ with tab_company:
     st.markdown(f"### {verdict_sentence(a)}")
     if a["rating"] == "SELL" and s["street_target_mean"]:
         st.caption(
-            "Note: most Wall Street analysts disagree with this call — see "
-            "*How It Works* for why our numbers run more conservative than "
-            "the street's.")
+            "Most street analysts rate this stock more favorably. See *How It "
+            "Works* for why our estimates run more conservative than the "
+            "street's.")
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Market price", f"${s['price']:,.2f}",
@@ -236,9 +264,10 @@ with tab_company:
                    "never used in our math.")
 
     # ---- The financial statements, at a glance ----
-    st.markdown("#### 📄 From the financial statements — latest fiscal year")
-    st.caption("Straight off the company's audited SEC filings (10-K). "
-               "Hover any number for what it means.")
+    st.markdown("#### From the financial statements — latest fiscal year")
+    st.caption("As filed with the SEC in the company's audited annual "
+               "report (10-K). Hover any figure for a plain-English "
+               "definition.")
     fin = a["financials"]
     rev, rev_p = latest_and_prior(fin["revenue"])
     ni, ni_p = latest_and_prior(fin["net_income"])
@@ -294,9 +323,10 @@ with tab_company:
     left, right = st.columns(2)
 
     with left:
-        st.subheader("How we got the number")
-        st.markdown("We value every company through several independent "
-                    "lenses, then blend them:")
+        st.subheader("Valuation — three independent lenses")
+        st.markdown("Each lens values the company independently; the target "
+                    "blends them. If they disagree sharply, that itself is "
+                    "information.")
         rows = []
         for name, m in a["models"].items():
             if m.get("per_share"):
@@ -311,7 +341,7 @@ with tab_company:
         st.bar_chart(mdf, horizontal=True)
 
         if a["overlay"]["overlays"]:
-            with st.expander("💭 Analyst judgment applied (click to read)"):
+            with st.expander("Analyst judgment applied — dated and disclosed"):
                 st.markdown(
                     "Some things — like unproven new products — can't be "
                     "computed from filings. When we choose to credit them, "
@@ -321,7 +351,7 @@ with tab_company:
                                 f"value** · review due {o.get('review_by', 'n/a')}"
                                 f"\n\n{o['rationale']}")
 
-        with st.expander("🌍 Economic conditions factored in"):
+        with st.expander("Macro conditions in the model"):
             st.markdown(
                 "The engine automatically leans on its assumptions when the "
                 "economy shifts (every adjustment is small and capped):")
@@ -335,7 +365,7 @@ with tab_company:
 
         sens = a.get("sensitivity")
         if sens:
-            with st.expander("🎛️ How wrong could we be? (sensitivity)"):
+            with st.expander("Sensitivity — how the estimate moves if assumptions shift"):
                 st.markdown(
                     f"No forecast is exact, so here's our fair value if the "
                     f"key assumptions shift: rows flex **{sens['x_label']}**, "
@@ -350,14 +380,14 @@ with tab_company:
                              .format("${:,.0f}"), width="stretch")
 
     with right:
-        st.subheader("The stock — last 5 years")
+        st.subheader("Share price — five years")
         hist = price_history(tk)
         if len(hist):
             st.line_chart(hist, height=220, color=C_BLUE)
         else:
             st.caption("Price chart temporarily unavailable.")
 
-        st.subheader("The business — trend over time")
+        st.subheader("Business trends")
         per_year = a["ratios"]["per_year"]
         fy = pd.DataFrame(per_year).T.sort_index()
         if "revenue" in fy:
@@ -379,10 +409,10 @@ with tab_company:
 # ---------- Macro Monitor tab ----------
 
 with tab_macro:
-    st.subheader("The economic backdrop")
+    st.subheader("Macro monitor")
     st.markdown(
-        "The same Federal Reserve data our valuation engine reads, charted. "
-        "These series feed the models directly — see *How It Works* and the "
+        "The Federal Reserve data the valuation engine reads, charted. These "
+        "series feed the models directly — see *How It Works* and the "
         "[macro catalog](https://github.com/Jamesheidbreder/equity-lens/blob/main/MACRO_CATALOG.md).")
 
     mc1, mc2 = st.columns(2)
@@ -427,11 +457,11 @@ with tab_macro:
 # ---------- Scorecard tab ----------
 
 with tab_scorecard:
-    st.subheader("Do our calls actually work?")
+    st.subheader("Track record")
     st.markdown(
-        "Every call we've ever made, with the date it was made and what the "
-        "stock has done since. Entries are append-only and stored in git — "
-        "**the record can't be quietly rewritten**, and wrong calls stay up.")
+        "Every call, dated, with performance since. The log is append-only "
+        "and version-controlled — **the record cannot be rewritten**, and "
+        "wrong calls stay visible.")
     calls = load_calls()
     if calls.empty:
         st.info("No calls logged yet.")
@@ -442,12 +472,12 @@ with tab_scorecard:
 
         def direction(row):
             if row["rating"] == "BUY":
-                return "✅ so far" if row["stock since call"] > 0 else "❌ so far"
+                return "✅ on track" if row["stock since call"] > 0 else "❌ against us"
             if row["rating"] == "SELL":
-                return "✅ so far" if row["stock since call"] < 0 else "❌ so far"
-            return "✅ so far" if abs(row["stock since call"]) < 0.10 else "❌ so far"
+                return "✅ on track" if row["stock since call"] < 0 else "❌ against us"
+            return "✅ on track" if abs(row["stock since call"]) < 0.10 else "❌ against us"
 
-        sc["working?"] = sc.apply(direction, axis=1)
+        sc["status"] = sc.apply(direction, axis=1)
 
         def progress_to_target(row):
             """How far the stock has traveled toward our target since the
@@ -461,7 +491,7 @@ with tab_scorecard:
         sc["rating"] = sc["rating"].map(RATING_BADGE)
         show = sc[["date", "ticker", "rating", "price", "final_target",
                    "current", "stock since call", "progress to target",
-                   "working?"]].rename(columns={
+                   "status"]].rename(columns={
             "price": "price at call", "final_target": "our target",
             "current": "price now"})
         show["date"] = show["date"].dt.date
@@ -477,31 +507,30 @@ with tab_scorecard:
             "against the call.")
 
         n = len(sc)
-        right_n = int((sc["working?"] == "✅ so far").sum())
+        right_n = int((sc["status"] == "✅ on track").sum())
         age_days = (pd.Timestamp.now() - sc["date"].min()).days
         m1, m2, m3 = st.columns(3)
         m1.metric("Calls on record", n,
                   help="Each dated rating + target we've published.")
-        m2.metric("Moving our way", f"{right_n}/{n}",
+        m2.metric("Calls on track", f"{right_n}/{n}",
                   help="BUYs where the stock is up since the call, SELLs "
                        "where it's down, HOLDs that stayed within ±10%.")
         m3.metric("Oldest call", f"{age_days} days",
                   help="Track records need time. Under ~90 days this is "
                        "weather, not climate.")
         if age_days < 90:
-            st.caption("⏳ **Honesty note:** a record this young is mostly "
-                       "noise. We show it anyway — keeping score in public "
-                       "is the whole point.")
+            st.caption("**Note:** a record this young is statistical noise. It is "
+                       "shown regardless — public scorekeeping is the point.")
 
 
 # ---------- Reports tab ----------
 
 with tab_reports:
-    st.subheader("Full research reports")
+    st.subheader("Research reports")
     st.markdown(
-        "The complete written research behind each call — the same format "
-        "professional analysts publish: thesis, economics, financials, "
-        "valuation, risks.")
+        "The complete written research behind each call, in the standard "
+        "institutional format: thesis, macro backdrop, financials, "
+        "valuation, and risks.")
     files = sorted(REPORTS_DIR.glob("*.md"), reverse=True)
     if not files:
         st.info("No reports generated yet.")
