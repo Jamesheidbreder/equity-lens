@@ -1,45 +1,38 @@
 <!-- Narrative sections for AAPL, spliced into generated reports.
-Drafted 2026-07-14; revised same day per analyst review (James Heidbreder):
-plain declarative prose, arithmetic shown, no compressed phrasing. -->
+v3, 2026-07-14: rewritten in sell-side register per analyst direction,
+style modeled on institutional research notes (labeled bullets, dense
+numerics, vs-consensus framing, numbered catalysts). -->
 
 <!-- section: thesis -->
-Apple is one of the finest businesses in the world. That is not the
-question. The question is the price. Apple today trades at roughly 38
-times its trailing earnings. Comparable large technology companies trade
-near 23 times. Apple's own average over the past five years is about 28
-times. In plain terms: Apple has always been expensive, and it is now
-expensive even by its own expensive standards.
+**Initiating at SELL, $229 target: quality is not the question; the multiple is.**
 
-What justifies the higher price? Not the reported results. Revenue grew 6%
-in fiscal 2025 — a good year, and a recovery from three roughly flat years
-before it — but over the past five years revenue has compounded at 8.7%
-per year and free cash flow at about 6%. Businesses growing at that pace
-do not ordinarily command 38 times earnings. What has changed is a story:
-that Apple's two billion devices will become the front door through which
-consumers use artificial intelligence, and that Apple will collect a toll
-on it through services revenue.
-
-We took that story seriously enough to price it. If the AI services
-opportunity plays out as its promoters describe — roughly $15 billion a
-year of high-margin services revenue, eventually — the arithmetic supports
-about $15 to $20 per share of additional value once you weight it for the
-chance it disappoints. Our target includes a disclosed +15% adjustment
-that grants approximately that amount. What we refuse to pay for is the
-rest of the premium, which requires the story to succeed on a far grander
-scale than anyone has yet demonstrated.
-
-Our three valuation methods land at $152 (discounted cash flow), $190
-(priced like its peers), and $267 (priced at Apple's own historical
-premium). All three sit below the $315 market price. Note the third
-number especially: even when we grant Apple every bit of the premium
-multiple it has historically commanded, the shares appear roughly 15%
-overpriced. We rate the stock SELL with a $229 target. To be clear about
-what kind of call this is: we find nothing wrong with the business. We
-find a great deal wrong with the price.
+- **Valuation:** AAPL trades at ~38x trailing earnings vs. its own 5-year
+  average of ~28x and a large-cap technology peer median of ~23x. Our
+  three approaches value the shares at $152 (DCF), $190 (peer multiples),
+  and $267 (own historical multiple); the blended base case is $199, and
+  our published target of $229 includes a +15% disclosed adjustment for
+  AI services optionality. Street consensus stands at ~$317 across 42
+  analysts, roughly in line with the current price.
+- **What the market is paying for:** consensus embeds an AI-gateway
+  thesis — Apple's ~2 billion installed devices monetizing AI through
+  services, with commonly cited estimates of up to $15B per year of
+  incremental services revenue over time. We estimate the
+  probability-weighted value of that scenario at $15–20 per share and
+  have credited it in full via our overlay. The remaining ~$85 per share
+  of gap between our target and the market price is, in our view,
+  narrative that has not yet produced cash flow.
+- **What the filings show:** FY25 revenue of $416.2B grew 6% YoY,
+  following a roughly flat FY22–FY24 stretch; the 5-year revenue CAGR is
+  8.7% and the FCF CAGR approximately 6%. We believe these are the
+  growth rates of a mature franchise, and we are unwilling to
+  capitalize them at a record multiple.
+- **Our position:** we see AAPL as a superb business at an unattractive
+  price. The rating is a valuation call, not a quality call, and we
+  identify below (see Catalysts) the specific results that would cause
+  us to revisit it.
 
 <!-- section: segments -->
-Apple reported $416.2 billion of revenue in fiscal 2025, in five
-categories:
+FY2025 net sales of $416.2B by reported category, per the 10-K:
 
 | Segment | FY2025 revenue | Share of total | Growth y/y |
 |---|---|---|---|
@@ -49,135 +42,121 @@ categories:
 | Mac | $33.7B | 8% | +12% |
 | iPad | $28.0B | 7% | +5% |
 
-Two facts in this table matter more than the rest.
-
-First, the iPhone is still half the company. More than that: every other
-line in the table depends on it. Services revenue is collected from people
-who own iPhones. Watches and AirPods are sold to people who own iPhones.
-A weak iPhone cycle eventually shows up everywhere else.
-
-Second, Services is the only part of Apple growing fast — 14% a year
-against 4% for the iPhone — and each dollar of services revenue produces
-roughly twice the gross profit of a hardware dollar. The bull case for the
-stock rests on this shift in mix: more subscription-like, high-margin
-revenue; less dependence on selling devices.
-
-The bull case is correct in direction. Our objection is to its speed, and
-the arithmetic is simple. Services is 26% of revenue growing 14%; the
-other 74% of the company grows around 4%. At those speeds, Services gains
-only one to two percentage points of revenue share per year. For Services
-to become even half of Apple would take more than a decade. The
-transformation is real, but it is slow — and the current share price pays
-for it as if it were nearly complete.
+- **iPhone concentration:** iPhone remains 50% of revenue, and in our
+  view effectively more — Services, Wearables, and accessory demand are
+  functions of the iPhone installed base. A weak iPhone cycle transmits
+  to every other line with a lag.
+- **The mix-shift math:** Services (26% of revenue) is growing ~14%;
+  the remaining 74% of the company is growing ~3–4%. At these rates,
+  Services gains roughly 1–2 points of revenue share per year, reaching
+  ~50% of revenue only on a 10-year-plus horizon. We believe the
+  mix-shift thesis is directionally correct and materially slower than
+  the current multiple implies.
+- **Margin mix:** Services gross margin runs approximately 2x hardware
+  gross margin, so each point of mix shift adds modestly to consolidated
+  margins; FY25 net margin of 26.9% (vs. 24.0% in FY24) already
+  reflects this tailwind plus favorable product mix.
+- **Watch item:** Wearables declined 4% in FY25 — the first sustained
+  negative print for the category — which we read as evidence that
+  device saturation now extends beyond the iPhone.
 
 <!-- section: industry -->
-The smartphone business is mature. The world buys roughly 1.2 billion
-phones a year and has for nearly a decade; there is no unit growth left.
-People also keep their phones longer than they used to, because the
-improvements from one model to the next have gotten smaller. In an
-industry like this, a company grows in only three ways: charge more per
-device, sell more services per device, or give people a reason to upgrade
-sooner. Apple currently earns the large majority of the entire industry's
-profit while holding a minority of its unit volume — its position at the
-premium end of the market is commanding.
-
-The competition comes from two directions. The familiar one is hardware:
-Samsung globally, and Chinese manufacturers — most importantly a resurgent
-Huawei — inside China. China deserves its own sentence: it is roughly a
-fifth of Apple's business, it is the one major market where Apple has
-recently lost ground, and it carries political risk that Apple can neither
-predict nor control.
-
-The newer and more serious threat is about how people will use computers
-at all. Today, a consumer opens apps on a phone, and Apple owns the ground
-those apps stand on — collecting a commission on much of what happens.
-If, over the next decade, consumers instead simply talk to an AI
-assistant that does things for them, the app model matters less, and so
-does the tollbooth built on it. Apple has moved slowly here; its upgraded
-Siri has been delayed repeatedly. Whether slowness is fatal is the debate.
-The bear says Apple is behind in the defining technology of the era. The
-bull says Apple does not need the best AI — it needs adequate AI in front
-of two billion loyal customers. Both arguments have merit, which is
-precisely why we price only what has been delivered.
-
-Regulation runs underneath all of this. Google pays Apple an estimated
-$20-plus billion a year to remain the default search engine on the
-iPhone — revenue that arrives with almost no cost attached, and which
-remains at risk in ongoing antitrust litigation. In Europe, regulators
-have already forced Apple to allow app stores other than its own. None of
-these items alone breaks the franchise. Together, they argue against
-paying a record multiple for the services stream.
+- **Market structure:** global smartphone units have been rangebound
+  around ~1.2B per year for most of a decade; replacement cycles have
+  lengthened as year-over-year hardware improvements diminished. We see
+  industry growth accruing through price/mix, services attach, and
+  cycle timing rather than units. Within this structure Apple captures
+  the substantial majority of industry profit on a minority of units —
+  a commanding position at the premium tier.
+- **China (~20% of revenue):** the one major market where Apple is
+  losing share, primarily to a resurgent Huawei; domestic-brand
+  preference and geopolitical exposure compound the commercial risk. We
+  treat China stabilization as a key swing factor for the stock (see
+  Catalysts).
+- **The AI-interface question:** the structural bear case is that
+  conversational AI assistants displace the app grid as the primary
+  consumer interface, reducing the value of App Store distribution over
+  time. Apple's own AI rollout has been slow — the revamped Siri has
+  been delayed repeatedly. The bull counter is distribution: ~2 billion
+  active devices mean Apple's AI needs to be adequate, not first. We
+  regard the outcome as genuinely uncertain, which is why our target
+  credits only the arithmetic value of the visible services opportunity.
+- **Regulatory:** Google's estimated $20B+ annual payment for default
+  search placement — revenue with near-zero associated cost — remains
+  subject to antitrust litigation and appeal; EU Digital Markets Act
+  enforcement has already forced alternative app distribution in
+  Europe. We view these as caps on the services multiple rather than
+  near-term earnings events, and we note our target does not assume
+  loss of the Google payment.
 
 <!-- section: moat -->
-Apple's competitive protection — its moat — is real, and it is wide. It
-has four layers. First, switching costs: a customer's photos, messages,
-subscriptions, and habits all live on the iPhone, and moving them to
-another system costs an evening of frustration most people will not
-volunteer for. Second, the brand: Apple charges hundreds of dollars more
-than competitors for comparable hardware, year after year, without losing
-customers — the cleanest evidence of pricing power that exists. Third,
-its chips: Apple designs its own processors, which are better, per watt of
-power, than anything its competitors can buy, and that advantage cannot be
-purchased off the shelf. Fourth, the App Store: developers must build for
-it because that is where the customers are, and customers stay because
-that is where the apps are. Each layer reinforces the others.
+We assess the moat as wide and stable-to-slightly-narrowing, resting on
+four layers:
 
-The fair question is not whether the moat exists — it does — but which
-direction it is moving. Our judgment: stable, perhaps narrowing slightly.
-The switching costs and the chips are as strong as ever. The App Store
-layer is being chipped at by regulators on two continents. And the brand
-has never been tested against a genuine change in how people use
-technology, which is what the AI assistant era may turn out to be. A
-stable moat earns a premium price. Only a widening one earns an
-ever-expanding premium, and expanding is what today's multiple assumes.
+- **Switching costs:** accumulated photos, messages, purchases, and
+  subscriptions make platform exit costly in time and friction;
+  observed churn to Android remains low across cycles.
+- **Brand/pricing power:** Apple sustains average selling prices well
+  above industry norms without measurable share loss in the premium
+  tier — demonstrated pricing power across more than a decade.
+- **Vertical silicon:** in-house chip design delivers
+  performance-per-watt advantages competitors cannot procure
+  externally; we view this as the most defensible layer.
+- **App Store network:** developers require presence where the users
+  are and vice versa; the two-sided network remains intact but is the
+  layer most exposed to regulatory erosion (see Industry).
+
+**Direction:** we believe the switching-cost and silicon layers are
+intact, the App Store layer is being narrowed at the margin by
+regulation, and the brand layer is untested against a potential
+AI-driven interface shift. A stable moat supports a premium multiple;
+we do not believe it supports a multiple above the company's own
+historical premium, which is what the current price requires.
 
 <!-- section: management -->
-Tim Cook's Apple is run less like an inventor's workshop and more like the
-world's best-oiled machine: extraordinary supply-chain discipline, steady
-prices, few mistakes. Its defining financial policy is the buyback. Apple
-spends roughly $100 billion a year repurchasing its own stock — the
-largest such program in corporate history — and retires about 3% of its
-shares annually. Management has said it intends to hold roughly zero
-excess cash over time; in practice, everything the business earns goes
-back to shareholders.
-
-Two things follow for an investor. First, per-share results grow faster
-than the company itself: shrink the share count 3% a year and each
-remaining share owns 3% more of everything. Our models do not yet credit
-this properly — a known limitation we disclose and intend to fix — and
-correcting it would add perhaps mid-single-digit percent to our target.
-Second, the buyback tells you nothing about whether the stock is cheap.
-Apple buys at 38 times earnings exactly as it bought at 15 times. It is a
-cash-return pipe, not a signal.
-
-Research spending runs about 8% of revenue — large in dollars, ordinary
-as a percentage for big technology. Apple concentrates its bets: chips,
-health, headsets, now AI. It buys small companies quietly rather than
-large ones loudly. We grade the capital allocation excellent, with one
-honest caveat: a management team returning every dollar to shareholders
-is also telling you it cannot find anything better to do with the money.
-For a company priced for a transformative future, that is worth a pause.
+- **Capital returns:** Apple repurchases ~$100B of stock per year —
+  the largest buyback in corporate history — retiring roughly 3% of
+  shares outstanding annually, alongside a modest dividend (~0.4%
+  yield). Management targets a net-cash-neutral balance sheet over
+  time; in practice substantially all free cash flow is returned.
+- **Per-share compounding:** the 3% annual share-count reduction means
+  per-share metrics compound ~3 points faster than company-level
+  results. Our models do not yet credit this share-count decline — a
+  disclosed limitation scheduled for correction — which we estimate
+  understates our target by a mid-single-digit percentage.
+- **Signal value:** we caution against reading the buyback as a
+  valuation signal; the program executes at 38x earnings as it did at
+  15x. It is a distribution mechanism, and its scale also indicates
+  management sees no internal projects capable of absorbing this
+  capital at acceptable returns.
+- **R&D and M&A:** R&D runs ~8% of revenue — large in dollars, mid-pack
+  as a ratio among mega-cap technology — concentrated on fewer,
+  longer-cycle programs (silicon, health, spatial, AI). Acquisitions
+  remain small tuck-ins. We assess execution and capital discipline as
+  excellent.
 
 <!-- section: catalysts -->
-What happens next, when, and what it would do to our view:
+Key events and data points, with our expected read-through:
 
-- **Quarterly earnings, next expected in late July 2026.** We watch one
-  number first: Services growth. At 14% or better, the bull story stays
-  on schedule. Drifting toward single digits, the one fast-growing piece
-  of Apple is slowing, and the case for today's multiple weakens further.
-- **The AI product cycle.** Demonstrations do not move our numbers;
-  revenue does. Evidence that Apple's AI features are either shortening
-  the upgrade cycle (people buying phones sooner) or producing paid
-  subscriptions would be the first hard proof of the AI story, and we
-  would raise our adjustment accordingly.
-- **The Google payment.** If courts ultimately strike the arrangement,
-  Apple loses roughly $20 billion a year of nearly pure profit. Our
-  target does not assume that loss, so this risk points only downward.
-- **China.** Stabilization against Huawei would de-risk about a fifth of
-  revenue. Continued share loss would do the opposite.
-- **What would change our rating.** Our SELL is about price, so it ends
-  in one of two ways: the price comes down toward $229, or the earnings
-  come up. Concretely: a return to sustained double-digit revenue growth
-  with Services still growing mid-teens would raise all three of our
-  valuation lenses materially, and we commit in advance to reviewing the
-  rating in any quarter that shows both.
+1. **Quarterly earnings (next print expected late July 2026):** the
+   primary metric is Services growth. We view ≥14% YoY as keeping the
+   mix-shift thesis on schedule; deceleration toward single digits
+   would undermine the one segment supporting the premium multiple and
+   likely pressure the shares.
+2. **AI monetization evidence:** we would raise our overlay on data —
+   shortened iPhone replacement cycles or paid AI services attach in
+   reported results — not on product demonstrations. No revenue
+   evidence has been reported to date.
+3. **Google default-placement litigation:** an adverse final ruling
+   would remove an estimated $20B+ of near-costless annual revenue
+   (roughly 3–4 points of EPS by our estimate). Our target does not
+   assume this loss; the risk is asymmetric to the downside.
+4. **China share trajectory:** stabilization against Huawei would
+   de-risk ~20% of revenue and would cause us to revisit the growth
+   assumption in our DCF.
+5. **Rating triggers:** we would revisit the SELL on either (a) price
+   convergence toward our $229 target, or (b) fundamentals closing the
+   gap — specifically, a return to sustained double-digit consolidated
+   revenue growth with Services holding mid-teens, which would raise
+   all three valuation lenses. We commit to reviewing the rating in any
+   quarter that delivers both conditions.
