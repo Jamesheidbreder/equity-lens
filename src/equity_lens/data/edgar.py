@@ -127,16 +127,19 @@ QUARTERLY_CONCEPTS = {
 
 
 def get_quarterly(cik: str, quarters: int = 8) -> dict:
-    """Recent quarterly history from 10-Q filings (plus the 10-K's Q4-
-    implied values are NOT derived here — quarters shown are as filed).
+    """Recent quarterly history, keyed by period end date.
 
-    Returns {concept: {(year, end_date): value}} for the most recent
-    `quarters` quarters. Foreign filers that don't file 10-Qs return empty.
+    Three quarters a year come from 10-Q filings. The fiscal fourth quarter
+    has no 10-Q (it lives inside the annual 10-K as part of the full year),
+    so for additive concepts (revenue, net income) it is DERIVED as the
+    annual figure minus the three reported quarters — standard analyst
+    practice. Derived period-ends are listed under "_derived". EPS is not
+    additive across quarters, so it is never derived.
     """
     facts = fetch_companyfacts(cik)
     gaap = facts.get("facts", {}).get("us-gaap", {})
-    out = {}
-    for name, tags in QUARTERLY_CONCEPTS.items():
+
+    def collect(tags, forms, dmin, dmax):
         best = {}
         for tag in tags:
             if tag not in gaap:
@@ -144,12 +147,12 @@ def get_quarterly(cik: str, quarters: int = 8) -> dict:
             series = {}
             for unit_vals in gaap[tag].get("units", {}).values():
                 for item in unit_vals:
-                    if item.get("form") != "10-Q" or "end" not in item \
+                    if item.get("form") not in forms or "end" not in item \
                             or "start" not in item:
                         continue
                     days = (pd.Timestamp(item["end"])
                             - pd.Timestamp(item["start"])).days
-                    if not 80 <= days <= 100:   # single quarters only
+                    if not dmin <= days <= dmax:
                         continue
                     key = item["end"]
                     prev = series.get(key)
@@ -159,8 +162,23 @@ def get_quarterly(cik: str, quarters: int = 8) -> dict:
             if series and (not best or
                            (max(series), len(series)) > (max(best), len(best))):
                 best = series
-        out[name] = {k: rec["val"] for k, rec in
-                     sorted(best.items())[-quarters:]}
+        return {k: rec["val"] for k, rec in sorted(best.items())}
+
+    out, derived = {}, set()
+    for name, tags in QUARTERLY_CONCEPTS.items():
+        q = collect(tags, ("10-Q",), 80, 100)
+        if name in ("revenue", "net_income"):
+            annual = collect(tags, ("10-K", "20-F", "40-F"), 330, 400)
+            for end, val in annual.items():
+                e = pd.Timestamp(end)
+                window = [k for k in q
+                          if e - pd.Timedelta(days=360) < pd.Timestamp(k)
+                          < e - pd.Timedelta(days=45)]
+                if len(window) == 3 and end not in q:
+                    q[end] = val - sum(q[k] for k in window)
+                    derived.add(end)
+        out[name] = dict(sorted(q.items())[-quarters:])
+    out["_derived"] = sorted(derived)
     return out
 
 

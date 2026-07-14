@@ -143,7 +143,7 @@ def analyze(ticker: str) -> dict:
             models["dcf"]["assumptions"]["fcf_basis"] = fcf_basis
             if capex_to_dep is not None:
                 models["dcf"]["assumptions"]["capex_to_depreciation"] = \
-                    round(capex_to_dep, 2)
+                    f"{capex_to_dep:.2f}x"
                 if capex_to_dep > 2.0 and "standard" in fcf_basis:
                     models["dcf"]["assumptions"]["diagnostic_flag"] = (
                         "capex runs well above depreciation on the standard "

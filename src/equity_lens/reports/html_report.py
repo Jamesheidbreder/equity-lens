@@ -6,6 +6,7 @@ metrics strip, styled tables, serif display headings — and is what gets
 linked from the website and printed to PDF. Output: reports/html/.
 """
 
+import base64
 import re
 from pathlib import Path
 
@@ -124,9 +125,18 @@ def render(a: dict, report_md: str) -> str:
                      flags=re.M)
     # First markdown table (the header key-facts table) is replaced by banner.
     body_md = re.sub(r"\n\| \|  ?\|\n(\|.*\n)+", "\n", body_md, count=1)
-    # Image paths: html/ lives one level below reports/, assets stays sibling.
-    body_md = body_md.replace("](assets/", "](../assets/")
     body_html = md.markdown(body_md, extensions=["tables"])
+
+    # Inline every chart as a data URI: the HTML report is a single
+    # self-contained file that renders anywhere (moved, emailed, printed).
+    def _inline(match):
+        img_path = REPO_ROOT / "reports" / match.group(1)
+        if img_path.exists():
+            b64 = base64.b64encode(img_path.read_bytes()).decode()
+            return f'src="data:image/png;base64,{b64}"'
+        return match.group(0)
+
+    body_html = re.sub(r'src="(assets/[^"]+)"', _inline, body_html)
 
     return f"""<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">

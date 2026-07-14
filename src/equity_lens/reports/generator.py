@@ -199,12 +199,18 @@ def _quarterly_section(a: dict) -> str:
     if len(rev) < 2:
         return None
     ni, eps = q.get("net_income", {}), q.get("eps_diluted", {})
-    out = ["### Recent quarters (10-Q, as filed)", "",
+    derived = set(q.get("_derived", []))
+    out = ["### Recent quarters", "",
            "| Quarter ended | Revenue | Net income | Diluted EPS |",
            "|---|---|---|---|"]
     for end in rev:
-        out.append(f"| {end} | {_bn(rev.get(end))} | {_bn(ni.get(end))} "
-                   f"| {_m(eps.get(end)) if eps.get(end) is not None else 'n/a'} |")
+        mark = "\\*" if end in derived else ""
+        out.append(f"| {end}{mark} | {_bn(rev.get(end))} | {_bn(ni.get(end))} "
+                   f"| {_m(eps.get(end)) if eps.get(end) is not None else '—'} |")
+    if derived & set(rev):
+        out += ["", "\\* Fiscal fourth quarters have no 10-Q of their own; "
+                    "they are derived as the annual filing less the three "
+                    "reported quarters. Quarterly EPS is not derived."]
     return "\n".join(out)
 
 
@@ -307,16 +313,26 @@ def _esg_section(a: dict) -> str:
 
 
 def _valuation_section(a: dict) -> str:
-    out = ["## Valuation", ""]
+    weights_note = {
+        "dcf_comps": "Weights: discounted cash flow 40%, peer comparables "
+                     "30%, own historical multiple 30%.",
+        "bank": "The target averages the three lenses equally.",
+        "conglomerate": "The target averages the two lenses equally.",
+    }.get(a["profile"]["method"], "")
+    out = ["## Valuation", "",
+           "Each lens values the company independently; sharp disagreement "
+           f"between them is itself information. {weights_note}", ""]
     for name, m in a["models"].items():
         title = MODEL_TITLES.get(name, name.replace("_", " ").title())
         if not m.get("per_share"):
             out += [f"**{title}:** not applicable "
                     f"({m.get('reason', 'no value')}).", ""]
             continue
-        out += [f"**{title}: {_m(m['per_share'])}**", ""]
+        out += [f"### {title} — {_m(m['per_share'])} per share", "",
+                "| Assumption | Value |", "|---|---|"]
         for k, v in (m.get("assumptions") or {}).items():
-            out.append(f"- {k.replace('_', ' ')}: {_fmt_val(v)}")
+            label = k.replace("_", " ").capitalize()
+            out.append(f"| {label} | {_fmt_val(v)} |")
         out.append("")
     sens = a.get("sensitivity")
     if sens:
