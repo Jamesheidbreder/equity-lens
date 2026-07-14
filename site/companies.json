@@ -1,0 +1,6621 @@
+[
+ {
+  "ticker": "BRK-B",
+  "name": "Berkshire Hathaway Inc.",
+  "sector": "Financials",
+  "industry": "Diversified Holdings / Insurance",
+  "as_of": "2026-07-14",
+  "price": 494.86,
+  "market_cap": 1067340595200,
+  "beta": 0.607,
+  "pe_trailing": 14.73236,
+  "dividend_yield_pct": null,
+  "week52_low": 455.19,
+  "week52_high": 516.85,
+  "rating": "BUY",
+  "relative_rating": "Top Pick",
+  "relative_rank": 1,
+  "target": 603.0717121200889,
+  "base_target": 603.0717121200889,
+  "upside": 0.21867136588143898,
+  "street_target": 520.3333,
+  "street_analyst_count": 3,
+  "cost_of_equity": 0.074,
+  "models": [
+   {
+    "key": "justified_pb",
+    "label": "Balance-sheet value",
+    "value": 595.2323005014058,
+    "assumptions": {
+     "book_per_share": 332.6229396095212,
+     "normalized_roe": 0.11268602297486884,
+     "cost_of_equity": 0.074,
+     "growth": 0.025,
+     "fair_pb_multiple": 1.789510672956507
+    }
+   },
+   {
+    "key": "peer_pb",
+    "label": "Balance sheet at peer multiples",
+    "value": 610.9111237387721,
+    "assumptions": {
+     "book_per_share": 332.6229396095212,
+     "peer_median_pb": 1.8366476,
+     "peers_used": [
+      "PGR",
+      "CB",
+      "ALL",
+      "MKL",
+      "L"
+     ]
+    }
+   }
+  ],
+  "overlays": [],
+  "macro_adjustments": [
+   {
+    "rule": "credit_spread_erp",
+    "indicator": "BAA10Y",
+    "reading": "Baa spread 1.58%, -0.39pp vs 10y median",
+    "target": "cost_of_equity",
+    "adjustment": -0.0019499999999999995,
+    "rationale": "Credit spreads are a market-priced risk gauge; wider-than-normal spreads raise the equity risk premium."
+   },
+   {
+    "rule": "cash_yield_roe",
+    "indicator": "DTB3",
+    "reading": "3-month T-bill 3.71%, +1.70pp vs 10y median; cash is 4% of book",
+    "target": "roe",
+    "adjustment": 0.0007483925014531257,
+    "rationale": "A large cash-and-bills pile earns the short rate; rates above their norm mechanically lift returns on it."
+   }
+  ],
+  "sensitivity": {
+   "x_label": "Normalized ROE",
+   "x_values": [
+    0.09268602297486883,
+    0.10268602297486884,
+    0.11268602297486884,
+    0.12268602297486883,
+    0.13268602297486884
+   ],
+   "coe_values": [
+    0.064,
+    0.06899999999999999,
+    0.074,
+    0.079,
+    0.08399999999999999
+   ],
+   "grid": [
+    [
+     594.0956122844946,
+     561.295606555505,
+     535.1894795467173,
+     513.9178205025199,
+     496.2515273980171
+    ],
+    [
+     636.7395789010998,
+     599.0936678747688,
+     569.1305958334032,
+     544.7162408367349,
+     524.4399121106884
+    ],
+    [
+     679.383545517705,
+     636.8917291940325,
+     603.0717121200889,
+     575.5146611709498,
+     552.6282968233596
+    ],
+    [
+     722.0275121343104,
+     674.6897905132963,
+     637.0128284067748,
+     606.3130815051647,
+     580.816681536031
+    ],
+    [
+     764.6714787509156,
+     712.4878518325602,
+     670.9539446934607,
+     637.1115018393797,
+     609.0050662487023
+    ]
+   ]
+  },
+  "fundamentals": [
+   {
+    "year": 2007,
+    "free_cash_flow": 7177000000
+   },
+   {
+    "year": 2008,
+    "roe": 0.04570455855839366,
+    "free_cash_flow": 5114000000
+   },
+   {
+    "year": 2009,
+    "roe": 0.061440710286647035,
+    "free_cash_flow": 10909000000
+   },
+   {
+    "year": 2010,
+    "roe": 0.0824254058658259,
+    "free_cash_flow": 11915000000
+   },
+   {
+    "year": 2011,
+    "roe": 0.06220200181983621
+   },
+   {
+    "year": 2012,
+    "roe": 0.07899939780545386
+   },
+   {
+    "year": 2013,
+    "roe": 0.0877732209653432
+   },
+   {
+    "year": 2014,
+    "roe": 0.08274139151434401
+   },
+   {
+    "year": 2015,
+    "roe": 0.09423987477988652,
+    "free_cash_flow": 15409000000
+   },
+   {
+    "year": 2016,
+    "roe": 0.08534760874960116,
+    "free_cash_flow": 19693000000
+   },
+   {
+    "year": 2017,
+    "roe": 0.1290281829248685,
+    "free_cash_flow": 34020000000
+   },
+   {
+    "year": 2018,
+    "revenue": 175445000000,
+    "net_margin": 0.022918863461483654,
+    "roe": 0.01153130314336269,
+    "free_cash_flow": 22863000000
+   },
+   {
+    "year": 2019,
+    "revenue": 176512000000,
+    "net_margin": 0.46125475888324874,
+    "roe": 0.1916636651906467,
+    "free_cash_flow": 22708000000
+   },
+   {
+    "year": 2020,
+    "revenue": 166733000000,
+    "net_margin": 0.25502450024890094,
+    "roe": 0.0959486781417263,
+    "free_cash_flow": 26761000000
+   },
+   {
+    "year": 2021,
+    "revenue": 191252000000,
+    "net_margin": 0.47025390584150756,
+    "roe": 0.20592989815357562,
+    "free_cash_flow": 26151000000
+   },
+   {
+    "year": 2022,
+    "revenue": 207771000000,
+    "net_margin": -0.1095388673106449,
+    "roe": -0.04807318598127683,
+    "free_cash_flow": 21886000000
+   },
+   {
+    "year": 2023,
+    "revenue": 254906000000,
+    "net_margin": 0.3774842490957451,
+    "roe": 0.1714370725119505,
+    "free_cash_flow": 29787000000
+   },
+   {
+    "year": 2024,
+    "revenue": 249714000000,
+    "net_margin": 0.3563877075374228,
+    "roe": 0.13704863806039103,
+    "free_cash_flow": 11616000000
+   },
+   {
+    "year": 2025,
+    "revenue": 247244000000,
+    "net_margin": 0.2708579379074922,
+    "roe": 0.09334572962243821,
+    "free_cash_flow": 25042000000
+   }
+  ],
+  "growth": {
+   "revenue_cagr_3y": 0.05969351607463791,
+   "revenue_cagr_5y": 0.08198400179125276,
+   "net_income_cagr_5y": 0.09509746053577373,
+   "fcf_cagr_5y": -0.013190470799036569
+  },
+  "business_summary": "Berkshire Hathaway Inc., together with its subsidiaries, engages in the insurance, freight rail transportation, and utility businesses. The company provides property, casualty, life, accident, and health insurance and reinsurance; operates railroad systems in North America; generates, transmits, stores, and distributes electricity from natural gas, coal, wind, solar, hydroelectric, nuclear, and geothermal sources; operates natural gas distribution and storage facilities, interstate pipelines, liquefied natural gas facilities, and compressor and meter stations; and holds interest in coal mining assets. It manufactures boxed chocolates and other confectionery products; specialty chemicals, metal cutting tools, and components for aerospace and power generation applications; prefabricated and site-built residential homes, flooring products; insulation, roofing, and engineered products; building and engineered components; paints and coatings; and bricks and masonry products, as well as offers manufactured and site-built home construction, and related lending and financial services. In addition, the company provides recreational vehicles, apparel, footwear, toys, jewelry, custom picture framing products, alkaline batteries, logistics services, and professional aviation training and shared aircraft ownership programs; castings, forgings, fasteners/fastener systems, aerostructures, and precision components; and cobalt, nickel, and titanium alloys. Further, it distributes televisions and information, and grocery and non-food consumer products; franchises and services quick service restaurants; and distributes electronic components. Additionally, it retails automobiles; furniture, bedding, and accessories; household appliances, electronics, and floor coverings; watches, home decor and repair services; sells kitchenware; and motorcycle clothing and equipment. The company was incorporated in 1998 and is headquartered in Omaha, Nebraska.",
+  "price_history_weekly": [
+   {
+    "date": "2021-07-18",
+    "close": 277.9
+   },
+   {
+    "date": "2021-07-25",
+    "close": 278.49
+   },
+   {
+    "date": "2021-08-01",
+    "close": 278.29
+   },
+   {
+    "date": "2021-08-08",
+    "close": 285.63
+   },
+   {
+    "date": "2021-08-15",
+    "close": 287.89
+   },
+   {
+    "date": "2021-08-22",
+    "close": 285.27
+   },
+   {
+    "date": "2021-08-29",
+    "close": 286.6
+   },
+   {
+    "date": "2021-09-05",
+    "close": 281.89
+   },
+   {
+    "date": "2021-09-12",
+    "close": 277.6
+   },
+   {
+    "date": "2021-09-19",
+    "close": 276.76
+   },
+   {
+    "date": "2021-09-26",
+    "close": 277.87
+   },
+   {
+    "date": "2021-10-03",
+    "close": 275.71
+   },
+   {
+    "date": "2021-10-10",
+    "close": 284.14
+   },
+   {
+    "date": "2021-10-17",
+    "close": 284.21
+   },
+   {
+    "date": "2021-10-24",
+    "close": 289.24
+   },
+   {
+    "date": "2021-10-31",
+    "close": 287.01
+   },
+   {
+    "date": "2021-11-07",
+    "close": 287.88
+   },
+   {
+    "date": "2021-11-14",
+    "close": 285.99
+   },
+   {
+    "date": "2021-11-21",
+    "close": 279.99
+   },
+   {
+    "date": "2021-11-28",
+    "close": 283.09
+   },
+   {
+    "date": "2021-12-05",
+    "close": 277.43
+   },
+   {
+    "date": "2021-12-12",
+    "close": 288.23
+   },
+   {
+    "date": "2021-12-19",
+    "close": 293.66
+   },
+   {
+    "date": "2021-12-26",
+    "close": 294.49
+   },
+   {
+    "date": "2022-01-02",
+    "close": 299.0
+   },
+   {
+    "date": "2022-01-09",
+    "close": 319.78
+   },
+   {
+    "date": "2022-01-16",
+    "close": 324.13
+   },
+   {
+    "date": "2022-01-23",
+    "close": 305.22
+   },
+   {
+    "date": "2022-01-30",
+    "close": 312.9
+   },
+   {
+    "date": "2022-02-06",
+    "close": 314.99
+   },
+   {
+    "date": "2022-02-13",
+    "close": 319.14
+   },
+   {
+    "date": "2022-02-20",
+    "close": 314.8
+   },
+   {
+    "date": "2022-02-27",
+    "close": 319.24
+   },
+   {
+    "date": "2022-03-06",
+    "close": 325.34
+   },
+   {
+    "date": "2022-03-13",
+    "close": 326.6
+   },
+   {
+    "date": "2022-03-20",
+    "close": 342.41
+   },
+   {
+    "date": "2022-03-27",
+    "close": 358.76
+   },
+   {
+    "date": "2022-04-03",
+    "close": 351.88
+   },
+   {
+    "date": "2022-04-10",
+    "close": 353.1
+   },
+   {
+    "date": "2022-04-17",
+    "close": 344.33
+   },
+   {
+    "date": "2022-04-24",
+    "close": 335.56
+   },
+   {
+    "date": "2022-05-01",
+    "close": 322.83
+   },
+   {
+    "date": "2022-05-08",
+    "close": 318.88
+   },
+   {
+    "date": "2022-05-15",
+    "close": 310.36
+   },
+   {
+    "date": "2022-05-22",
+    "close": 304.05
+   },
+   {
+    "date": "2022-05-29",
+    "close": 319.11
+   },
+   {
+    "date": "2022-06-05",
+    "close": 310.94
+   },
+   {
+    "date": "2022-06-12",
+    "close": 291.71
+   },
+   {
+    "date": "2022-06-19",
+    "close": 268.08
+   },
+   {
+    "date": "2022-06-26",
+    "close": 278.28
+   },
+   {
+    "date": "2022-07-03",
+    "close": 277.5
+   },
+   {
+    "date": "2022-07-10",
+    "close": 280.83
+   },
+   {
+    "date": "2022-07-17",
+    "close": 278.48
+   },
+   {
+    "date": "2022-07-24",
+    "close": 285.93
+   },
+   {
+    "date": "2022-07-31",
+    "close": 300.6
+   },
+   {
+    "date": "2022-08-07",
+    "close": 292.07
+   },
+   {
+    "date": "2022-08-14",
+    "close": 301.55
+   },
+   {
+    "date": "2022-08-21",
+    "close": 297.28
+   },
+   {
+    "date": "2022-08-28",
+    "close": 289.96
+   },
+   {
+    "date": "2022-09-04",
+    "close": 277.67
+   },
+   {
+    "date": "2022-09-11",
+    "close": 285.77
+   },
+   {
+    "date": "2022-09-18",
+    "close": 274.81
+   },
+   {
+    "date": "2022-09-25",
+    "close": 267.77
+   },
+   {
+    "date": "2022-10-02",
+    "close": 267.02
+   },
+   {
+    "date": "2022-10-09",
+    "close": 269.04
+   },
+   {
+    "date": "2022-10-16",
+    "close": 272.67
+   },
+   {
+    "date": "2022-10-23",
+    "close": 282.51
+   },
+   {
+    "date": "2022-10-30",
+    "close": 299.63
+   },
+   {
+    "date": "2022-11-06",
+    "close": 287.47
+   },
+   {
+    "date": "2022-11-13",
+    "close": 309.72
+   },
+   {
+    "date": "2022-11-20",
+    "close": 310.76
+   },
+   {
+    "date": "2022-11-27",
+    "close": 317.43
+   },
+   {
+    "date": "2022-12-04",
+    "close": 316.15
+   },
+   {
+    "date": "2022-12-11",
+    "close": 306.39
+   },
+   {
+    "date": "2022-12-18",
+    "close": 300.0
+   },
+   {
+    "date": "2022-12-25",
+    "close": 306.49
+   },
+   {
+    "date": "2023-01-01",
+    "close": 308.9
+   },
+   {
+    "date": "2023-01-08",
+    "close": 318.69
+   },
+   {
+    "date": "2023-01-15",
+    "close": 317.64
+   },
+   {
+    "date": "2023-01-22",
+    "close": 309.87
+   },
+   {
+    "date": "2023-01-29",
+    "close": 309.17
+   },
+   {
+    "date": "2023-02-05",
+    "close": 308.51
+   },
+   {
+    "date": "2023-02-12",
+    "close": 309.89
+   },
+   {
+    "date": "2023-02-19",
+    "close": 308.24
+   },
+   {
+    "date": "2023-02-26",
+    "close": 304.02
+   },
+   {
+    "date": "2023-03-05",
+    "close": 312.45
+   },
+   {
+    "date": "2023-03-12",
+    "close": 303.63
+   },
+   {
+    "date": "2023-03-19",
+    "close": 293.51
+   },
+   {
+    "date": "2023-03-26",
+    "close": 298.92
+   },
+   {
+    "date": "2023-04-02",
+    "close": 308.77
+   },
+   {
+    "date": "2023-04-09",
+    "close": 312.51
+   },
+   {
+    "date": "2023-04-16",
+    "close": 319.74
+   },
+   {
+    "date": "2023-04-23",
+    "close": 324.33
+   },
+   {
+    "date": "2023-04-30",
+    "close": 328.55
+   },
+   {
+    "date": "2023-05-07",
+    "close": 323.88
+   },
+   {
+    "date": "2023-05-14",
+    "close": 322.49
+   },
+   {
+    "date": "2023-05-21",
+    "close": 330.39
+   },
+   {
+    "date": "2023-05-28",
+    "close": 320.6
+   },
+   {
+    "date": "2023-06-04",
+    "close": 329.48
+   },
+   {
+    "date": "2023-06-11",
+    "close": 335.29
+   },
+   {
+    "date": "2023-06-18",
+    "close": 338.31
+   },
+   {
+    "date": "2023-06-25",
+    "close": 335.25
+   },
+   {
+    "date": "2023-07-02",
+    "close": 341.0
+   },
+   {
+    "date": "2023-07-09",
+    "close": 340.9
+   },
+   {
+    "date": "2023-07-16",
+    "close": 341.09
+   },
+   {
+    "date": "2023-07-23",
+    "close": 345.76
+   },
+   {
+    "date": "2023-07-30",
+    "close": 349.81
+   },
+   {
+    "date": "2023-08-06",
+    "close": 349.99
+   },
+   {
+    "date": "2023-08-13",
+    "close": 358.35
+   },
+   {
+    "date": "2023-08-20",
+    "close": 352.56
+   },
+   {
+    "date": "2023-08-27",
+    "close": 355.93
+   },
+   {
+    "date": "2023-09-03",
+    "close": 362.46
+   },
+   {
+    "date": "2023-09-10",
+    "close": 363.15
+   },
+   {
+    "date": "2023-09-17",
+    "close": 367.86
+   },
+   {
+    "date": "2023-09-24",
+    "close": 360.16
+   },
+   {
+    "date": "2023-10-01",
+    "close": 350.3
+   },
+   {
+    "date": "2023-10-08",
+    "close": 346.34
+   },
+   {
+    "date": "2023-10-15",
+    "close": 345.09
+   },
+   {
+    "date": "2023-10-22",
+    "close": 335.86
+   },
+   {
+    "date": "2023-10-29",
+    "close": 331.71
+   },
+   {
+    "date": "2023-11-05",
+    "close": 351.81
+   },
+   {
+    "date": "2023-11-12",
+    "close": 350.56
+   },
+   {
+    "date": "2023-11-19",
+    "close": 358.93
+   },
+   {
+    "date": "2023-11-26",
+    "close": 362.68
+   },
+   {
+    "date": "2023-12-03",
+    "close": 357.07
+   },
+   {
+    "date": "2023-12-10",
+    "close": 353.08
+   },
+   {
+    "date": "2023-12-17",
+    "close": 356.5
+   },
+   {
+    "date": "2023-12-24",
+    "close": 356.47
+   },
+   {
+    "date": "2023-12-31",
+    "close": 356.66
+   },
+   {
+    "date": "2024-01-07",
+    "close": 365.59
+   },
+   {
+    "date": "2024-01-14",
+    "close": 363.62
+   },
+   {
+    "date": "2024-01-21",
+    "close": 366.99
+   },
+   {
+    "date": "2024-01-28",
+    "close": 385.4
+   },
+   {
+    "date": "2024-02-04",
+    "close": 390.75
+   },
+   {
+    "date": "2024-02-11",
+    "close": 398.36
+   },
+   {
+    "date": "2024-02-18",
+    "close": 405.99
+   },
+   {
+    "date": "2024-02-25",
+    "close": 417.22
+   },
+   {
+    "date": "2024-03-03",
+    "close": 407.11
+   },
+   {
+    "date": "2024-03-10",
+    "close": 403.15
+   },
+   {
+    "date": "2024-03-17",
+    "close": 408.13
+   },
+   {
+    "date": "2024-03-24",
+    "close": 411.6
+   },
+   {
+    "date": "2024-03-31",
+    "close": 420.52
+   },
+   {
+    "date": "2024-04-07",
+    "close": 418.62
+   },
+   {
+    "date": "2024-04-14",
+    "close": 403.26
+   },
+   {
+    "date": "2024-04-21",
+    "close": 405.08
+   },
+   {
+    "date": "2024-04-28",
+    "close": 402.1
+   },
+   {
+    "date": "2024-05-05",
+    "close": 400.87
+   },
+   {
+    "date": "2024-05-12",
+    "close": 412.05
+   },
+   {
+    "date": "2024-05-19",
+    "close": 416.94
+   },
+   {
+    "date": "2024-05-26",
+    "close": 407.41
+   },
+   {
+    "date": "2024-06-02",
+    "close": 414.4
+   },
+   {
+    "date": "2024-06-09",
+    "close": 413.72
+   },
+   {
+    "date": "2024-06-16",
+    "close": 405.54
+   },
+   {
+    "date": "2024-06-23",
+    "close": 409.62
+   },
+   {
+    "date": "2024-06-30",
+    "close": 406.8
+   },
+   {
+    "date": "2024-07-07",
+    "close": 411.17
+   },
+   {
+    "date": "2024-07-14",
+    "close": 424.44
+   },
+   {
+    "date": "2024-07-21",
+    "close": 434.47
+   },
+   {
+    "date": "2024-07-28",
+    "close": 437.66
+   },
+   {
+    "date": "2024-08-04",
+    "close": 428.36
+   },
+   {
+    "date": "2024-08-11",
+    "close": 431.67
+   },
+   {
+    "date": "2024-08-18",
+    "close": 444.51
+   },
+   {
+    "date": "2024-08-25",
+    "close": 453.38
+   },
+   {
+    "date": "2024-09-01",
+    "close": 475.92
+   },
+   {
+    "date": "2024-09-08",
+    "close": 459.42
+   },
+   {
+    "date": "2024-09-15",
+    "close": 447.61
+   },
+   {
+    "date": "2024-09-22",
+    "close": 455.31
+   },
+   {
+    "date": "2024-09-29",
+    "close": 457.47
+   },
+   {
+    "date": "2024-10-06",
+    "close": 461.97
+   },
+   {
+    "date": "2024-10-13",
+    "close": 460.21
+   },
+   {
+    "date": "2024-10-20",
+    "close": 464.8
+   },
+   {
+    "date": "2024-10-27",
+    "close": 454.01
+   },
+   {
+    "date": "2024-11-03",
+    "close": 452.14
+   },
+   {
+    "date": "2024-11-10",
+    "close": 463.41
+   },
+   {
+    "date": "2024-11-17",
+    "close": 470.28
+   },
+   {
+    "date": "2024-11-24",
+    "close": 476.57
+   },
+   {
+    "date": "2024-12-01",
+    "close": 483.02
+   },
+   {
+    "date": "2024-12-08",
+    "close": 470.5
+   },
+   {
+    "date": "2024-12-15",
+    "close": 457.9
+   },
+   {
+    "date": "2024-12-22",
+    "close": 453.2
+   },
+   {
+    "date": "2024-12-29",
+    "close": 456.51
+   },
+   {
+    "date": "2025-01-05",
+    "close": 453.56
+   },
+   {
+    "date": "2025-01-12",
+    "close": 442.66
+   },
+   {
+    "date": "2025-01-19",
+    "close": 467.95
+   },
+   {
+    "date": "2025-01-26",
+    "close": 463.19
+   },
+   {
+    "date": "2025-02-02",
+    "close": 468.67
+   },
+   {
+    "date": "2025-02-09",
+    "close": 472.74
+   },
+   {
+    "date": "2025-02-16",
+    "close": 479.59
+   },
+   {
+    "date": "2025-02-23",
+    "close": 478.74
+   },
+   {
+    "date": "2025-03-02",
+    "close": 513.83
+   },
+   {
+    "date": "2025-03-09",
+    "close": 495.62
+   },
+   {
+    "date": "2025-03-16",
+    "close": 514.6
+   },
+   {
+    "date": "2025-03-23",
+    "close": 521.91
+   },
+   {
+    "date": "2025-03-30",
+    "close": 526.31
+   },
+   {
+    "date": "2025-04-06",
+    "close": 493.54
+   },
+   {
+    "date": "2025-04-13",
+    "close": 524.11
+   },
+   {
+    "date": "2025-04-20",
+    "close": 518.21
+   },
+   {
+    "date": "2025-04-27",
+    "close": 530.96
+   },
+   {
+    "date": "2025-05-04",
+    "close": 539.8
+   },
+   {
+    "date": "2025-05-11",
+    "close": 513.74
+   },
+   {
+    "date": "2025-05-18",
+    "close": 514.31
+   },
+   {
+    "date": "2025-05-25",
+    "close": 503.46
+   },
+   {
+    "date": "2025-06-01",
+    "close": 503.96
+   },
+   {
+    "date": "2025-06-08",
+    "close": 493.53
+   },
+   {
+    "date": "2025-06-15",
+    "close": 487.54
+   },
+   {
+    "date": "2025-06-22",
+    "close": 484.85
+   },
+   {
+    "date": "2025-06-29",
+    "close": 485.68
+   },
+   {
+    "date": "2025-07-06",
+    "close": 485.0
+   },
+   {
+    "date": "2025-07-13",
+    "close": 475.86
+   },
+   {
+    "date": "2025-07-20",
+    "close": 473.8
+   },
+   {
+    "date": "2025-07-27",
+    "close": 484.07
+   },
+   {
+    "date": "2025-08-03",
+    "close": 472.84
+   },
+   {
+    "date": "2025-08-10",
+    "close": 465.4
+   },
+   {
+    "date": "2025-08-17",
+    "close": 477.2
+   },
+   {
+    "date": "2025-08-24",
+    "close": 489.0
+   },
+   {
+    "date": "2025-08-31",
+    "close": 502.98
+   },
+   {
+    "date": "2025-09-07",
+    "close": 499.77
+   },
+   {
+    "date": "2025-09-14",
+    "close": 493.74
+   },
+   {
+    "date": "2025-09-21",
+    "close": 492.85
+   },
+   {
+    "date": "2025-09-28",
+    "close": 500.03
+   },
+   {
+    "date": "2025-10-05",
+    "close": 498.75
+   },
+   {
+    "date": "2025-10-12",
+    "close": 489.13
+   },
+   {
+    "date": "2025-10-19",
+    "close": 492.42
+   },
+   {
+    "date": "2025-10-26",
+    "close": 492.1
+   },
+   {
+    "date": "2025-11-02",
+    "close": 477.54
+   },
+   {
+    "date": "2025-11-09",
+    "close": 499.06
+   },
+   {
+    "date": "2025-11-16",
+    "close": 508.94
+   },
+   {
+    "date": "2025-11-23",
+    "close": 504.04
+   },
+   {
+    "date": "2025-11-30",
+    "close": 513.81
+   },
+   {
+    "date": "2025-12-07",
+    "close": 504.34
+   },
+   {
+    "date": "2025-12-14",
+    "close": 499.52
+   },
+   {
+    "date": "2025-12-21",
+    "close": 494.53
+   },
+   {
+    "date": "2025-12-28",
+    "close": 498.3
+   },
+   {
+    "date": "2026-01-04",
+    "close": 496.85
+   },
+   {
+    "date": "2026-01-11",
+    "close": 499.1
+   },
+   {
+    "date": "2026-01-18",
+    "close": 493.29
+   },
+   {
+    "date": "2026-01-25",
+    "close": 478.97
+   },
+   {
+    "date": "2026-02-01",
+    "close": 480.53
+   },
+   {
+    "date": "2026-02-08",
+    "close": 508.09
+   },
+   {
+    "date": "2026-02-15",
+    "close": 497.55
+   },
+   {
+    "date": "2026-02-22",
+    "close": 498.2
+   },
+   {
+    "date": "2026-03-01",
+    "close": 504.95
+   },
+   {
+    "date": "2026-03-08",
+    "close": 498.98
+   },
+   {
+    "date": "2026-03-15",
+    "close": 490.03
+   },
+   {
+    "date": "2026-03-22",
+    "close": 480.94
+   },
+   {
+    "date": "2026-03-29",
+    "close": 468.49
+   },
+   {
+    "date": "2026-04-05",
+    "close": 477.35
+   },
+   {
+    "date": "2026-04-12",
+    "close": 479.9
+   },
+   {
+    "date": "2026-04-19",
+    "close": 474.58
+   },
+   {
+    "date": "2026-04-26",
+    "close": 469.32
+   },
+   {
+    "date": "2026-05-03",
+    "close": 473.01
+   },
+   {
+    "date": "2026-05-10",
+    "close": 475.94
+   },
+   {
+    "date": "2026-05-17",
+    "close": 482.7
+   },
+   {
+    "date": "2026-05-24",
+    "close": 486.38
+   },
+   {
+    "date": "2026-05-31",
+    "close": 474.48
+   },
+   {
+    "date": "2026-06-07",
+    "close": 488.13
+   },
+   {
+    "date": "2026-06-14",
+    "close": 489.25
+   },
+   {
+    "date": "2026-06-21",
+    "close": 489.46
+   },
+   {
+    "date": "2026-06-28",
+    "close": 498.66
+   },
+   {
+    "date": "2026-07-05",
+    "close": 507.78
+   },
+   {
+    "date": "2026-07-12",
+    "close": 493.71
+   },
+   {
+    "date": "2026-07-19",
+    "close": 494.86
+   }
+  ]
+ },
+ {
+  "ticker": "MSFT",
+  "name": "Microsoft Corporation",
+  "sector": "Technology",
+  "industry": "Software & Cloud",
+  "as_of": "2026-07-14",
+  "price": 387.28,
+  "market_cap": 2876884385792,
+  "beta": 1.13,
+  "pe_trailing": 23.093618,
+  "dividend_yield_pct": 0.95,
+  "week52_low": 349.2,
+  "week52_high": 555.45,
+  "rating": "HOLD",
+  "relative_rating": "Overweight",
+  "relative_rank": 2,
+  "target": 417.39468277582387,
+  "base_target": 417.39468277582387,
+  "upside": 0.07775945769423642,
+  "street_target": 559.86035,
+  "street_analyst_count": 55,
+  "cost_of_equity": 0.10015,
+  "models": [
+   {
+    "key": "dcf",
+    "label": "Cash-flow value (DCF)",
+    "value": 217.77633486628022,
+    "assumptions": {
+     "fcf_base": 65149000000,
+     "initial_growth": 0.15,
+     "terminal_growth": 0.025,
+     "cost_of_equity": 0.10015,
+     "exit_multiple": 28.65278851003935,
+     "projection_years": 5,
+     "net_debt": 9910000000
+    }
+   },
+   {
+    "key": "comps",
+    "label": "Priced like its peers",
+    "value": 463.9855055055,
+    "assumptions": {
+     "trailing": {
+      "eps": 16.77,
+      "peer_median_pe": 27.161572
+     },
+     "forward": {
+      "eps": 19.35995,
+      "peer_median_pe": 24.40458
+     },
+     "peers_used": [
+      "AAPL",
+      "GOOGL",
+      "ORCL",
+      "CRM",
+      "AMZN"
+     ]
+    }
+   },
+   {
+    "key": "own_multiple",
+    "label": "Priced like its own history",
+    "value": 636.9616572588726,
+    "assumptions": {
+     "own_avg_pe_5y": 32.9009970200787,
+     "eps_used": 19.35995,
+     "eps_basis": "forward"
+    }
+   }
+  ],
+  "overlays": [],
+  "macro_adjustments": [
+   {
+    "rule": "credit_spread_erp",
+    "indicator": "BAA10Y",
+    "reading": "Baa spread 1.58%, -0.39pp vs 10y median",
+    "target": "cost_of_equity",
+    "adjustment": -0.0019499999999999995,
+    "rationale": "Credit spreads are a market-priced risk gauge; wider-than-normal spreads raise the equity risk premium."
+   },
+   {
+    "rule": "dollar_translation",
+    "indicator": "DTWEXBGS",
+    "reading": "Trade-weighted dollar +0.6% y/y",
+    "target": "growth",
+    "adjustment": -0.0008222528942047342,
+    "rationale": "~49% of revenue is foreign; a stronger dollar shrinks it in translation, a weaker one inflates it."
+   },
+   {
+    "rule": "software_investment_demand",
+    "indicator": "B985RC1Q027SBEA",
+    "reading": "Business software investment +9.9% y/y vs +9.5% trend",
+    "target": "growth",
+    "adjustment": 0.00102651454581828,
+    "rationale": "National-accounts software investment is the demand pool for enterprise IT; spend above/below trend leans on growth."
+   }
+  ],
+  "sensitivity": {
+   "x_label": "FCF growth",
+   "x_values": [
+    0.13,
+    0.13999999999999999,
+    0.15,
+    0.16,
+    0.16999999999999998
+   ],
+   "coe_values": [
+    0.09015000000000001,
+    0.09515,
+    0.10015,
+    0.10515000000000001,
+    0.11015
+   ],
+   "grid": [
+    [
+     420.7392095042103,
+     417.03673883932004,
+     413.7005952433278,
+     410.66711213451254,
+     407.8873830210571
+    ],
+    [
+     422.7318043404081,
+     418.9453443233748,
+     415.5335724337202,
+     412.43136778664905,
+     409.5887067729336
+    ],
+    [
+     424.755066962731,
+     420.88328345473724,
+     417.39468277582387,
+     414.2226664716885,
+     411.3160759442053
+    ],
+    [
+     426.80929093789905,
+     422.85083677610123,
+     419.28419510025213,
+     416.04126639149456,
+     413.06973901571814
+    ],
+    [
+     428.8947711072268,
+     424.8482860473781,
+     421.202379403269,
+     417.8874268668111,
+     414.8499455444464
+    ]
+   ]
+  },
+  "fundamentals": [
+   {
+    "year": 2008,
+    "roe": 0.4872678167888442,
+    "free_cash_flow": 18430000000
+   },
+   {
+    "year": 2009,
+    "roe": 0.3682946559482279,
+    "free_cash_flow": 15918000000
+   },
+   {
+    "year": 2010,
+    "roe": 0.4062804547915539,
+    "free_cash_flow": 22096000000
+   },
+   {
+    "year": 2011,
+    "roe": 0.4055498134295675,
+    "free_cash_flow": 24639000000
+   },
+   {
+    "year": 2012,
+    "roe": 0.2558353299278212,
+    "free_cash_flow": 29321000000
+   },
+   {
+    "year": 2013,
+    "roe": 0.2769431495743818,
+    "free_cash_flow": 24576000000
+   },
+   {
+    "year": 2014,
+    "roe": 0.24585672280139
+   },
+   {
+    "year": 2015,
+    "roe": 0.15225453591898405
+   },
+   {
+    "year": 2016,
+    "revenue": 91154000000,
+    "net_margin": 0.22532198257893235,
+    "operating_margin": 0.28608728086534874,
+    "roe": 0.24718979419906126,
+    "free_cash_flow": 24982000000
+   },
+   {
+    "year": 2017,
+    "revenue": 96571000000,
+    "net_margin": 0.26394052044609667,
+    "operating_margin": 0.3005560675565128,
+    "roe": 0.2906020909578046,
+    "free_cash_flow": 31378000000
+   },
+   {
+    "year": 2018,
+    "revenue": 110360000000,
+    "net_margin": 0.1501540413193186,
+    "operating_margin": 0.3176694454512505,
+    "roe": 0.20033124591987234,
+    "free_cash_flow": 32252000000
+   },
+   {
+    "year": 2019,
+    "revenue": 125843000000,
+    "net_margin": 0.3118171054409065,
+    "operating_margin": 0.3413698020549415,
+    "roe": 0.3834652594547054,
+    "free_cash_flow": 38260000000
+   },
+   {
+    "year": 2020,
+    "revenue": 143015000000,
+    "net_margin": 0.3096248645247002,
+    "operating_margin": 0.37030381428521486,
+    "roe": 0.37429841763592103,
+    "free_cash_flow": 45234000000
+   },
+   {
+    "year": 2021,
+    "revenue": 168088000000,
+    "net_margin": 0.36451739564989766,
+    "operating_margin": 0.415948788729713,
+    "roe": 0.4315223821731414,
+    "free_cash_flow": 56118000000
+   },
+   {
+    "year": 2022,
+    "revenue": 198270000000,
+    "net_margin": 0.3668633681343622,
+    "operating_margin": 0.4205527815604983,
+    "roe": 0.4367546925099975,
+    "free_cash_flow": 65149000000
+   },
+   {
+    "year": 2023,
+    "revenue": 211915000000,
+    "net_margin": 0.3414623787839464,
+    "operating_margin": 0.417728806361041,
+    "roe": 0.35088714643856406,
+    "free_cash_flow": 59475000000
+   },
+   {
+    "year": 2024,
+    "revenue": 245122000000,
+    "net_margin": 0.35955972944084985,
+    "operating_margin": 0.44644299573273716,
+    "roe": 0.32828137978299815,
+    "free_cash_flow": 74071000000
+   },
+   {
+    "year": 2025,
+    "revenue": 281724000000,
+    "net_margin": 0.3614601524896707,
+    "operating_margin": 0.4562195624085985,
+    "roe": 0.2964722734140952,
+    "free_cash_flow": 71611000000
+   }
+  ],
+  "growth": {
+   "revenue_cagr_3y": 0.12423114652863054,
+   "revenue_cagr_5y": 0.145218753307105,
+   "net_income_cagr_5y": 0.18122701458569956,
+   "fcf_cagr_5y": 0.09623319537765629
+  },
+  "business_summary": "Microsoft Corporation develops and supports software, services, devices, and solutions worldwide. The Productivity and Business Processes segment offers Microsoft 365 commercial, enterprise mobility + security, windows commercial, power BI, exchange, sharepoint, Microsoft teams, security and compliance, and copilot; Microsoft 365 commercial products, such as Windows commercial on-premises and office licensed services; Microsoft 365 consumer products and cloud services, including Microsoft 365 consumer subscriptions, office licensed on-premises, and other consumer services; LinkedIn; dynamics products and cloud services, such as dynamics 365, cloud-based applications, and on-premises ERP and CRM applications. Its Intelligent Cloud segment provides Server products and cloud services comprising Azure and other cloud services, GitHub, Nuance Healthcare, virtual desktop offerings, and other cloud services; server products, including SQL and windows server, visual studio and system center related client access licenses, and other on-premises offerings; enterprise and partner services, such as enterprise support and nuance professional services, industry solutions, Microsoft partner network, and learning experience. The Personal Computing segment provides windows and devices, such as Windows OEM licensing and devices and surface and PC accessories; gaming services and solutions, such as Xbox hardware, content, and services, first- and third-party content Xbox game pass, subscriptions, and cloud gaming, advertising, and other cloud services; search and news advertising services. It sells its products through OEMs, distributors, and resellers; and online and retail stores. The company has a strategic collaboration with Mayo Clinic, Inc. for the development of a frontier AI model for healthcare; and Global Objects, Inc. to build a retrieval-grounded generative AI world model. The company was founded in 1975 and is headquartered in Redmond, Washington.",
+  "price_history_weekly": [
+   {
+    "date": "2021-07-18",
+    "close": 269.43
+   },
+   {
+    "date": "2021-07-25",
+    "close": 278.0
+   },
+   {
+    "date": "2021-08-01",
+    "close": 273.43
+   },
+   {
+    "date": "2021-08-08",
+    "close": 277.79
+   },
+   {
+    "date": "2021-08-15",
+    "close": 281.05
+   },
+   {
+    "date": "2021-08-22",
+    "close": 292.65
+   },
+   {
+    "date": "2021-08-29",
+    "close": 288.19
+   },
+   {
+    "date": "2021-09-05",
+    "close": 289.56
+   },
+   {
+    "date": "2021-09-12",
+    "close": 284.34
+   },
+   {
+    "date": "2021-09-19",
+    "close": 288.34
+   },
+   {
+    "date": "2021-09-26",
+    "close": 287.84
+   },
+   {
+    "date": "2021-10-03",
+    "close": 277.98
+   },
+   {
+    "date": "2021-10-10",
+    "close": 283.51
+   },
+   {
+    "date": "2021-10-17",
+    "close": 292.51
+   },
+   {
+    "date": "2021-10-24",
+    "close": 297.27
+   },
+   {
+    "date": "2021-10-31",
+    "close": 318.86
+   },
+   {
+    "date": "2021-11-07",
+    "close": 323.13
+   },
+   {
+    "date": "2021-11-14",
+    "close": 323.77
+   },
+   {
+    "date": "2021-11-21",
+    "close": 330.52
+   },
+   {
+    "date": "2021-11-28",
+    "close": 317.58
+   },
+   {
+    "date": "2021-12-05",
+    "close": 311.15
+   },
+   {
+    "date": "2021-12-12",
+    "close": 329.97
+   },
+   {
+    "date": "2021-12-19",
+    "close": 311.91
+   },
+   {
+    "date": "2021-12-26",
+    "close": 322.4
+   },
+   {
+    "date": "2022-01-02",
+    "close": 323.97
+   },
+   {
+    "date": "2022-01-09",
+    "close": 302.51
+   },
+   {
+    "date": "2022-01-16",
+    "close": 298.81
+   },
+   {
+    "date": "2022-01-23",
+    "close": 285.16
+   },
+   {
+    "date": "2022-01-30",
+    "close": 296.94
+   },
+   {
+    "date": "2022-02-06",
+    "close": 294.71
+   },
+   {
+    "date": "2022-02-13",
+    "close": 284.21
+   },
+   {
+    "date": "2022-02-20",
+    "close": 277.93
+   },
+   {
+    "date": "2022-02-27",
+    "close": 286.99
+   },
+   {
+    "date": "2022-03-06",
+    "close": 279.8
+   },
+   {
+    "date": "2022-03-13",
+    "close": 270.35
+   },
+   {
+    "date": "2022-03-20",
+    "close": 290.0
+   },
+   {
+    "date": "2022-03-27",
+    "close": 293.14
+   },
+   {
+    "date": "2022-04-03",
+    "close": 298.68
+   },
+   {
+    "date": "2022-04-10",
+    "close": 286.66
+   },
+   {
+    "date": "2022-04-17",
+    "close": 270.12
+   },
+   {
+    "date": "2022-04-24",
+    "close": 264.52
+   },
+   {
+    "date": "2022-05-01",
+    "close": 267.89
+   },
+   {
+    "date": "2022-05-08",
+    "close": 265.19
+   },
+   {
+    "date": "2022-05-15",
+    "close": 252.06
+   },
+   {
+    "date": "2022-05-22",
+    "close": 244.36
+   },
+   {
+    "date": "2022-05-29",
+    "close": 264.37
+   },
+   {
+    "date": "2022-06-05",
+    "close": 261.25
+   },
+   {
+    "date": "2022-06-12",
+    "close": 244.78
+   },
+   {
+    "date": "2022-06-19",
+    "close": 239.61
+   },
+   {
+    "date": "2022-06-26",
+    "close": 259.01
+   },
+   {
+    "date": "2022-07-03",
+    "close": 251.15
+   },
+   {
+    "date": "2022-07-10",
+    "close": 258.97
+   },
+   {
+    "date": "2022-07-17",
+    "close": 248.39
+   },
+   {
+    "date": "2022-07-24",
+    "close": 251.91
+   },
+   {
+    "date": "2022-07-31",
+    "close": 271.63
+   },
+   {
+    "date": "2022-08-07",
+    "close": 273.72
+   },
+   {
+    "date": "2022-08-14",
+    "close": 282.43
+   },
+   {
+    "date": "2022-08-21",
+    "close": 277.45
+   },
+   {
+    "date": "2022-08-28",
+    "close": 259.94
+   },
+   {
+    "date": "2022-09-04",
+    "close": 248.27
+   },
+   {
+    "date": "2022-09-11",
+    "close": 256.42
+   },
+   {
+    "date": "2022-09-18",
+    "close": 237.3
+   },
+   {
+    "date": "2022-09-25",
+    "close": 230.68
+   },
+   {
+    "date": "2022-10-02",
+    "close": 225.82
+   },
+   {
+    "date": "2022-10-09",
+    "close": 227.12
+   },
+   {
+    "date": "2022-10-16",
+    "close": 221.61
+   },
+   {
+    "date": "2022-10-23",
+    "close": 234.76
+   },
+   {
+    "date": "2022-10-30",
+    "close": 228.7
+   },
+   {
+    "date": "2022-11-06",
+    "close": 214.66
+   },
+   {
+    "date": "2022-11-13",
+    "close": 239.59
+   },
+   {
+    "date": "2022-11-20",
+    "close": 234.54
+   },
+   {
+    "date": "2022-11-27",
+    "close": 240.64
+   },
+   {
+    "date": "2022-12-04",
+    "close": 247.96
+   },
+   {
+    "date": "2022-12-11",
+    "close": 238.63
+   },
+   {
+    "date": "2022-12-18",
+    "close": 237.92
+   },
+   {
+    "date": "2022-12-25",
+    "close": 232.12
+   },
+   {
+    "date": "2023-01-01",
+    "close": 233.18
+   },
+   {
+    "date": "2023-01-08",
+    "close": 218.7
+   },
+   {
+    "date": "2023-01-15",
+    "close": 232.61
+   },
+   {
+    "date": "2023-01-22",
+    "close": 233.57
+   },
+   {
+    "date": "2023-01-29",
+    "close": 241.29
+   },
+   {
+    "date": "2023-02-05",
+    "close": 251.2
+   },
+   {
+    "date": "2023-02-12",
+    "close": 255.82
+   },
+   {
+    "date": "2023-02-19",
+    "close": 251.55
+   },
+   {
+    "date": "2023-02-26",
+    "close": 242.93
+   },
+   {
+    "date": "2023-03-05",
+    "close": 248.85
+   },
+   {
+    "date": "2023-03-12",
+    "close": 242.31
+   },
+   {
+    "date": "2023-03-19",
+    "close": 272.38
+   },
+   {
+    "date": "2023-03-26",
+    "close": 273.49
+   },
+   {
+    "date": "2023-04-02",
+    "close": 281.02
+   },
+   {
+    "date": "2023-04-09",
+    "close": 284.24
+   },
+   {
+    "date": "2023-04-16",
+    "close": 278.92
+   },
+   {
+    "date": "2023-04-23",
+    "close": 278.55
+   },
+   {
+    "date": "2023-04-30",
+    "close": 299.5
+   },
+   {
+    "date": "2023-05-07",
+    "close": 302.81
+   },
+   {
+    "date": "2023-05-14",
+    "close": 301.17
+   },
+   {
+    "date": "2023-05-21",
+    "close": 310.98
+   },
+   {
+    "date": "2023-05-28",
+    "close": 325.2
+   },
+   {
+    "date": "2023-06-04",
+    "close": 327.65
+   },
+   {
+    "date": "2023-06-11",
+    "close": 319.24
+   },
+   {
+    "date": "2023-06-18",
+    "close": 334.42
+   },
+   {
+    "date": "2023-06-25",
+    "close": 327.28
+   },
+   {
+    "date": "2023-07-02",
+    "close": 332.67
+   },
+   {
+    "date": "2023-07-09",
+    "close": 329.43
+   },
+   {
+    "date": "2023-07-16",
+    "close": 337.26
+   },
+   {
+    "date": "2023-07-23",
+    "close": 335.82
+   },
+   {
+    "date": "2023-07-30",
+    "close": 330.55
+   },
+   {
+    "date": "2023-08-06",
+    "close": 320.2
+   },
+   {
+    "date": "2023-08-13",
+    "close": 313.59
+   },
+   {
+    "date": "2023-08-20",
+    "close": 309.82
+   },
+   {
+    "date": "2023-08-27",
+    "close": 316.18
+   },
+   {
+    "date": "2023-09-03",
+    "close": 321.74
+   },
+   {
+    "date": "2023-09-10",
+    "close": 327.23
+   },
+   {
+    "date": "2023-09-17",
+    "close": 323.27
+   },
+   {
+    "date": "2023-09-24",
+    "close": 310.34
+   },
+   {
+    "date": "2023-10-01",
+    "close": 309.1
+   },
+   {
+    "date": "2023-10-08",
+    "close": 320.37
+   },
+   {
+    "date": "2023-10-15",
+    "close": 320.83
+   },
+   {
+    "date": "2023-10-22",
+    "close": 319.79
+   },
+   {
+    "date": "2023-10-29",
+    "close": 322.87
+   },
+   {
+    "date": "2023-11-05",
+    "close": 345.37
+   },
+   {
+    "date": "2023-11-12",
+    "close": 361.89
+   },
+   {
+    "date": "2023-11-19",
+    "close": 362.8
+   },
+   {
+    "date": "2023-11-26",
+    "close": 370.24
+   },
+   {
+    "date": "2023-12-03",
+    "close": 367.37
+   },
+   {
+    "date": "2023-12-10",
+    "close": 367.1
+   },
+   {
+    "date": "2023-12-17",
+    "close": 363.66
+   },
+   {
+    "date": "2023-12-24",
+    "close": 367.44
+   },
+   {
+    "date": "2023-12-31",
+    "close": 368.87
+   },
+   {
+    "date": "2024-01-07",
+    "close": 360.74
+   },
+   {
+    "date": "2024-01-14",
+    "close": 381.07
+   },
+   {
+    "date": "2024-01-21",
+    "close": 391.07
+   },
+   {
+    "date": "2024-01-28",
+    "close": 396.23
+   },
+   {
+    "date": "2024-02-04",
+    "close": 403.38
+   },
+   {
+    "date": "2024-02-11",
+    "close": 412.53
+   },
+   {
+    "date": "2024-02-18",
+    "close": 397.09
+   },
+   {
+    "date": "2024-02-25",
+    "close": 403.26
+   },
+   {
+    "date": "2024-03-03",
+    "close": 408.33
+   },
+   {
+    "date": "2024-03-10",
+    "close": 399.21
+   },
+   {
+    "date": "2024-03-17",
+    "close": 409.24
+   },
+   {
+    "date": "2024-03-24",
+    "close": 421.35
+   },
+   {
+    "date": "2024-03-31",
+    "close": 413.46
+   },
+   {
+    "date": "2024-04-07",
+    "close": 418.18
+   },
+   {
+    "date": "2024-04-14",
+    "close": 414.62
+   },
+   {
+    "date": "2024-04-21",
+    "close": 392.24
+   },
+   {
+    "date": "2024-04-28",
+    "close": 399.31
+   },
+   {
+    "date": "2024-05-05",
+    "close": 399.65
+   },
+   {
+    "date": "2024-05-12",
+    "close": 407.59
+   },
+   {
+    "date": "2024-05-19",
+    "close": 413.71
+   },
+   {
+    "date": "2024-05-26",
+    "close": 423.5
+   },
+   {
+    "date": "2024-06-02",
+    "close": 408.71
+   },
+   {
+    "date": "2024-06-09",
+    "close": 417.29
+   },
+   {
+    "date": "2024-06-16",
+    "close": 435.72
+   },
+   {
+    "date": "2024-06-23",
+    "close": 442.82
+   },
+   {
+    "date": "2024-06-30",
+    "close": 440.03
+   },
+   {
+    "date": "2024-07-07",
+    "close": 460.33
+   },
+   {
+    "date": "2024-07-14",
+    "close": 446.53
+   },
+   {
+    "date": "2024-07-21",
+    "close": 430.35
+   },
+   {
+    "date": "2024-07-28",
+    "close": 418.69
+   },
+   {
+    "date": "2024-08-04",
+    "close": 402.17
+   },
+   {
+    "date": "2024-08-11",
+    "close": 399.74
+   },
+   {
+    "date": "2024-08-18",
+    "close": 412.74
+   },
+   {
+    "date": "2024-08-25",
+    "close": 411.08
+   },
+   {
+    "date": "2024-09-01",
+    "close": 411.43
+   },
+   {
+    "date": "2024-09-08",
+    "close": 396.2
+   },
+   {
+    "date": "2024-09-15",
+    "close": 424.69
+   },
+   {
+    "date": "2024-09-22",
+    "close": 429.31
+   },
+   {
+    "date": "2024-09-29",
+    "close": 422.16
+   },
+   {
+    "date": "2024-10-06",
+    "close": 410.36
+   },
+   {
+    "date": "2024-10-13",
+    "close": 410.62
+   },
+   {
+    "date": "2024-10-20",
+    "close": 412.43
+   },
+   {
+    "date": "2024-10-27",
+    "close": 422.29
+   },
+   {
+    "date": "2024-11-03",
+    "close": 404.75
+   },
+   {
+    "date": "2024-11-10",
+    "close": 416.75
+   },
+   {
+    "date": "2024-11-17",
+    "close": 409.32
+   },
+   {
+    "date": "2024-11-24",
+    "close": 412.11
+   },
+   {
+    "date": "2024-12-01",
+    "close": 418.5
+   },
+   {
+    "date": "2024-12-08",
+    "close": 438.37
+   },
+   {
+    "date": "2024-12-15",
+    "close": 442.03
+   },
+   {
+    "date": "2024-12-22",
+    "close": 431.48
+   },
+   {
+    "date": "2024-12-29",
+    "close": 425.48
+   },
+   {
+    "date": "2025-01-05",
+    "close": 418.39
+   },
+   {
+    "date": "2025-01-12",
+    "close": 414.04
+   },
+   {
+    "date": "2025-01-19",
+    "close": 424.0
+   },
+   {
+    "date": "2025-01-26",
+    "close": 438.85
+   },
+   {
+    "date": "2025-02-02",
+    "close": 410.19
+   },
+   {
+    "date": "2025-02-09",
+    "close": 404.95
+   },
+   {
+    "date": "2025-02-16",
+    "close": 403.64
+   },
+   {
+    "date": "2025-02-23",
+    "close": 404.23
+   },
+   {
+    "date": "2025-03-02",
+    "close": 393.12
+   },
+   {
+    "date": "2025-03-09",
+    "close": 389.48
+   },
+   {
+    "date": "2025-03-16",
+    "close": 384.77
+   },
+   {
+    "date": "2025-03-23",
+    "close": 387.45
+   },
+   {
+    "date": "2025-03-30",
+    "close": 375.11
+   },
+   {
+    "date": "2025-04-06",
+    "close": 356.33
+   },
+   {
+    "date": "2025-04-13",
+    "close": 384.67
+   },
+   {
+    "date": "2025-04-20",
+    "close": 364.2
+   },
+   {
+    "date": "2025-04-27",
+    "close": 388.03
+   },
+   {
+    "date": "2025-05-04",
+    "close": 431.04
+   },
+   {
+    "date": "2025-05-11",
+    "close": 434.46
+   },
+   {
+    "date": "2025-05-18",
+    "close": 450.67
+   },
+   {
+    "date": "2025-05-25",
+    "close": 446.61
+   },
+   {
+    "date": "2025-06-01",
+    "close": 456.71
+   },
+   {
+    "date": "2025-06-08",
+    "close": 466.65
+   },
+   {
+    "date": "2025-06-15",
+    "close": 471.2
+   },
+   {
+    "date": "2025-06-22",
+    "close": 473.62
+   },
+   {
+    "date": "2025-06-29",
+    "close": 492.01
+   },
+   {
+    "date": "2025-07-06",
+    "close": 494.89
+   },
+   {
+    "date": "2025-07-13",
+    "close": 499.33
+   },
+   {
+    "date": "2025-07-20",
+    "close": 506.01
+   },
+   {
+    "date": "2025-07-27",
+    "close": 509.64
+   },
+   {
+    "date": "2025-08-03",
+    "close": 519.96
+   },
+   {
+    "date": "2025-08-10",
+    "close": 517.9
+   },
+   {
+    "date": "2025-08-17",
+    "close": 516.05
+   },
+   {
+    "date": "2025-08-24",
+    "close": 504.04
+   },
+   {
+    "date": "2025-08-31",
+    "close": 503.5
+   },
+   {
+    "date": "2025-09-07",
+    "close": 491.88
+   },
+   {
+    "date": "2025-09-14",
+    "close": 506.69
+   },
+   {
+    "date": "2025-09-21",
+    "close": 514.67
+   },
+   {
+    "date": "2025-09-28",
+    "close": 508.24
+   },
+   {
+    "date": "2025-10-05",
+    "close": 514.09
+   },
+   {
+    "date": "2025-10-12",
+    "close": 507.74
+   },
+   {
+    "date": "2025-10-19",
+    "close": 510.35
+   },
+   {
+    "date": "2025-10-26",
+    "close": 520.31
+   },
+   {
+    "date": "2025-11-02",
+    "close": 514.55
+   },
+   {
+    "date": "2025-11-09",
+    "close": 493.69
+   },
+   {
+    "date": "2025-11-16",
+    "close": 506.97
+   },
+   {
+    "date": "2025-11-23",
+    "close": 470.03
+   },
+   {
+    "date": "2025-11-30",
+    "close": 489.83
+   },
+   {
+    "date": "2025-12-07",
+    "close": 481.02
+   },
+   {
+    "date": "2025-12-14",
+    "close": 476.41
+   },
+   {
+    "date": "2025-12-21",
+    "close": 483.77
+   },
+   {
+    "date": "2025-12-28",
+    "close": 485.55
+   },
+   {
+    "date": "2026-01-04",
+    "close": 470.84
+   },
+   {
+    "date": "2026-01-11",
+    "close": 477.16
+   },
+   {
+    "date": "2026-01-18",
+    "close": 457.82
+   },
+   {
+    "date": "2026-01-25",
+    "close": 463.88
+   },
+   {
+    "date": "2026-02-01",
+    "close": 428.38
+   },
+   {
+    "date": "2026-02-08",
+    "close": 399.36
+   },
+   {
+    "date": "2026-02-15",
+    "close": 399.54
+   },
+   {
+    "date": "2026-02-22",
+    "close": 396.37
+   },
+   {
+    "date": "2026-03-01",
+    "close": 391.89
+   },
+   {
+    "date": "2026-03-08",
+    "close": 408.08
+   },
+   {
+    "date": "2026-03-15",
+    "close": 394.7
+   },
+   {
+    "date": "2026-03-22",
+    "close": 381.04
+   },
+   {
+    "date": "2026-03-29",
+    "close": 356.0
+   },
+   {
+    "date": "2026-04-05",
+    "close": 372.65
+   },
+   {
+    "date": "2026-04-12",
+    "close": 370.07
+   },
+   {
+    "date": "2026-04-19",
+    "close": 421.88
+   },
+   {
+    "date": "2026-04-26",
+    "close": 423.7
+   },
+   {
+    "date": "2026-05-03",
+    "close": 413.54
+   },
+   {
+    "date": "2026-05-10",
+    "close": 414.22
+   },
+   {
+    "date": "2026-05-17",
+    "close": 421.01
+   },
+   {
+    "date": "2026-05-24",
+    "close": 418.57
+   },
+   {
+    "date": "2026-05-31",
+    "close": 450.24
+   },
+   {
+    "date": "2026-06-07",
+    "close": 416.67
+   },
+   {
+    "date": "2026-06-14",
+    "close": 390.74
+   },
+   {
+    "date": "2026-06-21",
+    "close": 379.4
+   },
+   {
+    "date": "2026-06-28",
+    "close": 372.97
+   },
+   {
+    "date": "2026-07-05",
+    "close": 390.49
+   },
+   {
+    "date": "2026-07-12",
+    "close": 385.1
+   },
+   {
+    "date": "2026-07-19",
+    "close": 387.35
+   }
+  ]
+ },
+ {
+  "ticker": "KO",
+  "name": "The Coca-Cola Company",
+  "sector": "Consumer Staples",
+  "industry": "Beverages",
+  "as_of": "2026-07-14",
+  "price": 83.48,
+  "market_cap": 359171260416,
+  "beta": 0.349,
+  "pe_trailing": 26.251574,
+  "dividend_yield_pct": 2.52,
+  "week52_low": 65.35,
+  "week52_high": 85.68,
+  "rating": "SELL",
+  "relative_rating": "Neutral",
+  "relative_rank": 3,
+  "target": 69.7568155897267,
+  "base_target": 69.7568155897267,
+  "upside": -0.16438888847955568,
+  "street_target": 86.84917,
+  "street_analyst_count": 24,
+  "cost_of_equity": 0.061099999999999995,
+  "models": [
+   {
+    "key": "dcf",
+    "label": "Cash-flow value (DCF)",
+    "value": 66.83517728457964,
+    "assumptions": {
+     "fcf_base": 9534000000,
+     "initial_growth": 0.15,
+     "terminal_growth": 0.025,
+     "cost_of_equity": 0.061099999999999995,
+     "exit_multiple": 19.779299903149315,
+     "projection_years": 5,
+     "net_debt": 25277000000
+    }
+   },
+   {
+    "key": "comps",
+    "label": "Priced like its peers",
+    "value": 66.3372386622,
+    "assumptions": {
+     "trailing": {
+      "eps": 3.18,
+      "peer_median_pe": 22.662962
+     },
+     "forward": {
+      "eps": 3.48036,
+      "peer_median_pe": 17.41379
+     },
+     "peers_used": [
+      "PEP",
+      "KDP",
+      "MNST",
+      "MDLZ",
+      "PG"
+     ]
+    }
+   },
+   {
+    "key": "own_multiple",
+    "label": "Priced like its own history",
+    "value": 77.0719102574495,
+    "assumptions": {
+     "own_avg_pe_5y": 22.14480980629863,
+     "eps_used": 3.48036,
+     "eps_basis": "forward"
+    }
+   }
+  ],
+  "overlays": [],
+  "macro_adjustments": [
+   {
+    "rule": "credit_spread_erp",
+    "indicator": "BAA10Y",
+    "reading": "Baa spread 1.58%, -0.39pp vs 10y median",
+    "target": "cost_of_equity",
+    "adjustment": -0.0019499999999999995,
+    "rationale": "Credit spreads are a market-priced risk gauge; wider-than-normal spreads raise the equity risk premium."
+   },
+   {
+    "rule": "dollar_translation",
+    "indicator": "DTWEXBGS",
+    "reading": "Trade-weighted dollar +0.6% y/y",
+    "target": "growth",
+    "adjustment": -0.0010739629638592447,
+    "rationale": "~64% of revenue is foreign; a stronger dollar shrinks it in translation, a weaker one inflates it."
+   },
+   {
+    "rule": "commodity_margin",
+    "indicator": "PALUMUSDM/PSUGAISAUSDM",
+    "reading": "Aluminum & sugar avg +10.9% y/y",
+    "target": "growth",
+    "adjustment": -0.015,
+    "rationale": "Cans and sweetener are real input costs for a beverage maker; cost inflation pressures margins unless fully passed through in price."
+   }
+  ],
+  "sensitivity": {
+   "x_label": "FCF growth",
+   "x_values": [
+    0.13,
+    0.13999999999999999,
+    0.15,
+    0.16,
+    0.16999999999999998
+   ],
+   "coe_values": [
+    0.05109999999999999,
+    0.0561,
+    0.061099999999999995,
+    0.06609999999999999,
+    0.0711
+   ],
+   "grid": [
+    [
+     75.21715857005867,
+     71.36903945617999,
+     68.52026881187001,
+     66.30853910994729,
+     64.52863366589924
+    ],
+    [
+     75.98334311119791,
+     72.04748094761311,
+     69.13379479465297,
+     66.87170038461355,
+     65.05129297394419
+    ],
+    [
+     76.76145957625525,
+     72.73645320543037,
+     69.7568155897267,
+     67.44355329296374,
+     65.5819985038712
+    ],
+    [
+     77.55162306455216,
+     73.43605758445929,
+     70.38942239593538,
+     68.02418116498276,
+     66.12082726681322
+    ],
+    [
+     78.35394917811962,
+     74.14639588140443,
+     71.03170680907675,
+     68.6136676928239,
+     66.66785660815694
+    ]
+   ]
+  },
+  "fundamentals": [
+   {
+    "year": 2007,
+    "free_cash_flow": 5502000000
+   },
+   {
+    "year": 2008,
+    "roe": 0.28365572489253615,
+    "free_cash_flow": 5603000000
+   },
+   {
+    "year": 2009,
+    "roe": 0.2751723859833058,
+    "free_cash_flow": 6193000000
+   },
+   {
+    "year": 2010,
+    "roe": 0.3801890139663904,
+    "free_cash_flow": 7317000000
+   },
+   {
+    "year": 2011,
+    "roe": 0.27134502923976606,
+    "free_cash_flow": 6554000000
+   },
+   {
+    "year": 2012,
+    "roe": 0.2750533699298567,
+    "free_cash_flow": 7865000000
+   },
+   {
+    "year": 2013,
+    "roe": 0.2587646580050041,
+    "free_cash_flow": 7992000000
+   },
+   {
+    "year": 2014,
+    "roe": 0.23410290237467019,
+    "free_cash_flow": 8209000000
+   },
+   {
+    "year": 2015,
+    "roe": 0.2876653361508961,
+    "free_cash_flow": 7975000000
+   },
+   {
+    "year": 2016,
+    "revenue": 41863000000,
+    "net_margin": 0.15591333635907603,
+    "operating_margin": 0.20679358861046748,
+    "roe": 0.2830196860636545,
+    "free_cash_flow": 6530000000
+   },
+   {
+    "year": 2017,
+    "revenue": 36212000000,
+    "net_margin": 0.034463713686070915,
+    "operating_margin": 0.21415552855407047,
+    "roe": 0.07310215557638237,
+    "free_cash_flow": 5291000000
+   },
+   {
+    "year": 2018,
+    "revenue": 34300000000,
+    "net_margin": 0.1875801749271137,
+    "operating_margin": 0.26682215743440235,
+    "roe": 0.37889405806489607,
+    "free_cash_flow": 6079000000
+   },
+   {
+    "year": 2019,
+    "revenue": 37266000000,
+    "net_margin": 0.23936027478130198,
+    "operating_margin": 0.27064884881661566,
+    "roe": 0.4699436278383647,
+    "free_cash_flow": 8417000000
+   },
+   {
+    "year": 2020,
+    "revenue": 33014000000,
+    "net_margin": 0.23465802386866177,
+    "operating_margin": 0.2725207487732477,
+    "roe": 0.40141976268200424,
+    "free_cash_flow": 8667000000
+   },
+   {
+    "year": 2021,
+    "revenue": 38655000000,
+    "net_margin": 0.2527745440434614,
+    "operating_margin": 0.26666666666666666,
+    "roe": 0.42484455845906344,
+    "free_cash_flow": 11258000000
+   },
+   {
+    "year": 2022,
+    "revenue": 43004000000,
+    "net_margin": 0.2218863361547763,
+    "operating_margin": 0.2536740768300623,
+    "roe": 0.3958514830947936,
+    "free_cash_flow": 9534000000
+   },
+   {
+    "year": 2023,
+    "revenue": 45754000000,
+    "net_margin": 0.23416531887922368,
+    "operating_margin": 0.24721335839489444,
+    "roe": 0.41301414748853166,
+    "free_cash_flow": 9747000000
+   },
+   {
+    "year": 2024,
+    "revenue": 47061000000,
+    "net_margin": 0.22589830220352308,
+    "operating_margin": 0.21232018019166612,
+    "roe": 0.4277035725780496,
+    "free_cash_flow": 4741000000
+   },
+   {
+    "year": 2025,
+    "revenue": 47941000000,
+    "net_margin": 0.2733985523873094,
+    "operating_margin": 0.28706117936630443,
+    "roe": 0.4074419472162641,
+    "free_cash_flow": 5296000000
+   }
+  ],
+  "growth": {
+   "revenue_cagr_3y": 0.03689014114187783,
+   "revenue_cagr_5y": 0.07746156826284567,
+   "net_income_cagr_5y": 0.1108973958223729,
+   "fcf_cagr_5y": -0.09381715561220638
+  },
+  "business_summary": "The Coca-Cola Company, a beverage company, manufactures and sells various nonalcoholic beverages in the United States and internationally. The company provides Trademark Coca-Cola, sparkling soft drinks and flavors; water, sports, coffee, and tea; juice, value-added dairy, and plant-based beverages; and emerging beverages. It also offers beverage concentrates and syrups, as well as fountain syrups to fountain retailers comprising restaurants and convenience stores. The company sells its products under the Coca-Cola, Diet Coke/Coca-Cola Light, Coca-Cola Zero Sugar, caffeine free Diet Coke, Cherry Coke, Fanta, Sprite, Simply, Fanta Orange, Fanta Zero Orange, Fanta Zero Sugar, Fanta Apple, Sprite Zero Sugar, Simply Orange, Simply Apple, Simply Grapefruit, Fresca, Schweppes, Thums Up, Aquarius, Ayataka, BODYARMOR, Ciel, Costa, Crystal, Dasani, Fuze Tea, Georgia, glac\u00e9au smartwater, glac\u00e9au vitaminwater, Gold Peak, I LOHAS, Powerade, Topo Chico, Core Power, Del Valle, fairlife, innocent, Maaza, Minute Maid, Minute Maid Pulpy, Santa Clara, and dogadan brands. It operates through a network of independent bottling partners, distributors, wholesalers, and retailers, as well as through bottling and distribution operators. The Coca-Cola Company was founded in 1886 and is headquartered in Atlanta, Georgia.",
+  "price_history_weekly": [
+   {
+    "date": "2021-07-18",
+    "close": 48.65
+   },
+   {
+    "date": "2021-07-25",
+    "close": 49.17
+   },
+   {
+    "date": "2021-08-01",
+    "close": 49.19
+   },
+   {
+    "date": "2021-08-08",
+    "close": 48.85
+   },
+   {
+    "date": "2021-08-15",
+    "close": 49.36
+   },
+   {
+    "date": "2021-08-22",
+    "close": 48.85
+   },
+   {
+    "date": "2021-08-29",
+    "close": 48.0
+   },
+   {
+    "date": "2021-09-05",
+    "close": 48.93
+   },
+   {
+    "date": "2021-09-12",
+    "close": 47.96
+   },
+   {
+    "date": "2021-09-19",
+    "close": 47.31
+   },
+   {
+    "date": "2021-09-26",
+    "close": 46.83
+   },
+   {
+    "date": "2021-10-03",
+    "close": 46.08
+   },
+   {
+    "date": "2021-10-10",
+    "close": 47.03
+   },
+   {
+    "date": "2021-10-17",
+    "close": 47.34
+   },
+   {
+    "date": "2021-10-24",
+    "close": 47.32
+   },
+   {
+    "date": "2021-10-31",
+    "close": 48.99
+   },
+   {
+    "date": "2021-11-07",
+    "close": 49.39
+   },
+   {
+    "date": "2021-11-14",
+    "close": 49.2
+   },
+   {
+    "date": "2021-11-21",
+    "close": 47.91
+   },
+   {
+    "date": "2021-11-28",
+    "close": 46.69
+   },
+   {
+    "date": "2021-12-05",
+    "close": 46.89
+   },
+   {
+    "date": "2021-12-12",
+    "close": 49.29
+   },
+   {
+    "date": "2021-12-19",
+    "close": 50.56
+   },
+   {
+    "date": "2021-12-26",
+    "close": 50.99
+   },
+   {
+    "date": "2022-01-02",
+    "close": 51.85
+   },
+   {
+    "date": "2022-01-09",
+    "close": 52.83
+   },
+   {
+    "date": "2022-01-16",
+    "close": 53.76
+   },
+   {
+    "date": "2022-01-23",
+    "close": 52.94
+   },
+   {
+    "date": "2022-01-30",
+    "close": 53.28
+   },
+   {
+    "date": "2022-02-06",
+    "close": 53.39
+   },
+   {
+    "date": "2022-02-13",
+    "close": 52.8
+   },
+   {
+    "date": "2022-02-20",
+    "close": 54.77
+   },
+   {
+    "date": "2022-02-27",
+    "close": 55.04
+   },
+   {
+    "date": "2022-03-06",
+    "close": 54.8
+   },
+   {
+    "date": "2022-03-13",
+    "close": 50.72
+   },
+   {
+    "date": "2022-03-20",
+    "close": 53.04
+   },
+   {
+    "date": "2022-03-27",
+    "close": 54.3
+   },
+   {
+    "date": "2022-04-03",
+    "close": 55.48
+   },
+   {
+    "date": "2022-04-10",
+    "close": 56.33
+   },
+   {
+    "date": "2022-04-17",
+    "close": 57.38
+   },
+   {
+    "date": "2022-04-24",
+    "close": 57.58
+   },
+   {
+    "date": "2022-05-01",
+    "close": 57.02
+   },
+   {
+    "date": "2022-05-08",
+    "close": 57.13
+   },
+   {
+    "date": "2022-05-15",
+    "close": 58.0
+   },
+   {
+    "date": "2022-05-22",
+    "close": 53.81
+   },
+   {
+    "date": "2022-05-29",
+    "close": 57.08
+   },
+   {
+    "date": "2022-06-05",
+    "close": 55.57
+   },
+   {
+    "date": "2022-06-12",
+    "close": 54.19
+   },
+   {
+    "date": "2022-06-19",
+    "close": 52.82
+   },
+   {
+    "date": "2022-06-26",
+    "close": 56.03
+   },
+   {
+    "date": "2022-07-03",
+    "close": 57.22
+   },
+   {
+    "date": "2022-07-10",
+    "close": 56.12
+   },
+   {
+    "date": "2022-07-17",
+    "close": 55.55
+   },
+   {
+    "date": "2022-07-24",
+    "close": 54.74
+   },
+   {
+    "date": "2022-07-31",
+    "close": 57.04
+   },
+   {
+    "date": "2022-08-07",
+    "close": 56.33
+   },
+   {
+    "date": "2022-08-14",
+    "close": 56.62
+   },
+   {
+    "date": "2022-08-21",
+    "close": 57.93
+   },
+   {
+    "date": "2022-08-28",
+    "close": 56.09
+   },
+   {
+    "date": "2022-09-04",
+    "close": 54.35
+   },
+   {
+    "date": "2022-09-11",
+    "close": 55.39
+   },
+   {
+    "date": "2022-09-18",
+    "close": 53.31
+   },
+   {
+    "date": "2022-09-25",
+    "close": 52.47
+   },
+   {
+    "date": "2022-10-02",
+    "close": 50.16
+   },
+   {
+    "date": "2022-10-09",
+    "close": 48.8
+   },
+   {
+    "date": "2022-10-16",
+    "close": 49.22
+   },
+   {
+    "date": "2022-10-23",
+    "close": 50.1
+   },
+   {
+    "date": "2022-10-30",
+    "close": 54.4
+   },
+   {
+    "date": "2022-11-06",
+    "close": 53.06
+   },
+   {
+    "date": "2022-11-13",
+    "close": 54.9
+   },
+   {
+    "date": "2022-11-20",
+    "close": 54.74
+   },
+   {
+    "date": "2022-11-27",
+    "close": 56.13
+   },
+   {
+    "date": "2022-12-04",
+    "close": 58.02
+   },
+   {
+    "date": "2022-12-11",
+    "close": 56.93
+   },
+   {
+    "date": "2022-12-18",
+    "close": 56.58
+   },
+   {
+    "date": "2022-12-25",
+    "close": 57.54
+   },
+   {
+    "date": "2023-01-01",
+    "close": 57.35
+   },
+   {
+    "date": "2023-01-08",
+    "close": 57.17
+   },
+   {
+    "date": "2023-01-15",
+    "close": 55.39
+   },
+   {
+    "date": "2023-01-22",
+    "close": 54.17
+   },
+   {
+    "date": "2023-01-29",
+    "close": 54.54
+   },
+   {
+    "date": "2023-02-05",
+    "close": 53.95
+   },
+   {
+    "date": "2023-02-12",
+    "close": 53.76
+   },
+   {
+    "date": "2023-02-19",
+    "close": 54.21
+   },
+   {
+    "date": "2023-02-26",
+    "close": 53.96
+   },
+   {
+    "date": "2023-03-05",
+    "close": 53.6
+   },
+   {
+    "date": "2023-03-12",
+    "close": 53.39
+   },
+   {
+    "date": "2023-03-19",
+    "close": 54.53
+   },
+   {
+    "date": "2023-03-26",
+    "close": 55.33
+   },
+   {
+    "date": "2023-04-02",
+    "close": 56.36
+   },
+   {
+    "date": "2023-04-09",
+    "close": 57.1
+   },
+   {
+    "date": "2023-04-16",
+    "close": 57.29
+   },
+   {
+    "date": "2023-04-23",
+    "close": 58.19
+   },
+   {
+    "date": "2023-04-30",
+    "close": 58.29
+   },
+   {
+    "date": "2023-05-07",
+    "close": 58.17
+   },
+   {
+    "date": "2023-05-14",
+    "close": 58.25
+   },
+   {
+    "date": "2023-05-21",
+    "close": 57.09
+   },
+   {
+    "date": "2023-05-28",
+    "close": 54.75
+   },
+   {
+    "date": "2023-06-04",
+    "close": 55.57
+   },
+   {
+    "date": "2023-06-11",
+    "close": 54.94
+   },
+   {
+    "date": "2023-06-18",
+    "close": 56.46
+   },
+   {
+    "date": "2023-06-25",
+    "close": 56.03
+   },
+   {
+    "date": "2023-07-02",
+    "close": 55.13
+   },
+   {
+    "date": "2023-07-09",
+    "close": 54.71
+   },
+   {
+    "date": "2023-07-16",
+    "close": 55.75
+   },
+   {
+    "date": "2023-07-23",
+    "close": 57.16
+   },
+   {
+    "date": "2023-07-30",
+    "close": 57.2
+   },
+   {
+    "date": "2023-08-06",
+    "close": 55.58
+   },
+   {
+    "date": "2023-08-13",
+    "close": 56.0
+   },
+   {
+    "date": "2023-08-20",
+    "close": 55.8
+   },
+   {
+    "date": "2023-08-27",
+    "close": 55.29
+   },
+   {
+    "date": "2023-09-03",
+    "close": 54.3
+   },
+   {
+    "date": "2023-09-10",
+    "close": 53.4
+   },
+   {
+    "date": "2023-09-17",
+    "close": 53.47
+   },
+   {
+    "date": "2023-09-24",
+    "close": 53.15
+   },
+   {
+    "date": "2023-10-01",
+    "close": 51.66
+   },
+   {
+    "date": "2023-10-08",
+    "close": 49.04
+   },
+   {
+    "date": "2023-10-15",
+    "close": 48.81
+   },
+   {
+    "date": "2023-10-22",
+    "close": 50.36
+   },
+   {
+    "date": "2023-10-29",
+    "close": 50.97
+   },
+   {
+    "date": "2023-11-05",
+    "close": 52.36
+   },
+   {
+    "date": "2023-11-12",
+    "close": 52.34
+   },
+   {
+    "date": "2023-11-19",
+    "close": 52.84
+   },
+   {
+    "date": "2023-11-26",
+    "close": 54.05
+   },
+   {
+    "date": "2023-12-03",
+    "close": 54.54
+   },
+   {
+    "date": "2023-12-10",
+    "close": 54.51
+   },
+   {
+    "date": "2023-12-17",
+    "close": 54.5
+   },
+   {
+    "date": "2023-12-24",
+    "close": 54.24
+   },
+   {
+    "date": "2023-12-31",
+    "close": 54.81
+   },
+   {
+    "date": "2024-01-07",
+    "close": 55.5
+   },
+   {
+    "date": "2024-01-14",
+    "close": 56.17
+   },
+   {
+    "date": "2024-01-21",
+    "close": 55.65
+   },
+   {
+    "date": "2024-01-28",
+    "close": 55.22
+   },
+   {
+    "date": "2024-02-04",
+    "close": 56.31
+   },
+   {
+    "date": "2024-02-11",
+    "close": 55.4
+   },
+   {
+    "date": "2024-02-18",
+    "close": 55.24
+   },
+   {
+    "date": "2024-02-25",
+    "close": 56.92
+   },
+   {
+    "date": "2024-03-03",
+    "close": 55.37
+   },
+   {
+    "date": "2024-03-10",
+    "close": 55.36
+   },
+   {
+    "date": "2024-03-17",
+    "close": 56.14
+   },
+   {
+    "date": "2024-03-24",
+    "close": 56.71
+   },
+   {
+    "date": "2024-03-31",
+    "close": 57.36
+   },
+   {
+    "date": "2024-04-07",
+    "close": 55.79
+   },
+   {
+    "date": "2024-04-14",
+    "close": 54.64
+   },
+   {
+    "date": "2024-04-21",
+    "close": 56.41
+   },
+   {
+    "date": "2024-04-28",
+    "close": 57.88
+   },
+   {
+    "date": "2024-05-05",
+    "close": 58.29
+   },
+   {
+    "date": "2024-05-12",
+    "close": 59.31
+   },
+   {
+    "date": "2024-05-19",
+    "close": 59.09
+   },
+   {
+    "date": "2024-05-26",
+    "close": 58.13
+   },
+   {
+    "date": "2024-06-02",
+    "close": 59.0
+   },
+   {
+    "date": "2024-06-09",
+    "close": 59.92
+   },
+   {
+    "date": "2024-06-16",
+    "close": 59.1
+   },
+   {
+    "date": "2024-06-23",
+    "close": 59.31
+   },
+   {
+    "date": "2024-06-30",
+    "close": 60.14
+   },
+   {
+    "date": "2024-07-07",
+    "close": 60.24
+   },
+   {
+    "date": "2024-07-14",
+    "close": 60.19
+   },
+   {
+    "date": "2024-07-21",
+    "close": 61.69
+   },
+   {
+    "date": "2024-07-28",
+    "close": 63.35
+   },
+   {
+    "date": "2024-08-04",
+    "close": 65.5
+   },
+   {
+    "date": "2024-08-11",
+    "close": 64.89
+   },
+   {
+    "date": "2024-08-18",
+    "close": 65.36
+   },
+   {
+    "date": "2024-08-25",
+    "close": 65.94
+   },
+   {
+    "date": "2024-09-01",
+    "close": 68.47
+   },
+   {
+    "date": "2024-09-08",
+    "close": 67.22
+   },
+   {
+    "date": "2024-09-15",
+    "close": 67.93
+   },
+   {
+    "date": "2024-09-22",
+    "close": 68.15
+   },
+   {
+    "date": "2024-09-29",
+    "close": 68.29
+   },
+   {
+    "date": "2024-10-06",
+    "close": 66.75
+   },
+   {
+    "date": "2024-10-13",
+    "close": 66.18
+   },
+   {
+    "date": "2024-10-20",
+    "close": 67.01
+   },
+   {
+    "date": "2024-10-27",
+    "close": 63.66
+   },
+   {
+    "date": "2024-11-03",
+    "close": 61.84
+   },
+   {
+    "date": "2024-11-10",
+    "close": 60.81
+   },
+   {
+    "date": "2024-11-17",
+    "close": 58.73
+   },
+   {
+    "date": "2024-11-24",
+    "close": 60.81
+   },
+   {
+    "date": "2024-12-01",
+    "close": 61.42
+   },
+   {
+    "date": "2024-12-08",
+    "close": 59.94
+   },
+   {
+    "date": "2024-12-15",
+    "close": 60.5
+   },
+   {
+    "date": "2024-12-22",
+    "close": 59.96
+   },
+   {
+    "date": "2024-12-29",
+    "close": 59.86
+   },
+   {
+    "date": "2025-01-05",
+    "close": 59.19
+   },
+   {
+    "date": "2025-01-12",
+    "close": 58.54
+   },
+   {
+    "date": "2025-01-19",
+    "close": 60.11
+   },
+   {
+    "date": "2025-01-26",
+    "close": 59.35
+   },
+   {
+    "date": "2025-02-02",
+    "close": 60.85
+   },
+   {
+    "date": "2025-02-09",
+    "close": 61.19
+   },
+   {
+    "date": "2025-02-16",
+    "close": 66.01
+   },
+   {
+    "date": "2025-02-23",
+    "close": 68.39
+   },
+   {
+    "date": "2025-03-02",
+    "close": 68.26
+   },
+   {
+    "date": "2025-03-09",
+    "close": 68.47
+   },
+   {
+    "date": "2025-03-16",
+    "close": 66.78
+   },
+   {
+    "date": "2025-03-23",
+    "close": 66.31
+   },
+   {
+    "date": "2025-03-30",
+    "close": 67.95
+   },
+   {
+    "date": "2025-04-06",
+    "close": 67.52
+   },
+   {
+    "date": "2025-04-13",
+    "close": 68.97
+   },
+   {
+    "date": "2025-04-20",
+    "close": 70.49
+   },
+   {
+    "date": "2025-04-27",
+    "close": 69.44
+   },
+   {
+    "date": "2025-05-04",
+    "close": 69.18
+   },
+   {
+    "date": "2025-05-11",
+    "close": 68.09
+   },
+   {
+    "date": "2025-05-18",
+    "close": 69.52
+   },
+   {
+    "date": "2025-05-25",
+    "close": 69.3
+   },
+   {
+    "date": "2025-06-01",
+    "close": 69.62
+   },
+   {
+    "date": "2025-06-08",
+    "close": 68.9
+   },
+   {
+    "date": "2025-06-15",
+    "close": 69.06
+   },
+   {
+    "date": "2025-06-22",
+    "close": 66.94
+   },
+   {
+    "date": "2025-06-29",
+    "close": 68.39
+   },
+   {
+    "date": "2025-07-06",
+    "close": 69.38
+   },
+   {
+    "date": "2025-07-13",
+    "close": 67.95
+   },
+   {
+    "date": "2025-07-20",
+    "close": 67.93
+   },
+   {
+    "date": "2025-07-27",
+    "close": 67.27
+   },
+   {
+    "date": "2025-08-03",
+    "close": 66.96
+   },
+   {
+    "date": "2025-08-10",
+    "close": 68.4
+   },
+   {
+    "date": "2025-08-17",
+    "close": 67.99
+   },
+   {
+    "date": "2025-08-24",
+    "close": 68.2
+   },
+   {
+    "date": "2025-08-31",
+    "close": 67.09
+   },
+   {
+    "date": "2025-09-07",
+    "close": 66.09
+   },
+   {
+    "date": "2025-09-14",
+    "close": 65.16
+   },
+   {
+    "date": "2025-09-21",
+    "close": 65.1
+   },
+   {
+    "date": "2025-09-28",
+    "close": 64.35
+   },
+   {
+    "date": "2025-10-05",
+    "close": 65.31
+   },
+   {
+    "date": "2025-10-12",
+    "close": 65.69
+   },
+   {
+    "date": "2025-10-19",
+    "close": 67.07
+   },
+   {
+    "date": "2025-10-26",
+    "close": 68.31
+   },
+   {
+    "date": "2025-11-02",
+    "close": 67.52
+   },
+   {
+    "date": "2025-11-09",
+    "close": 69.13
+   },
+   {
+    "date": "2025-11-16",
+    "close": 69.73
+   },
+   {
+    "date": "2025-11-23",
+    "close": 71.48
+   },
+   {
+    "date": "2025-11-30",
+    "close": 71.65
+   },
+   {
+    "date": "2025-12-07",
+    "close": 69.08
+   },
+   {
+    "date": "2025-12-14",
+    "close": 69.59
+   },
+   {
+    "date": "2025-12-21",
+    "close": 69.14
+   },
+   {
+    "date": "2025-12-28",
+    "close": 68.95
+   },
+   {
+    "date": "2026-01-04",
+    "close": 68.21
+   },
+   {
+    "date": "2026-01-11",
+    "close": 69.58
+   },
+   {
+    "date": "2026-01-18",
+    "close": 69.51
+   },
+   {
+    "date": "2026-01-25",
+    "close": 71.92
+   },
+   {
+    "date": "2026-02-01",
+    "close": 73.82
+   },
+   {
+    "date": "2026-02-08",
+    "close": 77.99
+   },
+   {
+    "date": "2026-02-15",
+    "close": 77.64
+   },
+   {
+    "date": "2026-02-22",
+    "close": 78.79
+   },
+   {
+    "date": "2026-03-01",
+    "close": 80.48
+   },
+   {
+    "date": "2026-03-08",
+    "close": 76.02
+   },
+   {
+    "date": "2026-03-15",
+    "close": 76.84
+   },
+   {
+    "date": "2026-03-22",
+    "close": 74.27
+   },
+   {
+    "date": "2026-03-29",
+    "close": 75.22
+   },
+   {
+    "date": "2026-04-05",
+    "close": 76.23
+   },
+   {
+    "date": "2026-04-12",
+    "close": 76.97
+   },
+   {
+    "date": "2026-04-19",
+    "close": 75.25
+   },
+   {
+    "date": "2026-04-26",
+    "close": 76.14
+   },
+   {
+    "date": "2026-05-03",
+    "close": 78.08
+   },
+   {
+    "date": "2026-05-10",
+    "close": 77.92
+   },
+   {
+    "date": "2026-05-17",
+    "close": 80.3
+   },
+   {
+    "date": "2026-05-24",
+    "close": 80.96
+   },
+   {
+    "date": "2026-05-31",
+    "close": 78.5
+   },
+   {
+    "date": "2026-06-07",
+    "close": 78.97
+   },
+   {
+    "date": "2026-06-14",
+    "close": 82.09
+   },
+   {
+    "date": "2026-06-21",
+    "close": 79.39
+   },
+   {
+    "date": "2026-06-28",
+    "close": 82.63
+   },
+   {
+    "date": "2026-07-05",
+    "close": 84.14
+   },
+   {
+    "date": "2026-07-12",
+    "close": 83.49
+   },
+   {
+    "date": "2026-07-19",
+    "close": 83.46
+   }
+  ]
+ },
+ {
+  "ticker": "FITB",
+  "name": "Fifth Third Bancorp",
+  "sector": "Financials",
+  "industry": "Regional Banks",
+  "as_of": "2026-07-14",
+  "price": 57.23,
+  "market_cap": 51868209152,
+  "beta": 0.922,
+  "pe_trailing": 19.26936,
+  "dividend_yield_pct": 2.8,
+  "week52_low": 40.05,
+  "week52_high": 58.52,
+  "rating": "SELL",
+  "relative_rating": "Underweight",
+  "relative_rank": 4,
+  "target": 43.81102704086316,
+  "base_target": 43.81102704086316,
+  "upside": -0.23447445324369798,
+  "street_target": 60.8,
+  "street_analyst_count": 20,
+  "cost_of_equity": 0.08975000000000001,
+  "models": [
+   {
+    "key": "justified_pb",
+    "label": "Balance-sheet value",
+    "value": 36.72574275520099,
+    "assumptions": {
+     "book_per_share": 23.969682785010143,
+     "normalized_roe": 0.12420831513408191,
+     "cost_of_equity": 0.08975000000000001,
+     "growth": 0.025,
+     "fair_pb_multiple": 1.532174751105512
+    }
+   },
+   {
+    "key": "comps",
+    "label": "Priced like its peers",
+    "value": 47.053258177589996,
+    "assumptions": {
+     "trailing": {
+      "eps": 2.97,
+      "peer_median_pe": 13.769309
+     },
+     "forward": {
+      "eps": 4.92011,
+      "peer_median_pe": 10.815138
+     },
+     "peers_used": [
+      "HBAN",
+      "RF",
+      "KEY",
+      "CFG",
+      "TFC"
+     ]
+    }
+   },
+   {
+    "key": "own_multiple",
+    "label": "Priced like its own history",
+    "value": 47.654080189798485,
+    "assumptions": {
+     "own_avg_pe_5y": 9.685572109119203,
+     "eps_used": 4.92011,
+     "eps_basis": "forward"
+    }
+   }
+  ],
+  "overlays": [],
+  "macro_adjustments": [
+   {
+    "rule": "credit_spread_erp",
+    "indicator": "BAA10Y",
+    "reading": "Baa spread 1.58%, -0.39pp vs 10y median",
+    "target": "cost_of_equity",
+    "adjustment": -0.0019499999999999995,
+    "rationale": "Credit spreads are a market-priced risk gauge; wider-than-normal spreads raise the equity risk premium."
+   },
+   {
+    "rule": "curve_slope_roe",
+    "indicator": "T10Y2Y",
+    "reading": "10y-2y slope 0.36%, -0.05pp vs 10y median",
+    "target": "roe",
+    "adjustment": -0.00024999999999999995,
+    "rationale": "Banks earn the spread between long lending and short funding; a steeper-than-normal curve supports richer margins and ROE, a flat/inverted curve compresses them."
+   }
+  ],
+  "sensitivity": {
+   "x_label": "Normalized ROE",
+   "x_values": [
+    0.10420831513408191,
+    0.11420831513408192,
+    0.12420831513408191,
+    0.1342083151340819,
+    0.14420831513408192
+   ],
+   "coe_values": [
+    0.07975000000000002,
+    0.08475,
+    0.08975000000000001,
+    0.09475000000000001,
+    0.09975
+   ],
+   "grid": [
+    [
+     43.12831027892591,
+     42.16101341785508,
+     41.343106033397504,
+     40.64246135638905,
+     40.03554840874627
+    ],
+    [
+     44.58765169658255,
+     43.49823421478731,
+     42.57706653713033,
+     41.7879659100335,
+     41.10443058422052
+    ],
+    [
+     46.04699311423917,
+     44.835455011719525,
+     43.81102704086316,
+     42.93347046367794,
+     42.173312759694774
+    ],
+    [
+     47.506334531895796,
+     46.17267580865175,
+     45.04498754459598,
+     44.0789750173224,
+     43.24219493516903
+    ],
+    [
+     48.96567594955243,
+     47.50989660558398,
+     46.27894804832881,
+     45.22447957096685,
+     44.31107711064328
+    ]
+   ]
+  },
+  "fundamentals": [
+   {
+    "year": 2007,
+    "revenue": 6027000000,
+    "net_margin": 0.17852994856479176,
+    "roe": 0.11745442637266675,
+    "free_cash_flow": -1164000000
+   },
+   {
+    "year": 2008,
+    "revenue": 5608000000,
+    "net_margin": -0.37678316690442226,
+    "roe": -0.1749606690403246,
+    "free_cash_flow": 2683000000
+   },
+   {
+    "year": 2009,
+    "revenue": 4668000000,
+    "net_margin": 0.1578834618680377,
+    "roe": 0.05460472697636512,
+    "free_cash_flow": 3621000000
+   },
+   {
+    "year": 2010,
+    "revenue": 4489000000,
+    "net_margin": 0.16774337268879483,
+    "roe": 0.05359049177994449,
+    "free_cash_flow": 3081000000
+   },
+   {
+    "year": 2011,
+    "revenue": 4218000000,
+    "net_margin": 0.30749170222854433,
+    "roe": 0.09825013256571472,
+    "free_cash_flow": 2047000000
+   },
+   {
+    "year": 2012,
+    "revenue": 4107000000,
+    "net_margin": 0.38373508643778914,
+    "roe": 0.11490230387868183,
+    "free_cash_flow": 2195000000
+   },
+   {
+    "year": 2013,
+    "revenue": 3973000000,
+    "net_margin": 0.4621193053108482,
+    "roe": 0.12584824182603332
+   },
+   {
+    "year": 2014,
+    "revenue": 4030000000,
+    "net_margin": 0.3674937965260546,
+    "roe": 0.09477793421221042
+   },
+   {
+    "year": 2015,
+    "revenue": 4028000000,
+    "net_margin": 0.42502482621648463,
+    "roe": 0.10808763179493655
+   },
+   {
+    "year": 2016,
+    "revenue": 4193000000,
+    "net_margin": 0.36894824707846413,
+    "roe": 0.09546436285097193
+   },
+   {
+    "year": 2017,
+    "revenue": 4489000000,
+    "net_margin": 0.48563154377366896,
+    "roe": 0.1345679012345679,
+    "free_cash_flow": 1280000000
+   },
+   {
+    "year": 2018,
+    "revenue": 5183000000,
+    "net_margin": 0.42311402662550646,
+    "roe": 0.13495384615384615,
+    "free_cash_flow": 2664000000
+   },
+   {
+    "year": 2019,
+    "revenue": 6254000000,
+    "net_margin": 0.4016629357211385,
+    "roe": 0.11847380087723436,
+    "free_cash_flow": 1581000000
+   },
+   {
+    "year": 2020,
+    "revenue": 5572000000,
+    "net_margin": 0.2561019382627423,
+    "roe": 0.061745489161005584,
+    "free_cash_flow": 66000000
+   },
+   {
+    "year": 2021,
+    "revenue": 5211000000,
+    "net_margin": 0.5315678372673192,
+    "roe": 0.12471859522737505,
+    "free_cash_flow": 2395000000
+   },
+   {
+    "year": 2022,
+    "revenue": 6587000000,
+    "net_margin": 0.3713374829209048,
+    "roe": 0.14116696485254226,
+    "free_cash_flow": 6080000000
+   },
+   {
+    "year": 2023,
+    "revenue": 9760000000,
+    "net_margin": 0.24067622950819673,
+    "roe": 0.12252242854162321,
+    "free_cash_flow": 4018000000
+   },
+   {
+    "year": 2024,
+    "revenue": 10426000000,
+    "net_margin": 0.22194513715710723,
+    "roe": 0.11779078645965894,
+    "free_cash_flow": 2410000000
+   },
+   {
+    "year": 2025,
+    "revenue": 9903000000,
+    "net_margin": 0.2546703019287085,
+    "roe": 0.1160928005892101,
+    "free_cash_flow": 3930000000
+   }
+  ],
+  "growth": {
+   "revenue_cagr_3y": 0.14558250308233256,
+   "revenue_cagr_5y": 0.12189221466427247,
+   "net_income_cagr_5y": 0.12063510184377813,
+   "fcf_cagr_5y": 1.2644864324094676
+  },
+  "business_summary": "Fifth Third Bancorp operates as the bank holding company for Fifth Third Bank, National Association that provides a range of financial products and services in the United States. It operates through three segments: Commercial Banking, Consumer and Small Business Banking, and Wealth and Asset Management. The Commercial Banking segment offers credit intermediation, cash management, and financial services; lending and depository products; and cash management, foreign exchange and international trade finance, derivatives and capital markets services, asset-based lending, real estate finance, public finance, commercial leasing, and syndicated finance for business, government, and professional customers. Its Consumer and Small Banking segment engages in the provision of a range of deposit and loan products to individuals and small businesses; residential mortgage activities, including the origination, retention and servicing of residential mortgage loans, sales and securitizations of loans, and associated hedging activities; home equity loans and lines of credit, credit cards, automobile and other indirect lending, and other consumer lending services; and home improvement and solar energy installation loans through contractors and installers. The Wealth and Asset Management segment provides various wealth management services, such as wealth planning, investment management, banking, insurance, trust, and estate services for for individuals, companies, and not-for-profit organizations; retail brokerage services for individual clients; and advisory services for institutional clients. Fifth Third Bancorp was founded in 1858 and is headquartered in Cincinnati, Ohio.",
+  "price_history_weekly": [
+   {
+    "date": "2021-07-18",
+    "close": 30.19
+   },
+   {
+    "date": "2021-07-25",
+    "close": 29.67
+   },
+   {
+    "date": "2021-08-01",
+    "close": 30.09
+   },
+   {
+    "date": "2021-08-08",
+    "close": 31.29
+   },
+   {
+    "date": "2021-08-15",
+    "close": 31.91
+   },
+   {
+    "date": "2021-08-22",
+    "close": 31.2
+   },
+   {
+    "date": "2021-08-29",
+    "close": 32.72
+   },
+   {
+    "date": "2021-09-05",
+    "close": 31.94
+   },
+   {
+    "date": "2021-09-12",
+    "close": 32.06
+   },
+   {
+    "date": "2021-09-19",
+    "close": 33.27
+   },
+   {
+    "date": "2021-09-26",
+    "close": 34.42
+   },
+   {
+    "date": "2021-10-03",
+    "close": 36.46
+   },
+   {
+    "date": "2021-10-10",
+    "close": 36.7
+   },
+   {
+    "date": "2021-10-17",
+    "close": 36.41
+   },
+   {
+    "date": "2021-10-24",
+    "close": 37.99
+   },
+   {
+    "date": "2021-10-31",
+    "close": 36.35
+   },
+   {
+    "date": "2021-11-07",
+    "close": 36.81
+   },
+   {
+    "date": "2021-11-14",
+    "close": 36.92
+   },
+   {
+    "date": "2021-11-21",
+    "close": 36.37
+   },
+   {
+    "date": "2021-11-28",
+    "close": 35.47
+   },
+   {
+    "date": "2021-12-05",
+    "close": 35.95
+   },
+   {
+    "date": "2021-12-12",
+    "close": 36.54
+   },
+   {
+    "date": "2021-12-19",
+    "close": 35.29
+   },
+   {
+    "date": "2021-12-26",
+    "close": 35.96
+   },
+   {
+    "date": "2022-01-02",
+    "close": 36.62
+   },
+   {
+    "date": "2022-01-09",
+    "close": 41.03
+   },
+   {
+    "date": "2022-01-16",
+    "close": 42.42
+   },
+   {
+    "date": "2022-01-23",
+    "close": 37.87
+   },
+   {
+    "date": "2022-01-30",
+    "close": 37.39
+   },
+   {
+    "date": "2022-02-06",
+    "close": 39.8
+   },
+   {
+    "date": "2022-02-13",
+    "close": 40.81
+   },
+   {
+    "date": "2022-02-20",
+    "close": 40.55
+   },
+   {
+    "date": "2022-02-27",
+    "close": 40.43
+   },
+   {
+    "date": "2022-03-06",
+    "close": 37.46
+   },
+   {
+    "date": "2022-03-13",
+    "close": 36.99
+   },
+   {
+    "date": "2022-03-20",
+    "close": 39.26
+   },
+   {
+    "date": "2022-03-27",
+    "close": 39.31
+   },
+   {
+    "date": "2022-04-03",
+    "close": 35.37
+   },
+   {
+    "date": "2022-04-10",
+    "close": 34.32
+   },
+   {
+    "date": "2022-04-17",
+    "close": 33.01
+   },
+   {
+    "date": "2022-04-24",
+    "close": 32.52
+   },
+   {
+    "date": "2022-05-01",
+    "close": 31.76
+   },
+   {
+    "date": "2022-05-08",
+    "close": 31.74
+   },
+   {
+    "date": "2022-05-15",
+    "close": 30.44
+   },
+   {
+    "date": "2022-05-22",
+    "close": 30.16
+   },
+   {
+    "date": "2022-05-29",
+    "close": 33.1
+   },
+   {
+    "date": "2022-06-05",
+    "close": 32.94
+   },
+   {
+    "date": "2022-06-12",
+    "close": 30.2
+   },
+   {
+    "date": "2022-06-19",
+    "close": 28.77
+   },
+   {
+    "date": "2022-06-26",
+    "close": 29.81
+   },
+   {
+    "date": "2022-07-03",
+    "close": 28.89
+   },
+   {
+    "date": "2022-07-10",
+    "close": 28.9
+   },
+   {
+    "date": "2022-07-17",
+    "close": 28.8
+   },
+   {
+    "date": "2022-07-24",
+    "close": 28.71
+   },
+   {
+    "date": "2022-07-31",
+    "close": 29.13
+   },
+   {
+    "date": "2022-08-07",
+    "close": 29.6
+   },
+   {
+    "date": "2022-08-14",
+    "close": 32.0
+   },
+   {
+    "date": "2022-08-21",
+    "close": 31.19
+   },
+   {
+    "date": "2022-08-28",
+    "close": 29.83
+   },
+   {
+    "date": "2022-09-04",
+    "close": 28.74
+   },
+   {
+    "date": "2022-09-11",
+    "close": 30.51
+   },
+   {
+    "date": "2022-09-18",
+    "close": 29.9
+   },
+   {
+    "date": "2022-09-25",
+    "close": 28.0
+   },
+   {
+    "date": "2022-10-02",
+    "close": 27.56
+   },
+   {
+    "date": "2022-10-09",
+    "close": 28.54
+   },
+   {
+    "date": "2022-10-16",
+    "close": 29.29
+   },
+   {
+    "date": "2022-10-23",
+    "close": 28.48
+   },
+   {
+    "date": "2022-10-30",
+    "close": 31.03
+   },
+   {
+    "date": "2022-11-06",
+    "close": 30.3
+   },
+   {
+    "date": "2022-11-13",
+    "close": 31.78
+   },
+   {
+    "date": "2022-11-20",
+    "close": 30.73
+   },
+   {
+    "date": "2022-11-27",
+    "close": 31.46
+   },
+   {
+    "date": "2022-12-04",
+    "close": 30.4
+   },
+   {
+    "date": "2022-12-11",
+    "close": 28.36
+   },
+   {
+    "date": "2022-12-18",
+    "close": 27.25
+   },
+   {
+    "date": "2022-12-25",
+    "close": 27.95
+   },
+   {
+    "date": "2023-01-01",
+    "close": 28.58
+   },
+   {
+    "date": "2023-01-08",
+    "close": 30.03
+   },
+   {
+    "date": "2023-01-15",
+    "close": 30.18
+   },
+   {
+    "date": "2023-01-22",
+    "close": 30.15
+   },
+   {
+    "date": "2023-01-29",
+    "close": 31.45
+   },
+   {
+    "date": "2023-02-05",
+    "close": 32.79
+   },
+   {
+    "date": "2023-02-12",
+    "close": 32.38
+   },
+   {
+    "date": "2023-02-19",
+    "close": 32.19
+   },
+   {
+    "date": "2023-02-26",
+    "close": 31.63
+   },
+   {
+    "date": "2023-03-05",
+    "close": 31.56
+   },
+   {
+    "date": "2023-03-12",
+    "close": 26.46
+   },
+   {
+    "date": "2023-03-19",
+    "close": 21.74
+   },
+   {
+    "date": "2023-03-26",
+    "close": 22.2
+   },
+   {
+    "date": "2023-04-02",
+    "close": 23.49
+   },
+   {
+    "date": "2023-04-09",
+    "close": 23.0
+   },
+   {
+    "date": "2023-04-16",
+    "close": 23.32
+   },
+   {
+    "date": "2023-04-23",
+    "close": 24.24
+   },
+   {
+    "date": "2023-04-30",
+    "close": 23.11
+   },
+   {
+    "date": "2023-05-07",
+    "close": 21.98
+   },
+   {
+    "date": "2023-05-14",
+    "close": 20.83
+   },
+   {
+    "date": "2023-05-21",
+    "close": 22.14
+   },
+   {
+    "date": "2023-05-28",
+    "close": 22.28
+   },
+   {
+    "date": "2023-06-04",
+    "close": 22.89
+   },
+   {
+    "date": "2023-06-11",
+    "close": 23.29
+   },
+   {
+    "date": "2023-06-18",
+    "close": 23.41
+   },
+   {
+    "date": "2023-06-25",
+    "close": 22.52
+   },
+   {
+    "date": "2023-07-02",
+    "close": 23.41
+   },
+   {
+    "date": "2023-07-09",
+    "close": 23.8
+   },
+   {
+    "date": "2023-07-16",
+    "close": 24.1
+   },
+   {
+    "date": "2023-07-23",
+    "close": 25.21
+   },
+   {
+    "date": "2023-07-30",
+    "close": 25.77
+   },
+   {
+    "date": "2023-08-06",
+    "close": 25.43
+   },
+   {
+    "date": "2023-08-13",
+    "close": 24.82
+   },
+   {
+    "date": "2023-08-20",
+    "close": 22.86
+   },
+   {
+    "date": "2023-08-27",
+    "close": 22.7
+   },
+   {
+    "date": "2023-09-03",
+    "close": 24.16
+   },
+   {
+    "date": "2023-09-10",
+    "close": 23.59
+   },
+   {
+    "date": "2023-09-17",
+    "close": 24.51
+   },
+   {
+    "date": "2023-09-24",
+    "close": 22.95
+   },
+   {
+    "date": "2023-10-01",
+    "close": 22.95
+   },
+   {
+    "date": "2023-10-08",
+    "close": 21.9
+   },
+   {
+    "date": "2023-10-15",
+    "close": 21.99
+   },
+   {
+    "date": "2023-10-22",
+    "close": 21.1
+   },
+   {
+    "date": "2023-10-29",
+    "close": 20.74
+   },
+   {
+    "date": "2023-11-05",
+    "close": 23.97
+   },
+   {
+    "date": "2023-11-12",
+    "close": 22.7
+   },
+   {
+    "date": "2023-11-19",
+    "close": 24.97
+   },
+   {
+    "date": "2023-11-26",
+    "close": 24.69
+   },
+   {
+    "date": "2023-12-03",
+    "close": 27.7
+   },
+   {
+    "date": "2023-12-10",
+    "close": 28.31
+   },
+   {
+    "date": "2023-12-17",
+    "close": 31.73
+   },
+   {
+    "date": "2023-12-24",
+    "close": 31.23
+   },
+   {
+    "date": "2023-12-31",
+    "close": 31.56
+   },
+   {
+    "date": "2024-01-07",
+    "close": 32.39
+   },
+   {
+    "date": "2024-01-14",
+    "close": 31.44
+   },
+   {
+    "date": "2024-01-21",
+    "close": 31.3
+   },
+   {
+    "date": "2024-01-28",
+    "close": 31.9
+   },
+   {
+    "date": "2024-02-04",
+    "close": 30.97
+   },
+   {
+    "date": "2024-02-11",
+    "close": 30.79
+   },
+   {
+    "date": "2024-02-18",
+    "close": 31.05
+   },
+   {
+    "date": "2024-02-25",
+    "close": 30.67
+   },
+   {
+    "date": "2024-03-03",
+    "close": 31.45
+   },
+   {
+    "date": "2024-03-10",
+    "close": 33.28
+   },
+   {
+    "date": "2024-03-17",
+    "close": 32.24
+   },
+   {
+    "date": "2024-03-24",
+    "close": 33.28
+   },
+   {
+    "date": "2024-03-31",
+    "close": 34.38
+   },
+   {
+    "date": "2024-04-07",
+    "close": 32.62
+   },
+   {
+    "date": "2024-04-14",
+    "close": 31.91
+   },
+   {
+    "date": "2024-04-21",
+    "close": 33.49
+   },
+   {
+    "date": "2024-04-28",
+    "close": 34.1
+   },
+   {
+    "date": "2024-05-05",
+    "close": 34.7
+   },
+   {
+    "date": "2024-05-12",
+    "close": 35.83
+   },
+   {
+    "date": "2024-05-19",
+    "close": 35.63
+   },
+   {
+    "date": "2024-05-26",
+    "close": 34.42
+   },
+   {
+    "date": "2024-06-02",
+    "close": 34.58
+   },
+   {
+    "date": "2024-06-09",
+    "close": 33.38
+   },
+   {
+    "date": "2024-06-16",
+    "close": 32.54
+   },
+   {
+    "date": "2024-06-23",
+    "close": 33.32
+   },
+   {
+    "date": "2024-06-30",
+    "close": 34.05
+   },
+   {
+    "date": "2024-07-07",
+    "close": 33.6
+   },
+   {
+    "date": "2024-07-14",
+    "close": 35.91
+   },
+   {
+    "date": "2024-07-21",
+    "close": 38.25
+   },
+   {
+    "date": "2024-07-28",
+    "close": 39.44
+   },
+   {
+    "date": "2024-08-04",
+    "close": 36.9
+   },
+   {
+    "date": "2024-08-11",
+    "close": 37.0
+   },
+   {
+    "date": "2024-08-18",
+    "close": 37.96
+   },
+   {
+    "date": "2024-08-25",
+    "close": 39.3
+   },
+   {
+    "date": "2024-09-01",
+    "close": 39.83
+   },
+   {
+    "date": "2024-09-08",
+    "close": 37.97
+   },
+   {
+    "date": "2024-09-15",
+    "close": 39.26
+   },
+   {
+    "date": "2024-09-22",
+    "close": 40.35
+   },
+   {
+    "date": "2024-09-29",
+    "close": 40.07
+   },
+   {
+    "date": "2024-10-06",
+    "close": 39.62
+   },
+   {
+    "date": "2024-10-13",
+    "close": 41.26
+   },
+   {
+    "date": "2024-10-20",
+    "close": 42.04
+   },
+   {
+    "date": "2024-10-27",
+    "close": 40.68
+   },
+   {
+    "date": "2024-11-03",
+    "close": 40.6
+   },
+   {
+    "date": "2024-11-10",
+    "close": 43.54
+   },
+   {
+    "date": "2024-11-17",
+    "close": 44.23
+   },
+   {
+    "date": "2024-11-24",
+    "close": 45.08
+   },
+   {
+    "date": "2024-12-01",
+    "close": 45.23
+   },
+   {
+    "date": "2024-12-08",
+    "close": 44.43
+   },
+   {
+    "date": "2024-12-15",
+    "close": 42.87
+   },
+   {
+    "date": "2024-12-22",
+    "close": 40.41
+   },
+   {
+    "date": "2024-12-29",
+    "close": 40.38
+   },
+   {
+    "date": "2025-01-05",
+    "close": 40.25
+   },
+   {
+    "date": "2025-01-12",
+    "close": 39.04
+   },
+   {
+    "date": "2025-01-19",
+    "close": 42.1
+   },
+   {
+    "date": "2025-01-26",
+    "close": 41.95
+   },
+   {
+    "date": "2025-02-02",
+    "close": 42.07
+   },
+   {
+    "date": "2025-02-09",
+    "close": 41.81
+   },
+   {
+    "date": "2025-02-16",
+    "close": 41.83
+   },
+   {
+    "date": "2025-02-23",
+    "close": 40.71
+   },
+   {
+    "date": "2025-03-02",
+    "close": 41.27
+   },
+   {
+    "date": "2025-03-09",
+    "close": 38.03
+   },
+   {
+    "date": "2025-03-16",
+    "close": 36.6
+   },
+   {
+    "date": "2025-03-23",
+    "close": 37.48
+   },
+   {
+    "date": "2025-03-30",
+    "close": 36.85
+   },
+   {
+    "date": "2025-04-06",
+    "close": 32.35
+   },
+   {
+    "date": "2025-04-13",
+    "close": 32.44
+   },
+   {
+    "date": "2025-04-20",
+    "close": 32.74
+   },
+   {
+    "date": "2025-04-27",
+    "close": 33.82
+   },
+   {
+    "date": "2025-05-04",
+    "close": 35.56
+   },
+   {
+    "date": "2025-05-11",
+    "close": 35.8
+   },
+   {
+    "date": "2025-05-18",
+    "close": 38.0
+   },
+   {
+    "date": "2025-05-25",
+    "close": 35.66
+   },
+   {
+    "date": "2025-06-01",
+    "close": 36.61
+   },
+   {
+    "date": "2025-06-08",
+    "close": 37.78
+   },
+   {
+    "date": "2025-06-15",
+    "close": 36.41
+   },
+   {
+    "date": "2025-06-22",
+    "close": 37.71
+   },
+   {
+    "date": "2025-06-29",
+    "close": 39.79
+   },
+   {
+    "date": "2025-07-06",
+    "close": 41.98
+   },
+   {
+    "date": "2025-07-13",
+    "close": 42.32
+   },
+   {
+    "date": "2025-07-20",
+    "close": 41.62
+   },
+   {
+    "date": "2025-07-27",
+    "close": 41.43
+   },
+   {
+    "date": "2025-08-03",
+    "close": 39.57
+   },
+   {
+    "date": "2025-08-10",
+    "close": 40.27
+   },
+   {
+    "date": "2025-08-17",
+    "close": 41.09
+   },
+   {
+    "date": "2025-08-24",
+    "close": 43.32
+   },
+   {
+    "date": "2025-08-31",
+    "close": 44.27
+   },
+   {
+    "date": "2025-09-07",
+    "close": 44.12
+   },
+   {
+    "date": "2025-09-14",
+    "close": 44.07
+   },
+   {
+    "date": "2025-09-21",
+    "close": 44.57
+   },
+   {
+    "date": "2025-09-28",
+    "close": 43.94
+   },
+   {
+    "date": "2025-10-05",
+    "close": 43.33
+   },
+   {
+    "date": "2025-10-12",
+    "close": 40.47
+   },
+   {
+    "date": "2025-10-19",
+    "close": 39.9
+   },
+   {
+    "date": "2025-10-26",
+    "close": 41.6
+   },
+   {
+    "date": "2025-11-02",
+    "close": 40.61
+   },
+   {
+    "date": "2025-11-09",
+    "close": 41.83
+   },
+   {
+    "date": "2025-11-16",
+    "close": 41.54
+   },
+   {
+    "date": "2025-11-23",
+    "close": 41.39
+   },
+   {
+    "date": "2025-11-30",
+    "close": 42.41
+   },
+   {
+    "date": "2025-12-07",
+    "close": 44.32
+   },
+   {
+    "date": "2025-12-14",
+    "close": 46.98
+   },
+   {
+    "date": "2025-12-21",
+    "close": 46.67
+   },
+   {
+    "date": "2025-12-28",
+    "close": 47.24
+   },
+   {
+    "date": "2026-01-04",
+    "close": 46.95
+   },
+   {
+    "date": "2026-01-11",
+    "close": 48.48
+   },
+   {
+    "date": "2026-01-18",
+    "close": 48.38
+   },
+   {
+    "date": "2026-01-25",
+    "close": 49.93
+   },
+   {
+    "date": "2026-02-01",
+    "close": 49.42
+   },
+   {
+    "date": "2026-02-08",
+    "close": 54.2
+   },
+   {
+    "date": "2026-02-15",
+    "close": 52.02
+   },
+   {
+    "date": "2026-02-22",
+    "close": 52.77
+   },
+   {
+    "date": "2026-03-01",
+    "close": 48.68
+   },
+   {
+    "date": "2026-03-08",
+    "close": 46.55
+   },
+   {
+    "date": "2026-03-15",
+    "close": 42.71
+   },
+   {
+    "date": "2026-03-22",
+    "close": 43.49
+   },
+   {
+    "date": "2026-03-29",
+    "close": 43.83
+   },
+   {
+    "date": "2026-04-05",
+    "close": 46.78
+   },
+   {
+    "date": "2026-04-12",
+    "close": 48.96
+   },
+   {
+    "date": "2026-04-19",
+    "close": 49.99
+   },
+   {
+    "date": "2026-04-26",
+    "close": 49.31
+   },
+   {
+    "date": "2026-05-03",
+    "close": 50.07
+   },
+   {
+    "date": "2026-05-10",
+    "close": 48.98
+   },
+   {
+    "date": "2026-05-17",
+    "close": 47.02
+   },
+   {
+    "date": "2026-05-24",
+    "close": 49.13
+   },
+   {
+    "date": "2026-05-31",
+    "close": 49.58
+   },
+   {
+    "date": "2026-06-07",
+    "close": 51.64
+   },
+   {
+    "date": "2026-06-14",
+    "close": 54.34
+   },
+   {
+    "date": "2026-06-21",
+    "close": 52.37
+   },
+   {
+    "date": "2026-06-28",
+    "close": 55.91
+   },
+   {
+    "date": "2026-07-05",
+    "close": 57.16
+   },
+   {
+    "date": "2026-07-12",
+    "close": 57.07
+   },
+   {
+    "date": "2026-07-19",
+    "close": 57.24
+   }
+  ]
+ },
+ {
+  "ticker": "AAPL",
+  "name": "Apple Inc.",
+  "sector": "Technology",
+  "industry": "Consumer Electronics",
+  "as_of": "2026-07-14",
+  "price": 313.86,
+  "market_cap": 4609773404160,
+  "beta": 1.097,
+  "pe_trailing": 37.768948,
+  "dividend_yield_pct": 0.34,
+  "week52_low": 201.5,
+  "week52_high": 323.45,
+  "rating": "SELL",
+  "relative_rating": "Least Preferred",
+  "relative_rank": 5,
+  "target": 228.82495237535886,
+  "base_target": 198.9782194568338,
+  "upside": -0.2709330517576026,
+  "street_target": 316.75714,
+  "street_analyst_count": 42,
+  "cost_of_equity": 0.0985,
+  "models": [
+   {
+    "key": "dcf",
+    "label": "Cash-flow value (DCF)",
+    "value": 153.35024171295237,
+    "assumptions": {
+     "fcf_base": 99584000000,
+     "initial_growth": 0.15,
+     "terminal_growth": 0.025,
+     "cost_of_equity": 0.0985,
+     "exit_multiple": 23.88419794306147,
+     "projection_years": 5,
+     "net_debt": 42394000000
+    }
+   },
+   {
+    "key": "comps",
+    "label": "Priced like its peers",
+    "value": 192.04908648375,
+    "assumptions": {
+     "trailing": {
+      "eps": 8.31,
+      "peer_median_pe": 23.093618
+     },
+     "forward": {
+      "eps": 9.6075,
+      "peer_median_pe": 20.004185
+     },
+     "peers_used": [
+      "MSFT",
+      "GOOGL",
+      "DELL",
+      "HPQ",
+      "SONY"
+     ]
+    }
+   },
+   {
+    "key": "own_multiple",
+    "label": "Priced like its own history",
+    "value": 266.74465608842615,
+    "assumptions": {
+     "own_avg_pe_5y": 27.76421088612294,
+     "eps_used": 9.6075,
+     "eps_basis": "forward"
+    }
+   }
+  ],
+  "overlays": [
+   {
+    "date": "2026-07-03",
+    "type": "target_pct",
+    "value": 0.15,
+    "rationale": "Partial credit for AI services optionality the base engine refuses to price: street consensus embeds an AI-gateway narrative (est. up to $15B/yr services revenue long-term, per Wedbush). We credit roughly half the gap on the services portion only - hardware replacement-cycle acceleration remains unproven. DRAFT: analyst to confirm or revise.",
+    "review_by": "2026-10-30"
+   }
+  ],
+  "macro_adjustments": [
+   {
+    "rule": "credit_spread_erp",
+    "indicator": "BAA10Y",
+    "reading": "Baa spread 1.58%, -0.39pp vs 10y median",
+    "target": "cost_of_equity",
+    "adjustment": -0.0019499999999999995,
+    "rationale": "Credit spreads are a market-priced risk gauge; wider-than-normal spreads raise the equity risk premium."
+   },
+   {
+    "rule": "dollar_translation",
+    "indicator": "DTWEXBGS",
+    "reading": "Trade-weighted dollar +0.6% y/y",
+    "target": "growth",
+    "adjustment": -0.0009732789359974405,
+    "rationale": "~58% of revenue is foreign; a stronger dollar shrinks it in translation, a weaker one inflates it."
+   },
+   {
+    "rule": "durables_demand",
+    "indicator": "PCEDG",
+    "reading": "Durables spending +5.7% y/y vs +6.2% 5y trend",
+    "target": "growth",
+    "adjustment": -0.0014908909312052465,
+    "rationale": "Premium devices are durable-goods purchases; demand running above/below trend leans on near-term growth."
+   }
+  ],
+  "sensitivity": {
+   "x_label": "FCF growth",
+   "x_values": [
+    0.13,
+    0.13999999999999999,
+    0.15,
+    0.16,
+    0.16999999999999998
+   ],
+   "coe_values": [
+    0.08850000000000001,
+    0.0935,
+    0.0985,
+    0.10350000000000001,
+    0.1085
+   ],
+   "grid": [
+    [
+     201.71615827966423,
+     198.8857700410984,
+     196.35432503555393,
+     194.06801672866982,
+     191.98579524818751
+    ],
+    [
+     203.13972786227015,
+     200.24514024647596,
+     197.6563192406432,
+     195.31822922632676,
+     193.18888266597037
+    ],
+    [
+     204.58513371234727,
+     201.6253270561258,
+     198.9782194568338,
+     196.58752654846938,
+     194.41030812738984
+    ],
+    [
+     206.0525843576131,
+     203.0265290448146,
+     200.32021537670977,
+     197.87609038305345,
+     195.65024604593373
+    ],
+    [
+     207.5422892293705,
+     204.44894564705163,
+     201.68249751349782,
+     199.1841032034627,
+     196.90887158853582
+    ]
+   ]
+  },
+  "fundamentals": [
+   {
+    "year": 2007,
+    "roe": 0.24058908540361984
+   },
+   {
+    "year": 2008,
+    "roe": 0.2744315378750505
+   },
+   {
+    "year": 2009,
+    "roe": 0.2602718078381795
+   },
+   {
+    "year": 2010,
+    "roe": 0.2932142035111213
+   },
+   {
+    "year": 2011,
+    "roe": 0.3383410559289956
+   },
+   {
+    "year": 2012,
+    "roe": 0.35304119786820065
+   },
+   {
+    "year": 2013,
+    "roe": 0.29977579745687943,
+    "free_cash_flow": 45501000000
+   },
+   {
+    "year": 2014,
+    "roe": 0.3542004715501089
+   },
+   {
+    "year": 2015,
+    "roe": 0.44735453060198566,
+    "free_cash_flow": 70019000000
+   },
+   {
+    "year": 2016,
+    "roe": 0.3562366958026963,
+    "free_cash_flow": 53497000000
+   },
+   {
+    "year": 2017,
+    "revenue": 229234000000,
+    "net_margin": 0.21092420845075338,
+    "operating_margin": 0.2676042820872994,
+    "roe": 0.3607018433832909,
+    "free_cash_flow": 51774000000
+   },
+   {
+    "year": 2018,
+    "revenue": 265595000000,
+    "net_margin": 0.22414202074587247,
+    "operating_margin": 0.26694026619477024,
+    "roe": 0.5556011834209077,
+    "free_cash_flow": 64121000000
+   },
+   {
+    "year": 2019,
+    "revenue": 260174000000,
+    "net_margin": 0.21238094505984456,
+    "operating_margin": 0.24572017188496928,
+    "roe": 0.6106445053487756,
+    "free_cash_flow": 58896000000
+   },
+   {
+    "year": 2020,
+    "revenue": 274515000000,
+    "net_margin": 0.20913611278072236,
+    "operating_margin": 0.24147314354406862,
+    "roe": 0.8786635853012749,
+    "free_cash_flow": 73365000000
+   },
+   {
+    "year": 2021,
+    "revenue": 365817000000,
+    "net_margin": 0.2588179335569424,
+    "operating_margin": 0.29782377527561593,
+    "roe": 1.5007132667617689,
+    "free_cash_flow": 92953000000
+   },
+   {
+    "year": 2022,
+    "revenue": 394328000000,
+    "net_margin": 0.2530964070519973,
+    "operating_margin": 0.30288744395528594,
+    "roe": 1.9695887275023682,
+    "free_cash_flow": 111443000000
+   },
+   {
+    "year": 2023,
+    "revenue": 383285000000,
+    "net_margin": 0.2530623426432028,
+    "operating_margin": 0.2982141226502472,
+    "roe": 1.5607601454639075,
+    "free_cash_flow": 99584000000
+   },
+   {
+    "year": 2024,
+    "revenue": 391035000000,
+    "net_margin": 0.23971255769943867,
+    "operating_margin": 0.31510222870075566,
+    "roe": 1.6459350307287095,
+    "free_cash_flow": 108807000000
+   },
+   {
+    "year": 2025,
+    "revenue": 416161000000,
+    "net_margin": 0.2691506412181824,
+    "operating_margin": 0.31970799762591884,
+    "roe": 1.5191298333175105,
+    "free_cash_flow": 98767000000
+   }
+  ],
+  "growth": {
+   "revenue_cagr_3y": 0.01812535743479393,
+   "revenue_cagr_5y": 0.08677354924090741,
+   "net_income_cagr_5y": 0.14301607214786305,
+   "fcf_cagr_5y": 0.061266824126846364
+  },
+  "business_summary": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple Vision Pro, Apple TV, Apple Watch, Beats products, and HomePod, as well as Apple branded and third-party accessories. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allows customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV, which offers original content and live sports; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers and resellers. The company was formerly known as Apple Computer, Inc. and changed its name to Apple Inc. in January 2007. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California.",
+  "price_history_weekly": [
+   {
+    "date": "2021-07-18",
+    "close": 142.69
+   },
+   {
+    "date": "2021-07-25",
+    "close": 144.81
+   },
+   {
+    "date": "2021-08-01",
+    "close": 142.18
+   },
+   {
+    "date": "2021-08-08",
+    "close": 142.66
+   },
+   {
+    "date": "2021-08-15",
+    "close": 145.55
+   },
+   {
+    "date": "2021-08-22",
+    "close": 144.66
+   },
+   {
+    "date": "2021-08-29",
+    "close": 145.07
+   },
+   {
+    "date": "2021-09-05",
+    "close": 150.63
+   },
+   {
+    "date": "2021-09-12",
+    "close": 145.43
+   },
+   {
+    "date": "2021-09-19",
+    "close": 142.59
+   },
+   {
+    "date": "2021-09-26",
+    "close": 143.43
+   },
+   {
+    "date": "2021-10-03",
+    "close": 139.26
+   },
+   {
+    "date": "2021-10-10",
+    "close": 139.5
+   },
+   {
+    "date": "2021-10-17",
+    "close": 141.39
+   },
+   {
+    "date": "2021-10-24",
+    "close": 145.15
+   },
+   {
+    "date": "2021-10-31",
+    "close": 146.24
+   },
+   {
+    "date": "2021-11-07",
+    "close": 147.9
+   },
+   {
+    "date": "2021-11-14",
+    "close": 146.64
+   },
+   {
+    "date": "2021-11-21",
+    "close": 156.96
+   },
+   {
+    "date": "2021-11-28",
+    "close": 153.3
+   },
+   {
+    "date": "2021-12-05",
+    "close": 158.22
+   },
+   {
+    "date": "2021-12-12",
+    "close": 175.44
+   },
+   {
+    "date": "2021-12-19",
+    "close": 167.31
+   },
+   {
+    "date": "2021-12-26",
+    "close": 172.34
+   },
+   {
+    "date": "2022-01-02",
+    "close": 173.6
+   },
+   {
+    "date": "2022-01-09",
+    "close": 168.32
+   },
+   {
+    "date": "2022-01-16",
+    "close": 169.2
+   },
+   {
+    "date": "2022-01-23",
+    "close": 158.78
+   },
+   {
+    "date": "2022-01-30",
+    "close": 166.52
+   },
+   {
+    "date": "2022-02-06",
+    "close": 168.75
+   },
+   {
+    "date": "2022-02-13",
+    "close": 165.08
+   },
+   {
+    "date": "2022-02-20",
+    "close": 163.77
+   },
+   {
+    "date": "2022-02-27",
+    "close": 161.37
+   },
+   {
+    "date": "2022-03-06",
+    "close": 159.72
+   },
+   {
+    "date": "2022-03-13",
+    "close": 151.46
+   },
+   {
+    "date": "2022-03-20",
+    "close": 160.52
+   },
+   {
+    "date": "2022-03-27",
+    "close": 171.03
+   },
+   {
+    "date": "2022-04-03",
+    "close": 170.63
+   },
+   {
+    "date": "2022-04-10",
+    "close": 166.5
+   },
+   {
+    "date": "2022-04-17",
+    "close": 161.8
+   },
+   {
+    "date": "2022-04-24",
+    "close": 158.37
+   },
+   {
+    "date": "2022-05-01",
+    "close": 154.32
+   },
+   {
+    "date": "2022-05-08",
+    "close": 154.18
+   },
+   {
+    "date": "2022-05-15",
+    "close": 144.22
+   },
+   {
+    "date": "2022-05-22",
+    "close": 134.88
+   },
+   {
+    "date": "2022-05-29",
+    "close": 146.7
+   },
+   {
+    "date": "2022-06-05",
+    "close": 142.52
+   },
+   {
+    "date": "2022-06-12",
+    "close": 134.43
+   },
+   {
+    "date": "2022-06-19",
+    "close": 128.97
+   },
+   {
+    "date": "2022-06-26",
+    "close": 138.87
+   },
+   {
+    "date": "2022-07-03",
+    "close": 136.2
+   },
+   {
+    "date": "2022-07-10",
+    "close": 144.15
+   },
+   {
+    "date": "2022-07-17",
+    "close": 147.21
+   },
+   {
+    "date": "2022-07-24",
+    "close": 151.06
+   },
+   {
+    "date": "2022-07-31",
+    "close": 159.31
+   },
+   {
+    "date": "2022-08-07",
+    "close": 162.32
+   },
+   {
+    "date": "2022-08-14",
+    "close": 168.95
+   },
+   {
+    "date": "2022-08-21",
+    "close": 168.38
+   },
+   {
+    "date": "2022-08-28",
+    "close": 160.62
+   },
+   {
+    "date": "2022-09-04",
+    "close": 152.96
+   },
+   {
+    "date": "2022-09-11",
+    "close": 154.49
+   },
+   {
+    "date": "2022-09-18",
+    "close": 147.94
+   },
+   {
+    "date": "2022-09-25",
+    "close": 147.67
+   },
+   {
+    "date": "2022-10-02",
+    "close": 135.67
+   },
+   {
+    "date": "2022-10-09",
+    "close": 137.52
+   },
+   {
+    "date": "2022-10-16",
+    "close": 135.85
+   },
+   {
+    "date": "2022-10-23",
+    "close": 144.57
+   },
+   {
+    "date": "2022-10-30",
+    "close": 152.89
+   },
+   {
+    "date": "2022-11-06",
+    "close": 136.07
+   },
+   {
+    "date": "2022-11-13",
+    "close": 147.2
+   },
+   {
+    "date": "2022-11-20",
+    "close": 148.77
+   },
+   {
+    "date": "2022-11-27",
+    "close": 145.64
+   },
+   {
+    "date": "2022-12-04",
+    "close": 145.34
+   },
+   {
+    "date": "2022-12-11",
+    "close": 139.79
+   },
+   {
+    "date": "2022-12-18",
+    "close": 132.27
+   },
+   {
+    "date": "2022-12-25",
+    "close": 129.66
+   },
+   {
+    "date": "2023-01-01",
+    "close": 127.76
+   },
+   {
+    "date": "2023-01-08",
+    "close": 127.46
+   },
+   {
+    "date": "2023-01-15",
+    "close": 132.51
+   },
+   {
+    "date": "2023-01-22",
+    "close": 135.57
+   },
+   {
+    "date": "2023-01-29",
+    "close": 143.49
+   },
+   {
+    "date": "2023-02-05",
+    "close": 151.92
+   },
+   {
+    "date": "2023-02-12",
+    "close": 148.72
+   },
+   {
+    "date": "2023-02-19",
+    "close": 150.23
+   },
+   {
+    "date": "2023-02-26",
+    "close": 144.48
+   },
+   {
+    "date": "2023-03-05",
+    "close": 148.74
+   },
+   {
+    "date": "2023-03-12",
+    "close": 146.24
+   },
+   {
+    "date": "2023-03-19",
+    "close": 152.65
+   },
+   {
+    "date": "2023-03-26",
+    "close": 157.82
+   },
+   {
+    "date": "2023-04-02",
+    "close": 162.4
+   },
+   {
+    "date": "2023-04-09",
+    "close": 162.16
+   },
+   {
+    "date": "2023-04-16",
+    "close": 162.7
+   },
+   {
+    "date": "2023-04-23",
+    "close": 162.51
+   },
+   {
+    "date": "2023-04-30",
+    "close": 167.1
+   },
+   {
+    "date": "2023-05-07",
+    "close": 170.93
+   },
+   {
+    "date": "2023-05-14",
+    "close": 170.18
+   },
+   {
+    "date": "2023-05-21",
+    "close": 172.74
+   },
+   {
+    "date": "2023-05-28",
+    "close": 173.0
+   },
+   {
+    "date": "2023-06-04",
+    "close": 178.45
+   },
+   {
+    "date": "2023-06-11",
+    "close": 178.46
+   },
+   {
+    "date": "2023-06-18",
+    "close": 182.36
+   },
+   {
+    "date": "2023-06-25",
+    "close": 184.1
+   },
+   {
+    "date": "2023-07-02",
+    "close": 191.29
+   },
+   {
+    "date": "2023-07-09",
+    "close": 188.04
+   },
+   {
+    "date": "2023-07-16",
+    "close": 188.05
+   },
+   {
+    "date": "2023-07-23",
+    "close": 189.29
+   },
+   {
+    "date": "2023-07-30",
+    "close": 193.12
+   },
+   {
+    "date": "2023-08-06",
+    "close": 179.47
+   },
+   {
+    "date": "2023-08-13",
+    "close": 175.57
+   },
+   {
+    "date": "2023-08-20",
+    "close": 172.31
+   },
+   {
+    "date": "2023-08-27",
+    "close": 176.38
+   },
+   {
+    "date": "2023-09-03",
+    "close": 187.09
+   },
+   {
+    "date": "2023-09-10",
+    "close": 175.95
+   },
+   {
+    "date": "2023-09-17",
+    "close": 172.82
+   },
+   {
+    "date": "2023-09-24",
+    "close": 172.61
+   },
+   {
+    "date": "2023-10-01",
+    "close": 169.07
+   },
+   {
+    "date": "2023-10-08",
+    "close": 175.27
+   },
+   {
+    "date": "2023-10-15",
+    "close": 176.62
+   },
+   {
+    "date": "2023-10-22",
+    "close": 170.72
+   },
+   {
+    "date": "2023-10-29",
+    "close": 166.12
+   },
+   {
+    "date": "2023-11-05",
+    "close": 174.44
+   },
+   {
+    "date": "2023-11-12",
+    "close": 184.31
+   },
+   {
+    "date": "2023-11-19",
+    "close": 187.57
+   },
+   {
+    "date": "2023-11-26",
+    "close": 187.84
+   },
+   {
+    "date": "2023-12-03",
+    "close": 189.1
+   },
+   {
+    "date": "2023-12-10",
+    "close": 193.52
+   },
+   {
+    "date": "2023-12-17",
+    "close": 195.36
+   },
+   {
+    "date": "2023-12-24",
+    "close": 191.43
+   },
+   {
+    "date": "2023-12-31",
+    "close": 190.38
+   },
+   {
+    "date": "2024-01-07",
+    "close": 179.15
+   },
+   {
+    "date": "2024-01-14",
+    "close": 183.84
+   },
+   {
+    "date": "2024-01-21",
+    "close": 189.42
+   },
+   {
+    "date": "2024-01-28",
+    "close": 190.27
+   },
+   {
+    "date": "2024-02-04",
+    "close": 183.77
+   },
+   {
+    "date": "2024-02-11",
+    "close": 186.97
+   },
+   {
+    "date": "2024-02-18",
+    "close": 180.5
+   },
+   {
+    "date": "2024-02-25",
+    "close": 180.71
+   },
+   {
+    "date": "2024-03-03",
+    "close": 177.88
+   },
+   {
+    "date": "2024-03-10",
+    "close": 169.03
+   },
+   {
+    "date": "2024-03-17",
+    "close": 170.91
+   },
+   {
+    "date": "2024-03-24",
+    "close": 170.57
+   },
+   {
+    "date": "2024-03-31",
+    "close": 169.78
+   },
+   {
+    "date": "2024-04-07",
+    "close": 167.9
+   },
+   {
+    "date": "2024-04-14",
+    "close": 174.8
+   },
+   {
+    "date": "2024-04-21",
+    "close": 163.36
+   },
+   {
+    "date": "2024-04-28",
+    "close": 167.62
+   },
+   {
+    "date": "2024-05-05",
+    "close": 181.56
+   },
+   {
+    "date": "2024-05-12",
+    "close": 181.48
+   },
+   {
+    "date": "2024-05-19",
+    "close": 188.24
+   },
+   {
+    "date": "2024-05-26",
+    "close": 188.35
+   },
+   {
+    "date": "2024-06-02",
+    "close": 190.6
+   },
+   {
+    "date": "2024-06-09",
+    "close": 195.2
+   },
+   {
+    "date": "2024-06-16",
+    "close": 210.67
+   },
+   {
+    "date": "2024-06-23",
+    "close": 205.71
+   },
+   {
+    "date": "2024-06-30",
+    "close": 208.81
+   },
+   {
+    "date": "2024-07-07",
+    "close": 224.4
+   },
+   {
+    "date": "2024-07-14",
+    "close": 228.56
+   },
+   {
+    "date": "2024-07-21",
+    "close": 222.38
+   },
+   {
+    "date": "2024-07-28",
+    "close": 216.09
+   },
+   {
+    "date": "2024-08-04",
+    "close": 217.97
+   },
+   {
+    "date": "2024-08-11",
+    "close": 214.38
+   },
+   {
+    "date": "2024-08-18",
+    "close": 224.37
+   },
+   {
+    "date": "2024-08-25",
+    "close": 225.15
+   },
+   {
+    "date": "2024-09-01",
+    "close": 227.3
+   },
+   {
+    "date": "2024-09-08",
+    "close": 219.18
+   },
+   {
+    "date": "2024-09-15",
+    "close": 220.84
+   },
+   {
+    "date": "2024-09-22",
+    "close": 226.5
+   },
+   {
+    "date": "2024-09-29",
+    "close": 226.1
+   },
+   {
+    "date": "2024-10-06",
+    "close": 225.11
+   },
+   {
+    "date": "2024-10-13",
+    "close": 225.86
+   },
+   {
+    "date": "2024-10-20",
+    "close": 233.25
+   },
+   {
+    "date": "2024-10-27",
+    "close": 229.69
+   },
+   {
+    "date": "2024-11-03",
+    "close": 221.25
+   },
+   {
+    "date": "2024-11-10",
+    "close": 225.52
+   },
+   {
+    "date": "2024-11-17",
+    "close": 223.57
+   },
+   {
+    "date": "2024-11-24",
+    "close": 228.41
+   },
+   {
+    "date": "2024-12-01",
+    "close": 235.82
+   },
+   {
+    "date": "2024-12-08",
+    "close": 241.3
+   },
+   {
+    "date": "2024-12-15",
+    "close": 246.55
+   },
+   {
+    "date": "2024-12-22",
+    "close": 252.87
+   },
+   {
+    "date": "2024-12-29",
+    "close": 253.97
+   },
+   {
+    "date": "2025-01-05",
+    "close": 241.82
+   },
+   {
+    "date": "2025-01-12",
+    "close": 235.35
+   },
+   {
+    "date": "2025-01-19",
+    "close": 228.52
+   },
+   {
+    "date": "2025-01-26",
+    "close": 221.37
+   },
+   {
+    "date": "2025-02-02",
+    "close": 234.5
+   },
+   {
+    "date": "2025-02-09",
+    "close": 226.18
+   },
+   {
+    "date": "2025-02-16",
+    "close": 243.31
+   },
+   {
+    "date": "2025-02-23",
+    "close": 244.26
+   },
+   {
+    "date": "2025-03-02",
+    "close": 240.57
+   },
+   {
+    "date": "2025-03-09",
+    "close": 237.81
+   },
+   {
+    "date": "2025-03-16",
+    "close": 212.37
+   },
+   {
+    "date": "2025-03-23",
+    "close": 217.12
+   },
+   {
+    "date": "2025-03-30",
+    "close": 216.75
+   },
+   {
+    "date": "2025-04-06",
+    "close": 187.39
+   },
+   {
+    "date": "2025-04-13",
+    "close": 197.11
+   },
+   {
+    "date": "2025-04-20",
+    "close": 195.94
+   },
+   {
+    "date": "2025-04-27",
+    "close": 208.18
+   },
+   {
+    "date": "2025-05-04",
+    "close": 204.27
+   },
+   {
+    "date": "2025-05-11",
+    "close": 197.49
+   },
+   {
+    "date": "2025-05-18",
+    "close": 210.43
+   },
+   {
+    "date": "2025-05-25",
+    "close": 194.5
+   },
+   {
+    "date": "2025-06-01",
+    "close": 200.06
+   },
+   {
+    "date": "2025-06-08",
+    "close": 203.11
+   },
+   {
+    "date": "2025-06-15",
+    "close": 195.67
+   },
+   {
+    "date": "2025-06-22",
+    "close": 200.21
+   },
+   {
+    "date": "2025-06-29",
+    "close": 200.29
+   },
+   {
+    "date": "2025-07-06",
+    "close": 212.71
+   },
+   {
+    "date": "2025-07-13",
+    "close": 210.33
+   },
+   {
+    "date": "2025-07-20",
+    "close": 210.35
+   },
+   {
+    "date": "2025-07-27",
+    "close": 213.03
+   },
+   {
+    "date": "2025-08-03",
+    "close": 201.58
+   },
+   {
+    "date": "2025-08-10",
+    "close": 228.44
+   },
+   {
+    "date": "2025-08-17",
+    "close": 230.94
+   },
+   {
+    "date": "2025-08-24",
+    "close": 227.12
+   },
+   {
+    "date": "2025-08-31",
+    "close": 231.49
+   },
+   {
+    "date": "2025-09-07",
+    "close": 239.01
+   },
+   {
+    "date": "2025-09-14",
+    "close": 233.41
+   },
+   {
+    "date": "2025-09-21",
+    "close": 244.81
+   },
+   {
+    "date": "2025-09-28",
+    "close": 254.74
+   },
+   {
+    "date": "2025-10-05",
+    "close": 257.29
+   },
+   {
+    "date": "2025-10-12",
+    "close": 244.58
+   },
+   {
+    "date": "2025-10-19",
+    "close": 251.58
+   },
+   {
+    "date": "2025-10-26",
+    "close": 262.08
+   },
+   {
+    "date": "2025-11-02",
+    "close": 269.61
+   },
+   {
+    "date": "2025-11-09",
+    "close": 267.71
+   },
+   {
+    "date": "2025-11-16",
+    "close": 271.9
+   },
+   {
+    "date": "2025-11-23",
+    "close": 270.99
+   },
+   {
+    "date": "2025-11-30",
+    "close": 278.33
+   },
+   {
+    "date": "2025-12-07",
+    "close": 278.26
+   },
+   {
+    "date": "2025-12-14",
+    "close": 277.76
+   },
+   {
+    "date": "2025-12-21",
+    "close": 273.16
+   },
+   {
+    "date": "2025-12-28",
+    "close": 272.89
+   },
+   {
+    "date": "2026-01-04",
+    "close": 270.51
+   },
+   {
+    "date": "2026-01-11",
+    "close": 258.89
+   },
+   {
+    "date": "2026-01-18",
+    "close": 255.06
+   },
+   {
+    "date": "2026-01-25",
+    "close": 247.58
+   },
+   {
+    "date": "2026-02-01",
+    "close": 259.0
+   },
+   {
+    "date": "2026-02-08",
+    "close": 277.6
+   },
+   {
+    "date": "2026-02-15",
+    "close": 255.54
+   },
+   {
+    "date": "2026-02-22",
+    "close": 264.34
+   },
+   {
+    "date": "2026-03-01",
+    "close": 263.94
+   },
+   {
+    "date": "2026-03-08",
+    "close": 257.22
+   },
+   {
+    "date": "2026-03-15",
+    "close": 249.89
+   },
+   {
+    "date": "2026-03-22",
+    "close": 247.76
+   },
+   {
+    "date": "2026-03-29",
+    "close": 248.57
+   },
+   {
+    "date": "2026-04-05",
+    "close": 255.68
+   },
+   {
+    "date": "2026-04-12",
+    "close": 260.24
+   },
+   {
+    "date": "2026-04-19",
+    "close": 269.98
+   },
+   {
+    "date": "2026-04-26",
+    "close": 270.81
+   },
+   {
+    "date": "2026-05-03",
+    "close": 279.88
+   },
+   {
+    "date": "2026-05-10",
+    "close": 293.05
+   },
+   {
+    "date": "2026-05-17",
+    "close": 300.23
+   },
+   {
+    "date": "2026-05-24",
+    "close": 308.82
+   },
+   {
+    "date": "2026-05-31",
+    "close": 312.06
+   },
+   {
+    "date": "2026-06-07",
+    "close": 307.34
+   },
+   {
+    "date": "2026-06-14",
+    "close": 291.13
+   },
+   {
+    "date": "2026-06-21",
+    "close": 298.01
+   },
+   {
+    "date": "2026-06-28",
+    "close": 283.78
+   },
+   {
+    "date": "2026-07-05",
+    "close": 308.63
+   },
+   {
+    "date": "2026-07-12",
+    "close": 315.32
+   },
+   {
+    "date": "2026-07-19",
+    "close": 313.94
+   }
+  ]
+ }
+]

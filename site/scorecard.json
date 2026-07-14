@@ -1,0 +1,52 @@
+[
+ {
+  "date": "2026-07-03",
+  "ticker": "AAPL",
+  "price": 308.63,
+  "base_target": 196.27,
+  "final_target": 225.71,
+  "rating": "SELL",
+  "relative_rating": "Least Preferred",
+  "street_target": 315.09048
+ },
+ {
+  "date": "2026-07-03",
+  "ticker": "MSFT",
+  "price": 390.49,
+  "base_target": 419.43,
+  "final_target": 419.43,
+  "rating": "HOLD",
+  "relative_rating": "Overweight",
+  "street_target": 561.1149
+ },
+ {
+  "date": "2026-07-03",
+  "ticker": "KO",
+  "price": 84.14,
+  "base_target": 71.75,
+  "final_target": 71.75,
+  "rating": "SELL",
+  "relative_rating": "Neutral",
+  "street_target": 85.97417
+ },
+ {
+  "date": "2026-07-03",
+  "ticker": "FITB",
+  "price": 57.16,
+  "base_target": 43.83,
+  "final_target": 43.83,
+  "rating": "SELL",
+  "relative_rating": "Underweight",
+  "street_target": 58.375
+ },
+ {
+  "date": "2026-07-03",
+  "ticker": "BRK-B",
+  "price": 507.78,
+  "base_target": 620.11,
+  "final_target": 620.11,
+  "rating": "BUY",
+  "relative_rating": "Top Pick",
+  "street_target": 520.3333
+ }
+]
