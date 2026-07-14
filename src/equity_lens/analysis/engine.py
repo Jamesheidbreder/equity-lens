@@ -82,6 +82,26 @@ def analyze(ticker: str) -> dict:
         # payout or windfall year can't set the base), unlike a mean.
         recent_fcf = list(fcf_years.values())[-5:]
         fcf_base = statistics.median(recent_fcf) if recent_fcf else None
+        fcf_basis = "ocf minus all capex (standard)"
+
+        # Capital-intensive check: when capex persistently runs far above
+        # depreciation, the company is buying growth assets (ships, fleets,
+        # plants) — charging ALL of it against cash flow mis-values the
+        # business. Standard fix: charge maintenance capex only, proxied by
+        # depreciation. Threshold of 2x keeps normal companies (capex around
+        # 1-1.8x depreciation) on the standard definition.
+        capex_hist = list(fin["capex"].values())[-5:]
+        dep_hist = list(fin["depreciation"].values())[-5:]
+        ocf_hist = list(fin["operating_cash_flow"].values())[-5:]
+        if capex_hist and dep_hist and ocf_hist:
+            capex_med = statistics.median(capex_hist)
+            dep_med = statistics.median(dep_hist)
+            if dep_med > 0 and capex_med > 2.0 * dep_med:
+                fcf_base = statistics.median(
+                    [ocf - dep_med for ocf in ocf_hist])
+                fcf_basis = ("maintenance: ocf minus depreciation "
+                             f"(capex runs {capex_med / dep_med:.1f}x "
+                             "depreciation - growth investment excluded)")
 
         # Forward-looking growth (consensus) preferred; history as fallback;
         # macro linkages lean on the result within their caps.
@@ -100,7 +120,12 @@ def analyze(ticker: str) -> dict:
         pe_t = peers["trailing_pe"].dropna()
         peer_mult = (pe_f.median() if not pe_f.empty
                      else (pe_t.median() if not pe_t.empty else None))
-        own_pe = _own_average_pe(ticker, fin["eps_diluted"])
+        # EPS history: as filed, or derived from net income / current share
+        # count for filers (some foreign issuers) that don't tag EPS.
+        eps_hist = fin["eps_diluted"]
+        if not eps_hist and shares:
+            eps_hist = {y: v / shares for y, v in fin["net_income"].items()}
+        own_pe = _own_average_pe(ticker, eps_hist)
         mults = [x for x in (peer_mult, own_pe) if x]
         exit_mult = sum(mults) / len(mults) if mults else None
 
@@ -110,6 +135,8 @@ def analyze(ticker: str) -> dict:
                     - (list(cash.values())[-1] if cash else 0))
         models["dcf"] = valuation.dcf_value(fcf_base, growth, coe, net_debt,
                                             shares, exit_multiple=exit_mult)
+        if models["dcf"].get("assumptions") is not None:
+            models["dcf"]["assumptions"]["fcf_basis"] = fcf_basis
 
         # Current trailing EPS; last 10-K EPS can be ~3 quarters stale.
         eps_10k = fin["eps_diluted"]

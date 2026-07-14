@@ -33,12 +33,40 @@ CONCEPTS = {
     "total_equity": ["StockholdersEquity",
                      "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
     "operating_cash_flow": ["NetCashProvidedByUsedInOperatingActivities"],
-    "capex": ["PaymentsToAcquirePropertyPlantAndEquipment"],
+    "capex": ["PaymentsToAcquirePropertyPlantAndEquipment",
+              "PaymentsToAcquireProductiveAssets",
+              "PaymentsToAcquireMachineryAndEquipment"],
     "cash": ["CashAndCashEquivalentsAtCarryingValue"],
     "long_term_debt": ["LongTermDebtNoncurrent", "LongTermDebt"],
     "shares_diluted": ["WeightedAverageNumberOfDilutedSharesOutstanding"],
-    "eps_diluted": ["EarningsPerShareDiluted"],
+    "eps_diluted": ["EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted",
+                    "IncomeLossFromContinuingOperationsPerDilutedShare",
+                    "DilutedEarningsLossPerShare"],
     "dividends_paid": ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends"],
+    # Maintenance-capex proxy for capital-intensive companies.
+    "depreciation": ["DepreciationDepletionAndAmortization",
+                     "DepreciationAmortizationAndAccretionNet", "Depreciation",
+                     "DepreciationAndAmortisationExpense"],
+}
+
+# IFRS equivalents for foreign private issuers that don't file under
+# us-gaap. Checked when the us-gaap taxonomy yields nothing for a concept.
+IFRS_CONCEPTS = {
+    "revenue": ["Revenue"],
+    "net_income": ["ProfitLossAttributableToOwnersOfParent", "ProfitLoss"],
+    "operating_income": ["ProfitLossFromOperatingActivities"],
+    "total_assets": ["Assets"],
+    "total_equity": ["EquityAttributableToOwnersOfParent", "Equity"],
+    "operating_cash_flow": ["CashFlowsFromUsedInOperatingActivities"],
+    "capex": ["PurchaseOfPropertyPlantAndEquipment"],
+    "cash": ["CashAndCashEquivalents"],
+    "long_term_debt": ["NoncurrentPortionOfNoncurrentBorrowings",
+                       "Borrowings"],
+    "eps_diluted": ["DilutedEarningsLossPerShare",
+                    "BasicAndDilutedEarningsLossPerShare"],
+    "dividends_paid": ["DividendsPaidClassifiedAsFinancingActivities",
+                       "DividendsPaid"],
+    "depreciation": ["DepreciationAndAmortisationExpense"],
 }
 
 
@@ -49,7 +77,7 @@ def fetch_companyfacts(cik: str) -> dict:
     return resp.json()
 
 
-def _annual_values(facts: dict, tags: list) -> dict:
+def _annual_values_in(gaap: dict, tags: list) -> dict:
     """Extract annual (10-K) values for the first tag that has data.
 
     Values are keyed by the year of the period END date, not the SEC's "fy"
@@ -58,8 +86,12 @@ def _annual_values(facts: dict, tags: list) -> dict:
 
     Duration concepts (revenue, income) are kept only for ~full-year periods;
     instant concepts (assets, equity) are point-in-time balances.
+
+    When several tags carry data, the one with the most RECENT data wins
+    (more years as tiebreak) — filers sometimes leave a stale series under
+    one tag and report currently under another.
     """
-    gaap = facts.get("facts", {}).get("us-gaap", {})
+    best = {}
     for tag in tags:
         if tag not in gaap:
             continue
@@ -81,16 +113,26 @@ def _annual_values(facts: dict, tags: list) -> dict:
                 prev = series.get(year)
                 if prev is None or item.get("filed", "") > prev["filed"]:
                     series[year] = {"val": item["val"], "filed": item.get("filed", "")}
-        if series:
-            return {year: rec["val"] for year, rec in sorted(series.items())}
-    return {}
+        if series and (not best or
+                       (max(series), len(series)) > (max(best), len(best))):
+            best = series
+    return {year: rec["val"] for year, rec in sorted(best.items())}
 
 
 def get_annual_financials(cik: str) -> dict:
     """Annual history for every concept in CONCEPTS.
 
-    Returns {concept_name: {fiscal_year: value}}. Concepts a company does not
+    Returns {concept_name: {fiscal_year: value}}. Tries us-gaap first, then
+    the IFRS taxonomy (foreign private issuers). Concepts a company does not
     report (e.g. capex for a bank) come back empty rather than invented.
     """
     facts = fetch_companyfacts(cik)
-    return {name: _annual_values(facts, tags) for name, tags in CONCEPTS.items()}
+    us_gaap = facts.get("facts", {}).get("us-gaap", {})
+    ifrs = facts.get("facts", {}).get("ifrs-full", {})
+    out = {}
+    for name, tags in CONCEPTS.items():
+        vals = _annual_values_in(us_gaap, tags)
+        if not vals and ifrs:
+            vals = _annual_values_in(ifrs, IFRS_CONCEPTS.get(name, []))
+        out[name] = vals
+    return out
