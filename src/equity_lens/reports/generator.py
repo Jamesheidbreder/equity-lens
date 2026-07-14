@@ -23,6 +23,7 @@ from equity_lens.universe import MACRO_SERIES
 REPO_ROOT = Path(__file__).parents[3]
 REPORTS_DIR = REPO_ROOT / "reports"
 CALLS_CSV = REPO_ROOT / "data" / "calls.csv"
+NARRATIVES_DIR = REPO_ROOT / "narratives"
 
 TRAIT_RISKS = {
     "bank": "Credit cycle: rising delinquencies and charge-offs flow directly "
@@ -368,6 +369,24 @@ def _disclosures(a: dict) -> str:
     ])
 
 
+def load_narrative(ticker: str) -> dict:
+    """Written analysis sections from narratives/<TICKER>.md.
+
+    The file is human-edited (drafted by the analyst team, reviewed line by
+    line) and versioned; sections are delimited by
+    `<!-- section: name -->` markers. Reports regenerate around the prose,
+    so numbers refresh without touching the written analysis.
+    """
+    path = NARRATIVES_DIR / f"{ticker}.md"
+    if not path.exists():
+        return {}
+    import re
+    parts = re.split(r"<!--\s*section:\s*([a-z_]+)\s*-->", path.read_text())
+    # parts: [preamble, name, content, name, content, ...]
+    return {parts[i]: parts[i + 1].strip()
+            for i in range(1, len(parts) - 1, 2)}
+
+
 def _make_charts(a: dict) -> dict:
     """All report charts for one company; failures degrade to no chart."""
     tk = a["ticker"]
@@ -401,13 +420,26 @@ def _img(path: str, alt: str) -> str:
 
 def generate_report(a: dict, dashboard, chart_paths: dict = None) -> str:
     c = chart_paths or {}
+    n = load_narrative(a["ticker"])
     parts = [_header(a)]
     if "price" in c:
         parts.append(_img(c["price"], "Share price, five years"))
-    parts += [_investment_summary(a), _macro_section(a, dashboard)]
+    parts.append(_investment_summary(a))
+    if "thesis" in n:
+        parts.append("## The Investment Thesis\n\n" + n["thesis"])
+    parts.append(_macro_section(a, dashboard))
     if "macro" in c:
         parts.append(_img(c["macro"], "Economic backdrop"))
-    parts += [_business_section(a), _financials_section(a)]
+    parts.append(_business_section(a))
+    if "segments" in n:
+        parts.append("### Segments and revenue drivers\n\n" + n["segments"])
+    if "industry" in n:
+        parts.append("## Industry Overview and Competitive Positioning\n\n"
+                     + n["industry"])
+    if "moat" in n:
+        parts.append("### The moat — durability of the franchise\n\n"
+                     + n["moat"])
+    parts.append(_financials_section(a))
     if "fundamentals" in c:
         parts.append(_img(c["fundamentals"], "Revenue and cash generation"))
     if "margins" in c:
@@ -417,6 +449,9 @@ def generate_report(a: dict, dashboard, chart_paths: dict = None) -> str:
         parts.append(q)
     if "quarterly" in c:
         parts.append(_img(c["quarterly"], "Quarterly revenue"))
+    if "management" in n:
+        parts.append("## Management and Capital Allocation\n\n"
+                     + n["management"])
     parts.append(_valuation_section(a))
     walk = _dcf_walk_section(a)
     if walk:
@@ -426,6 +461,9 @@ def generate_report(a: dict, dashboard, chart_paths: dict = None) -> str:
         parts.append(peers)
     if "sensitivity" in c:
         parts.append(_img(c["sensitivity"], "Sensitivity heatmap"))
+    if "catalysts" in n:
+        parts.append("## Catalysts and What Would Change Our Mind\n\n"
+                     + n["catalysts"])
     parts += [_risks_section(a), _esg_section(a), _disclosures(a)]
     return "\n\n".join(parts) + "\n"
 
