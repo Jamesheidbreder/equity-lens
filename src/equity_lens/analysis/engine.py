@@ -228,10 +228,18 @@ def analyze(ticker: str) -> dict:
     overlay = overlays.apply(ticker, target)
     final_target = overlay["adjusted_target"]
 
+    # Recent quarters (10-Q, domestic filers) for the report's quarterly view.
+    try:
+        quarterly = edgar.get_quarterly(profile["cik"])
+    except Exception:
+        quarterly = {}
+
     return {
         "ticker": ticker,
         "as_of": __import__("datetime").date.today().isoformat(),
         "profile": profile,
+        "quarterly": quarterly,
+        "peer_multiples": peers.reset_index().to_dict("records"),
         "snapshot": snap,
         "financials": fin,
         "ratios": ratio_data,

@@ -16,7 +16,8 @@ from datetime import date
 from pathlib import Path
 
 from equity_lens.analysis.engine import analyze_universe
-from equity_lens.data import macro
+from equity_lens.data import macro, market
+from equity_lens.reports import charts
 from equity_lens.universe import MACRO_SERIES
 
 REPO_ROOT = Path(__file__).parents[3]
@@ -181,6 +182,118 @@ def _financials_section(a: dict) -> str:
     return "\n".join(out)
 
 
+def _quarterly_section(a: dict) -> str:
+    q = a.get("quarterly") or {}
+    rev = q.get("revenue", {})
+    if len(rev) < 2:
+        return None
+    ni, eps = q.get("net_income", {}), q.get("eps_diluted", {})
+    out = ["### Recent quarters (10-Q, as filed)", "",
+           "| Quarter ended | Revenue | Net income | Diluted EPS |",
+           "|---|---|---|---|"]
+    for end in rev:
+        out.append(f"| {end} | {_bn(rev.get(end))} | {_bn(ni.get(end))} "
+                   f"| {_m(eps.get(end)) if eps.get(end) is not None else 'n/a'} |")
+    return "\n".join(out)
+
+
+def _dcf_walk_section(a: dict) -> str:
+    dcf = a["models"].get("dcf") or {}
+    walk = dcf.get("walk")
+    if not walk:
+        return None
+    ass = dcf["assumptions"]
+    out = ["### DCF walk — the projection, year by year", "",
+           f"Base free cash flow {_bn(ass['fcf_base'])} ({ass.get('fcf_basis', 'standard')}); "
+           f"growth fades from {ass['initial_growth']:.1%} toward "
+           f"{ass['terminal_growth']:.1%}; discounted at {ass['cost_of_equity']:.2%}.",
+           "",
+           "| Year | Growth | Free cash flow | Discount factor | Present value |",
+           "|---|---|---|---|---|"]
+    for w in walk:
+        out.append(f"| {w['year']} | {w['growth']:+.1%} | {_bn(w['fcf'])} "
+                   f"| {w['discount_factor']:.3f} | {_bn(w['present_value'])} |")
+    out += ["",
+            f"- Sum of explicit-period value: {_bn(dcf['pv_explicit'])}",
+            f"- Terminal value: average of Gordon growth ({_bn(dcf['tv_gordon'])}) "
+            f"and exit multiple ({_bn(dcf['tv_exit']) if dcf.get('tv_exit') else 'n/a'}), "
+            f"discounted to {_bn(dcf['pv_terminal'])} "
+            f"({dcf['terminal_share_of_value']:.0%} of total value)",
+            f"- Less net debt {_bn(ass['net_debt'])} → equity value "
+            f"{_bn(dcf.get('equity_value'))} → **{_m(dcf['per_share'])} per share**"]
+    return "\n".join(out)
+
+
+def _peer_comp_section(a: dict) -> str:
+    peers = a.get("peer_multiples") or []
+    if not peers:
+        return None
+    s = a["snapshot"]
+    out = ["### Comparable companies", "",
+           "| Company | Mkt cap | P/E (ttm) | P/E (fwd) | EV/EBITDA | P/B "
+           "| Net margin | ROE |",
+           "|---|---|---|---|---|---|---|---|"]
+
+    def fmt(x, pat="{:.1f}"):
+        # x == x filters NaN (NaN never equals itself)
+        return pat.format(x) if x is not None and x == x else "—"
+
+    out.append(f"| **{a['ticker']} (subject)** | {_bn(s['market_cap'])} "
+               f"| {fmt(s['trailing_pe'])} | {fmt(s['forward_pe'])} | — "
+               f"| {fmt(s['price_to_book'])} | — | — |")
+    for p in peers:
+        out.append(
+            f"| {p.get('name') or p['ticker']} | {_bn(p.get('market_cap'))} "
+            f"| {fmt(p.get('trailing_pe'))} | {fmt(p.get('forward_pe'))} "
+            f"| {fmt(p.get('ev_to_ebitda'))} | {fmt(p.get('price_to_book'))} "
+            f"| {fmt(p.get('profit_margin'), '{:.1%}')} "
+            f"| {fmt(p.get('return_on_equity'), '{:.1%}')} |")
+    out += ["", "Medians of this table drive the peer-comps lens and the "
+                "DCF exit multiple. Peer selection is disclosed in "
+                "universe.py and versioned."]
+    return "\n".join(out)
+
+
+def _esg_section(a: dict) -> str:
+    s = a["snapshot"]
+    fin = a["financials"]
+    div_years = len(fin.get("dividends_paid") or {})
+    lines = ["## ESG & Governance", "",
+             "Free primary ESG data is limited; this section reports only "
+             "what can be grounded in market and filing data, and flags "
+             "sector-specific exposures qualitatively."]
+    facts = []
+    if s.get("held_by_institutions"):
+        facts.append(f"- Institutional ownership: {s['held_by_institutions']:.0%} "
+                     "— professional holders with governance voting power.")
+    if s.get("float_shares") and s.get("shares_outstanding"):
+        facts.append(f"- Public float: {s['float_shares'] / s['shares_outstanding']:.0%} "
+                     "of shares outstanding.")
+    if div_years:
+        facts.append(f"- Dividend record: cash returned to shareholders in "
+                     f"each of the last {div_years} fiscal years on file — "
+                     "a capital-discipline signal.")
+    env_notes = {
+        "beverage_commodity": "- Environmental exposure: packaging (aluminum, "
+                              "plastic) and water sourcing are the material "
+                              "environmental themes for beverage producers.",
+        "consumer_hardware": "- Environmental/social exposure: hardware supply "
+                             "chains (sourcing, labor, e-waste) are the "
+                             "material themes for device makers.",
+        "bank": "- Governance exposure: regulatory capital and risk oversight "
+                "are the material governance themes for banks.",
+        "holdco_cash": "- Governance note: key-person and succession risk are "
+                       "material for founder-led holding companies.",
+        "enterprise_software": "- Social exposure: data privacy and AI "
+                               "governance are the material themes for cloud "
+                               "platforms.",
+    }
+    for t in a["profile"].get("traits", []):
+        if t in env_notes:
+            facts.append(env_notes[t])
+    return "\n".join(lines + [""] + facts) if facts else "\n".join(lines)
+
+
 def _valuation_section(a: dict) -> str:
     out = ["## Valuation", ""]
     for name, m in a["models"].items():
@@ -244,12 +357,64 @@ def _disclosures(a: dict) -> str:
     ])
 
 
-def generate_report(a: dict, dashboard) -> str:
-    return "\n\n".join([
-        _header(a), _investment_summary(a), _macro_section(a, dashboard),
-        _business_section(a), _financials_section(a), _valuation_section(a),
-        _risks_section(a), _disclosures(a),
-    ]) + "\n"
+def _make_charts(a: dict) -> dict:
+    """All report charts for one company; failures degrade to no chart."""
+    tk = a["ticker"]
+    out = {}
+    try:
+        hist = market.get_history(tk, period="5y")["Close"]
+        out["price"] = charts.price_chart(
+            tk, hist, a["target_price"], a["snapshot"]["street_target_mean"])
+    except Exception:
+        pass
+    try:
+        out["fundamentals"] = charts.fundamentals_chart(
+            tk, a["ratios"]["per_year"])
+        out["margins"] = charts.margins_chart(tk, a["ratios"]["per_year"])
+    except Exception:
+        pass
+    try:
+        out["sensitivity"] = charts.sensitivity_heatmap(tk, a.get("sensitivity"))
+    except Exception:
+        pass
+    try:
+        out["quarterly"] = charts.quarterly_chart(tk, a.get("quarterly") or {})
+    except Exception:
+        pass
+    return {k: v for k, v in out.items() if v}
+
+
+def _img(path: str, alt: str) -> str:
+    return f"![{alt}]({path})"
+
+
+def generate_report(a: dict, dashboard, chart_paths: dict = None) -> str:
+    c = chart_paths or {}
+    parts = [_header(a)]
+    if "price" in c:
+        parts.append(_img(c["price"], "Share price, five years"))
+    parts += [_investment_summary(a), _macro_section(a, dashboard),
+              _business_section(a), _financials_section(a)]
+    if "fundamentals" in c:
+        parts.append(_img(c["fundamentals"], "Revenue and cash generation"))
+    if "margins" in c:
+        parts.append(_img(c["margins"], "Profit margins"))
+    q = _quarterly_section(a)
+    if q:
+        parts.append(q)
+    if "quarterly" in c:
+        parts.append(_img(c["quarterly"], "Quarterly revenue"))
+    parts.append(_valuation_section(a))
+    walk = _dcf_walk_section(a)
+    if walk:
+        parts.append(walk)
+    peers = _peer_comp_section(a)
+    if peers:
+        parts.append(peers)
+    if "sensitivity" in c:
+        parts.append(_img(c["sensitivity"], "Sensitivity heatmap"))
+    parts += [_risks_section(a), _esg_section(a), _disclosures(a)]
+    return "\n\n".join(parts) + "\n"
 
 
 def _log_calls(results: dict):
@@ -287,7 +452,7 @@ def generate_all() -> list:
 
     for tk, a in results.items():
         path = REPORTS_DIR / f"{tk}_{today}.md"
-        path.write_text(generate_report(a, dashboard))
+        path.write_text(generate_report(a, dashboard, _make_charts(a)))
         written.append(path)
 
     ranked = sorted(results.values(), key=lambda a: a.get("relative_rank", 99))

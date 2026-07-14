@@ -119,6 +119,51 @@ def _annual_values_in(gaap: dict, tags: list) -> dict:
     return {year: rec["val"] for year, rec in sorted(best.items())}
 
 
+QUARTERLY_CONCEPTS = {
+    "revenue": CONCEPTS["revenue"],
+    "net_income": CONCEPTS["net_income"],
+    "eps_diluted": CONCEPTS["eps_diluted"],
+}
+
+
+def get_quarterly(cik: str, quarters: int = 8) -> dict:
+    """Recent quarterly history from 10-Q filings (plus the 10-K's Q4-
+    implied values are NOT derived here — quarters shown are as filed).
+
+    Returns {concept: {(year, end_date): value}} for the most recent
+    `quarters` quarters. Foreign filers that don't file 10-Qs return empty.
+    """
+    facts = fetch_companyfacts(cik)
+    gaap = facts.get("facts", {}).get("us-gaap", {})
+    out = {}
+    for name, tags in QUARTERLY_CONCEPTS.items():
+        best = {}
+        for tag in tags:
+            if tag not in gaap:
+                continue
+            series = {}
+            for unit_vals in gaap[tag].get("units", {}).values():
+                for item in unit_vals:
+                    if item.get("form") != "10-Q" or "end" not in item \
+                            or "start" not in item:
+                        continue
+                    days = (pd.Timestamp(item["end"])
+                            - pd.Timestamp(item["start"])).days
+                    if not 80 <= days <= 100:   # single quarters only
+                        continue
+                    key = item["end"]
+                    prev = series.get(key)
+                    if prev is None or item.get("filed", "") > prev["filed"]:
+                        series[key] = {"val": item["val"],
+                                       "filed": item.get("filed", "")}
+            if series and (not best or
+                           (max(series), len(series)) > (max(best), len(best))):
+                best = series
+        out[name] = {k: rec["val"] for k, rec in
+                     sorted(best.items())[-quarters:]}
+    return out
+
+
 def get_annual_financials(cik: str) -> dict:
     """Annual history for every concept in CONCEPTS.
 

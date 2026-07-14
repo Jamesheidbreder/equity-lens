@@ -58,11 +58,15 @@ def dcf_value(fcf_base: float, growth: float, coe: float, net_debt: float,
     pv, fcf = 0.0, fcf_base
     fades = [growth + (TERMINAL_GROWTH - growth) * t / (PROJECTION_YEARS - 1)
              for t in range(PROJECTION_YEARS)]
-    projected = []
+    projected, walk = [], []
     for t, g in enumerate(fades, start=1):
         fcf *= (1 + g)
         projected.append(fcf)
-        pv += fcf / (1 + coe) ** t
+        pv_t = fcf / (1 + coe) ** t
+        pv += pv_t
+        walk.append({"year": t, "growth": g, "fcf": fcf,
+                     "discount_factor": 1 / (1 + coe) ** t,
+                     "present_value": pv_t})
 
     tv_gordon = projected[-1] * (1 + TERMINAL_GROWTH) / (coe - TERMINAL_GROWTH)
     terminal_values = [tv_gordon]
@@ -85,6 +89,8 @@ def dcf_value(fcf_base: float, growth: float, coe: float, net_debt: float,
         "tv_gordon": tv_gordon,
         "tv_exit": projected[-1] * exit_multiple if exit_multiple else None,
         "terminal_share_of_value": pv_terminal / (pv + pv_terminal),
+        "walk": walk,   # year-by-year projection for report disclosure
+        "equity_value": equity_value,
     }
 
 
