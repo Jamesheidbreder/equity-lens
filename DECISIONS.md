@@ -49,3 +49,29 @@ basis if cloud/AI revenue growth holds ~20%+ while capex growth flattens
 for 2+ consecutive quarters — evidence the buildout is earning returns
 rather than becoming the permanent price of relevance. Checked at each
 quarterly earnings update.
+
+---
+
+## 2026-07-14 — GSL initiated on the maintenance-capex basis
+
+**Decision (James Heidbreder / Equity-Lens):** Global Ship Lease enters
+coverage with its DCF on the maintenance basis (operating cash flow less
+depreciation), declared per sector playbook #5 (Industrials & Transport,
+fleet buyers).
+
+**Reasoning:** GSL's reported capex is dominated by vessel acquisitions —
+growth investment, not upkeep. Standard-basis free cash flow charges
+whole ships against a single year's cash flow and is distorted by the
+lumpiness of purchase timing (the diagnostic shows capex near 2x
+depreciation on 5-year medians). Depreciation is the closest available
+proxy for maintaining the existing 71-vessel fleet.
+
+**Known bias, disclosed:** depreciation understates true replacement
+cost (vessels are replaced at inflated future prices), so the
+maintenance basis is generous; we mitigate by capping growth and noting
+that the peer-comps lens, not the DCF, is the primary anchor for
+cyclical lessors.
+
+**Tripwire:** revisit if fleet growth stops (capex converging to
+depreciation would justify the standard basis) or if charter coverage
+falls materially below ~85% for the forward year.

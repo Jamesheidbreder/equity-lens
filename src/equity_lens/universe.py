@@ -58,6 +58,20 @@ UNIVERSE = {
         "traits": ["bank"],
         "intl_revenue_share": None,   # domestic
     },
+    "GSL": {
+        "name": "Global Ship Lease, Inc.",
+        "sector": "Industrials",
+        "industry": "Marine Shipping (Containership Lessor)",
+        "method": "dcf_comps",
+        "peers": ["DAC", "CMRE", "ESEA", "NMM"],
+        "cik": "0001430725",
+        "traits": [],
+        "intl_revenue_share": None,  # charters denominated in USD
+        # Fleet buyer: capex is ship acquisition (growth), not upkeep.
+        # Maintenance basis per SECTOR_PLAYBOOKS.md #5 (Industrials &
+        # Transport); see DECISIONS.md 2026-07-14.
+        "capex_basis": "maintenance",
+    },
     "BRK-B": {
         "name": "Berkshire Hathaway Inc.",
         "sector": "Financials",
