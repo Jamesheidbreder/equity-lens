@@ -320,8 +320,11 @@ def _valuation_section(a: dict) -> str:
         "conglomerate": "The target averages the two lenses equally.",
     }.get(a["profile"]["method"], "")
     out = ["## Valuation", "",
-           "Each lens values the company independently; sharp disagreement "
-           f"between them is itself information. {weights_note}", ""]
+           "We value the company using several independent methods, each of "
+           "which can be wrong for different reasons. Close agreement across "
+           "methods increases our confidence in the blended target. A wide "
+           "spread indicates the value is genuinely uncertain, and we hold "
+           f"the target with lower conviction accordingly. {weights_note}", ""]
     for name, m in a["models"].items():
         title = MODEL_TITLES.get(name, name.replace("_", " ").title())
         if not m.get("per_share"):
