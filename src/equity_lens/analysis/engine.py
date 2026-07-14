@@ -84,24 +84,26 @@ def analyze(ticker: str) -> dict:
         fcf_base = statistics.median(recent_fcf) if recent_fcf else None
         fcf_basis = "ocf minus all capex (standard)"
 
-        # Capital-intensive check: when capex persistently runs far above
-        # depreciation, the company is buying growth assets (ships, fleets,
-        # plants) — charging ALL of it against cash flow mis-values the
-        # business. Standard fix: charge maintenance capex only, proxied by
-        # depreciation. Threshold of 2x keeps normal companies (capex around
-        # 1-1.8x depreciation) on the standard definition.
+        # Capex basis is DECLARED by the company profile / sector playbook,
+        # never auto-switched: capital-intensive sectors (shipping, energy,
+        # utilities) charge maintenance capex only (depreciation proxy),
+        # because charging fleet/plant growth investment against cash flow
+        # mis-values the business. The capex/depreciation ratio is always
+        # computed as a DIAGNOSTIC: if it looks anomalous under the standard
+        # basis, the report flags it for analyst review — it does not act.
         capex_hist = list(fin["capex"].values())[-5:]
         dep_hist = list(fin["depreciation"].values())[-5:]
         ocf_hist = list(fin["operating_cash_flow"].values())[-5:]
-        if capex_hist and dep_hist and ocf_hist:
-            capex_med = statistics.median(capex_hist)
+        capex_to_dep = None
+        if capex_hist and dep_hist:
             dep_med = statistics.median(dep_hist)
-            if dep_med > 0 and capex_med > 2.0 * dep_med:
-                fcf_base = statistics.median(
-                    [ocf - dep_med for ocf in ocf_hist])
-                fcf_basis = ("maintenance: ocf minus depreciation "
-                             f"(capex runs {capex_med / dep_med:.1f}x "
-                             "depreciation - growth investment excluded)")
+            if dep_med > 0:
+                capex_to_dep = statistics.median(capex_hist) / dep_med
+        if profile.get("capex_basis") == "maintenance" and dep_hist and ocf_hist:
+            dep_med = statistics.median(dep_hist)
+            fcf_base = statistics.median([ocf - dep_med for ocf in ocf_hist])
+            fcf_basis = ("maintenance: ocf minus depreciation (declared by "
+                         "sector playbook; growth capex excluded)")
 
         # Forward-looking growth (consensus) preferred; history as fallback;
         # macro linkages lean on the result within their caps.
@@ -137,6 +139,14 @@ def analyze(ticker: str) -> dict:
                                             shares, exit_multiple=exit_mult)
         if models["dcf"].get("assumptions") is not None:
             models["dcf"]["assumptions"]["fcf_basis"] = fcf_basis
+            if capex_to_dep is not None:
+                models["dcf"]["assumptions"]["capex_to_depreciation"] = \
+                    round(capex_to_dep, 2)
+                if capex_to_dep > 2.0 and "standard" in fcf_basis:
+                    models["dcf"]["assumptions"]["diagnostic_flag"] = (
+                        "capex runs well above depreciation on the standard "
+                        "basis — review whether this sector needs the "
+                        "maintenance-capex playbook")
 
         # Current trailing EPS; last 10-K EPS can be ~3 quarters stale.
         eps_10k = fin["eps_diluted"]
