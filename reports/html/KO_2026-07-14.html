@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Coca-Cola Company (KO) — Equity-Lens Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1d1d1f; --muted: #6e6e73; --hair: #e5e5e2; --accent: #2a78d6;
+  --paper: #ffffff; --wash: #f5f5f7;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--wash); color: var(--ink);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+.sheet {
+  max-width: 860px; margin: 24px auto; background: var(--paper);
+  padding: 48px 56px 40px; border: 1px solid var(--hair);
+  border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,.05),
+                                  0 12px 32px rgba(0,0,0,.05);
+}
+.masthead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 3px solid var(--ink); padding-bottom: 10px;
+  margin-bottom: 22px;
+}
+.masthead .brand {
+  font-family: 'Source Serif 4', Georgia, serif; font-size: 21px;
+  font-weight: 700; letter-spacing: .01em;
+}
+.masthead .kind { color: var(--muted); font-size: 12.5px;
+  text-transform: uppercase; letter-spacing: .14em; }
+.titleblock h1 {
+  font-family: 'Source Serif 4', Georgia, serif; font-size: 30px;
+  line-height: 1.15; margin: 0 0 4px;
+}
+.titleblock .sub { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; }
+.banner {
+  display: flex; gap: 0; border: 1px solid var(--hair); border-radius: 10px;
+  overflow: hidden; margin: 0 0 26px;
+}
+.banner .cell {
+  flex: 1; padding: 12px 16px; border-right: 1px solid var(--hair);
+}
+.banner .cell:last-child { border-right: 0; }
+.banner .label { font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--muted); margin-bottom: 3px; }
+.banner .value { font-size: 19px; font-weight: 650; }
+.banner .rating-cell { color: #fff; }
+.banner .rating-cell .label { color: rgba(255,255,255,.75); }
+h2 {
+  font-family: 'Source Serif 4', Georgia, serif; font-size: 20px;
+  margin: 34px 0 10px; padding-top: 18px; border-top: 1px solid var(--hair);
+}
+h3 { font-size: 15.5px; margin: 22px 0 8px; }
+p, li { max-width: 72ch; }
+a { color: var(--accent); text-decoration: none; }
+img { max-width: 100%; border: 1px solid var(--hair); border-radius: 8px;
+      margin: 8px 0 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px;
+        margin: 12px 0 6px; }
+th { text-align: left; font-size: 11px; text-transform: uppercase;
+     letter-spacing: .08em; color: var(--muted); font-weight: 600;
+     padding: 7px 10px; border-bottom: 2px solid var(--ink); }
+td { padding: 7px 10px; border-bottom: 1px solid var(--hair);
+     font-variant-numeric: tabular-nums; }
+tr:hover td { background: #fafafa; }
+.footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid
+          var(--hair); color: var(--muted); font-size: 12px; }
+@media print {
+  body { background: #fff; }
+  .sheet { box-shadow: none; border: 0; margin: 0; padding: 24px 8px;
+           max-width: 100%; }
+  .banner { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  img, table { break-inside: avoid; }
+}
+</style></head>
+<body><div class="sheet">
+<div class="masthead"><span class="brand">EQUITY-LENS</span>
+<span class="kind">Equity Research</span></div>
+<div class="titleblock">
+<h1>The Coca-Cola Company <span style="color:var(--muted)">(KO)</span></h1>
+<div class="sub">Consumer Staples — Beverages &middot; 2026-07-14 &middot;
+computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
+<div class="banner"><div class="cell rating-cell" style="background:#b3261e"><div class="label">Rating</div><div class="value">SELL</div></div><div class="cell " style=""><div class="label">Price</div><div class="value">$83.36</div></div><div class="cell " style=""><div class="label">Our target</div><div class="value">$69.89</div></div><div class="cell " style=""><div class="label">Implied</div><div class="value">-16.2%</div></div><div class="cell " style=""><div class="label">Street</div><div class="value">$86.85</div></div><div class="cell " style=""><div class="label">Within coverage</div><div class="value">Neutral</div></div></div>
+<p><img alt="Share price, five years" src="../assets/KO_price.png" /></p>
+<h2>Investment Summary</h2>
+<p>We rate KO <strong>SELL</strong> with a target of <strong>$69.89</strong> vs. a current price of $83.36 (-16.2% implied). Within our coverage universe the name ranks <strong>Neutral</strong>.</p>
+<p>The target blends independent valuation lenses: dcf $66.87, comps $66.74, own multiple $77.07.</p>
+<p>Our target sits -19.5% vs. street consensus of $86.85. The divergence is our documented view, not an input: consensus never enters the models.</p>
+<h2>Macro &amp; Industry Overview</h2>
+<p><strong>Economic backdrop (FRED, latest readings):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Indicator</th>
+<th>Latest</th>
+<th>As of</th>
+<th>1y ago</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Effective Federal Funds Rate (%)</td>
+<td>3.63</td>
+<td>2026-06-01</td>
+<td>4.33</td>
+<td>-0.70</td>
+</tr>
+<tr>
+<td>10-Year Treasury Yield (%)</td>
+<td>4.56</td>
+<td>2026-07-10</td>
+<td>4.35</td>
+<td>+0.21</td>
+</tr>
+<tr>
+<td>10Y-2Y Treasury Spread (%)</td>
+<td>0.36</td>
+<td>2026-07-13</td>
+<td>0.53</td>
+<td>-0.17</td>
+</tr>
+<tr>
+<td>Consumer Price Index (level)</td>
+<td>332.57</td>
+<td>2026-06-01</td>
+<td>321.44</td>
+<td>+11.13</td>
+</tr>
+<tr>
+<td>Unemployment Rate (%)</td>
+<td>4.20</td>
+<td>2026-06-01</td>
+<td>4.10</td>
+<td>+0.10</td>
+</tr>
+<tr>
+<td>U. Michigan Consumer Sentiment</td>
+<td>44.80</td>
+<td>2026-05-01</td>
+<td>52.20</td>
+<td>-7.40</td>
+</tr>
+<tr>
+<td>Personal Consumption Expenditures ($B)</td>
+<td>22,059.80</td>
+<td>2026-05-01</td>
+<td>20,755.00</td>
+<td>+1,304.80</td>
+</tr>
+</tbody>
+</table>
+<p>Cost of equity: <strong>6.11%</strong> (10Y Treasury 4.56% risk-free base, CAPM).</p>
+<p><strong>Macro linkages applied to this valuation</strong> (rule-based, capped; see MACRO_CATALOG.md):</p>
+<ul>
+<li><strong>credit_spread_erp</strong> [BAA10Y] — Baa spread 1.58%, -0.39pp vs 10y median. Adjustment: -0.19% to cost_of_equity. Credit spreads are a market-priced risk gauge; wider-than-normal spreads raise the equity risk premium.</li>
+<li><strong>dollar_translation</strong> [DTWEXBGS] — Trade-weighted dollar +0.6% y/y. Adjustment: -0.11% to growth. ~64% of revenue is foreign; a stronger dollar shrinks it in translation, a weaker one inflates it.</li>
+<li><strong>commodity_margin</strong> [PALUMUSDM/PSUGAISAUSDM] — Aluminum &amp; sugar avg +10.9% y/y. Adjustment: -1.50% to growth. Cans and sweetener are real input costs for a beverage maker; cost inflation pressures margins unless fully passed through in price.</li>
+</ul>
+<h2>Business Description</h2>
+<p>The Coca-Cola Company, a beverage company, manufactures and sells various nonalcoholic beverages in the United States and internationally. The company provides Trademark Coca-Cola, sparkling soft drinks and flavors; water, sports, coffee, and tea; juice, value-added dairy, and plant-based beverages; and emerging beverages. It also offers beverage concentrates and syrups, as well as fountain syrups to fountain retailers comprising restaurants and convenience stores. The company sells its products under the Coca-Cola, Diet Coke/Coca-Cola Light, Coca-Cola Zero Sugar, caffeine free Diet Coke, Cherry Coke, Fanta, Sprite, Simply, Fanta Orange, Fanta Zero Orange, Fanta Zero Sugar, Fanta Apple, Sprite Zero Sugar, Simply Orange, Simply Apple, Simply Grapefruit, Fresca, Schweppes, Thums Up, Aquarius, Ayataka, BODYARMOR, Ciel, Costa, Crystal, Dasani, Fuze Tea, Georgia, glacéau smartwater, glacéau vitaminwater, Gold Peak, I LOHAS, Powerade, Topo Chico, Core Power, Del Valle, fairlife, innocent, Maaza, Minute Maid, Minute Maid Pulpy, Santa Clara, and dogadan brands. It operates through a network of independent bottling partners, distributors, wholesalers, and retailers, as well as through bottling and distribution operators. The Coca-Cola Company was founded in 1886 and is headquartered in Atlanta, Georgia.</p>
+<h2>Financial Analysis</h2>
+<p>Annual figures from SEC EDGAR as-filed XBRL data (10-K).</p>
+<table>
+<thead>
+<tr>
+<th>Fiscal year</th>
+<th>Revenue</th>
+<th>Net margin</th>
+<th>Op margin</th>
+<th>ROE</th>
+<th>Free cash flow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2020</td>
+<td>$33.0B</td>
+<td>+23.5%</td>
+<td>+27.3%</td>
+<td>+36.4%</td>
+<td>$8.7B</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>$38.7B</td>
+<td>+25.3%</td>
+<td>+26.7%</td>
+<td>+39.3%</td>
+<td>$11.3B</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>$43.0B</td>
+<td>+22.2%</td>
+<td>+25.4%</td>
+<td>+36.9%</td>
+<td>$9.5B</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>$45.8B</td>
+<td>+23.4%</td>
+<td>+24.7%</td>
+<td>+39.0%</td>
+<td>$9.7B</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>$47.1B</td>
+<td>+22.6%</td>
+<td>+21.2%</td>
+<td>+40.3%</td>
+<td>$4.7B</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>$47.9B</td>
+<td>+27.3%</td>
+<td>+28.7%</td>
+<td>+38.2%</td>
+<td>$5.3B</td>
+</tr>
+</tbody>
+</table>
+<p>Revenue CAGR: +3.7% (3y), +7.7% (5y). Net income CAGR (5y): +11.1%. FCF CAGR (5y): -9.4%.</p>
+<p><img alt="Revenue and cash generation" src="../assets/KO_fundamentals.png" /></p>
+<p><img alt="Profit margins" src="../assets/KO_margins.png" /></p>
+<h3>Recent quarters (10-Q, as filed)</h3>
+<table>
+<thead>
+<tr>
+<th>Quarter ended</th>
+<th>Revenue</th>
+<th>Net income</th>
+<th>Diluted EPS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023-09-29</td>
+<td>$12.0B</td>
+<td>$3.1B</td>
+<td>$0.71</td>
+</tr>
+<tr>
+<td>2024-03-29</td>
+<td>$11.3B</td>
+<td>$3.2B</td>
+<td>$0.74</td>
+</tr>
+<tr>
+<td>2024-06-28</td>
+<td>$12.4B</td>
+<td>$2.4B</td>
+<td>$0.56</td>
+</tr>
+<tr>
+<td>2024-09-27</td>
+<td>$11.9B</td>
+<td>$2.8B</td>
+<td>$0.66</td>
+</tr>
+<tr>
+<td>2025-03-28</td>
+<td>$11.1B</td>
+<td>$3.3B</td>
+<td>$0.77</td>
+</tr>
+<tr>
+<td>2025-06-27</td>
+<td>$12.5B</td>
+<td>$3.8B</td>
+<td>$0.88</td>
+</tr>
+<tr>
+<td>2025-09-26</td>
+<td>$12.5B</td>
+<td>$3.7B</td>
+<td>$0.86</td>
+</tr>
+<tr>
+<td>2026-04-03</td>
+<td>$12.5B</td>
+<td>$3.9B</td>
+<td>$0.91</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Quarterly revenue" src="../assets/KO_quarterly.png" /></p>
+<h2>Valuation</h2>
+<p><strong>Dcf: $66.87</strong></p>
+<ul>
+<li>fcf base: $9.5B</li>
+<li>initial growth: 15.00%</li>
+<li>terminal growth: 2.50%</li>
+<li>cost of equity: 6.11%</li>
+<li>exit multiple: 19.81</li>
+<li>projection years: 5.00</li>
+<li>net debt: $25.3B</li>
+<li>fcf basis: ocf minus all capex (standard)</li>
+<li>capex to depreciation: 1.64</li>
+</ul>
+<p><strong>Comps: $66.74</strong></p>
+<ul>
+<li>trailing: eps 3.21; peer median pe 22.64</li>
+<li>forward: eps 3.48; peer median pe 17.47</li>
+<li>peers used: PEP, KDP, MNST, MDLZ, PG</li>
+</ul>
+<p><strong>Own Multiple: $77.07</strong></p>
+<ul>
+<li>own avg pe 5y: 22.14</li>
+<li>eps used: 3.48</li>
+<li>eps basis: forward</li>
+</ul>
+<p><strong>Sensitivity — target price across FCF growth (rows) and cost of equity (columns):</strong></p>
+<table>
+<thead>
+<tr>
+<th>FCF growth</th>
+<th>5.1%</th>
+<th>5.6%</th>
+<th>6.1%</th>
+<th>6.6%</th>
+<th>7.1%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>13.0%</td>
+<td>75</td>
+<td>72</td>
+<td>69</td>
+<td>66</td>
+<td>65</td>
+</tr>
+<tr>
+<td>14.0%</td>
+<td>76</td>
+<td>72</td>
+<td>69</td>
+<td>67</td>
+<td>65</td>
+</tr>
+<tr>
+<td>15.0%</td>
+<td>77</td>
+<td>73</td>
+<td>70</td>
+<td>68</td>
+<td>66</td>
+</tr>
+<tr>
+<td>16.0%</td>
+<td>78</td>
+<td>74</td>
+<td>71</td>
+<td>68</td>
+<td>66</td>
+</tr>
+<tr>
+<td>17.0%</td>
+<td>78</td>
+<td>74</td>
+<td>71</td>
+<td>69</td>
+<td>67</td>
+</tr>
+</tbody>
+</table>
+<h3>DCF walk — the projection, year by year</h3>
+<p>Base free cash flow $9.5B (ocf minus all capex (standard)); growth fades from 15.0% toward 2.5%; discounted at 6.11%.</p>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Growth</th>
+<th>Free cash flow</th>
+<th>Discount factor</th>
+<th>Present value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>+15.0%</td>
+<td>$11.0B</td>
+<td>0.942</td>
+<td>$10.3B</td>
+</tr>
+<tr>
+<td>2</td>
+<td>+11.9%</td>
+<td>$12.3B</td>
+<td>0.888</td>
+<td>$10.9B</td>
+</tr>
+<tr>
+<td>3</td>
+<td>+8.8%</td>
+<td>$13.3B</td>
+<td>0.837</td>
+<td>$11.2B</td>
+</tr>
+<tr>
+<td>4</td>
+<td>+5.6%</td>
+<td>$14.1B</td>
+<td>0.789</td>
+<td>$11.1B</td>
+</tr>
+<tr>
+<td>5</td>
+<td>+2.5%</td>
+<td>$14.4B</td>
+<td>0.743</td>
+<td>$10.7B</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Sum of explicit-period value: $54.2B</li>
+<li>Terminal value: average of Gordon growth ($410.1B) and exit multiple ($286.0B), discounted to $258.7B (83% of total value)</li>
+<li>Less net debt $25.3B → equity value $287.7B → <strong>$66.87 per share</strong></li>
+</ul>
+<h3>Comparable companies</h3>
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>Mkt cap</th>
+<th>P/E (ttm)</th>
+<th>P/E (fwd)</th>
+<th>EV/EBITDA</th>
+<th>P/B</th>
+<th>Net margin</th>
+<th>ROE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KO (subject)</strong></td>
+<td>$358.6B</td>
+<td>26.0</td>
+<td>24.0</td>
+<td>—</td>
+<td>10.7</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Pepsico, Inc.</td>
+<td>$185.8B</td>
+<td>17.8</td>
+<td>15.1</td>
+<td>12.3</td>
+<td>8.7</td>
+<td>10.8%</td>
+<td>51.5%</td>
+</tr>
+<tr>
+<td>Keurig Dr Pepper Inc.</td>
+<td>$41.6B</td>
+<td>22.6</td>
+<td>12.1</td>
+<td>17.8</td>
+<td>1.6</td>
+<td>10.8%</td>
+<td>6.3%</td>
+</tr>
+<tr>
+<td>Monster Beverage Corporation</td>
+<td>$95.4B</td>
+<td>47.1</td>
+<td>37.7</td>
+<td>32.6</td>
+<td>10.9</td>
+<td>23.1%</td>
+<td>26.7%</td>
+</tr>
+<tr>
+<td>Mondelez International, Inc.</td>
+<td>$75.7B</td>
+<td>29.2</td>
+<td>17.5</td>
+<td>18.6</td>
+<td>2.9</td>
+<td>6.6%</td>
+<td>10.2%</td>
+</tr>
+<tr>
+<td>Procter &amp; Gamble Company (The)</td>
+<td>$340.7B</td>
+<td>21.2</td>
+<td>20.7</td>
+<td>14.8</td>
+<td>6.3</td>
+<td>19.2%</td>
+<td>31.1%</td>
+</tr>
+</tbody>
+</table>
+<p>Medians of this table drive the peer-comps lens and the DCF exit multiple. Peer selection is disclosed in universe.py and versioned.</p>
+<p><img alt="Sensitivity heatmap" src="../assets/KO_sensitivity.png" /></p>
+<h2>Investment Risks</h2>
+<ul>
+<li>Input-cost inflation (aluminum, sweetener) pressures gross margin if not passed through in price.</li>
+<li>Currency: ~64% of revenue is earned abroad; a strengthening dollar is a mechanical translation headwind.</li>
+<li>Valuation model risk: 83% of DCF value sits in the terminal period — the estimate is sensitive to terminal assumptions, as the sensitivity grid shows.</li>
+<li>Against-consensus risk: our rating is below street consensus; if the narrative premium we decline to pay for is validated by delivered earnings, the stock can continue to outperform our target.</li>
+</ul>
+<h2>ESG &amp; Governance</h2>
+<p>Free primary ESG data is limited; this section reports only what can be grounded in market and filing data, and flags sector-specific exposures qualitatively.</p>
+<ul>
+<li>Institutional ownership: 68% — professional holders with governance voting power.</li>
+<li>Public float: 90% of shares outstanding.</li>
+<li>Dividend record: cash returned to shareholders in each of the last 19 fiscal years on file — a capital-discipline signal.</li>
+<li>Environmental exposure: packaging (aluminum, plastic) and water sourcing are the material environmental themes for beverage producers.</li>
+</ul>
+<h2>Disclosures</h2>
+<ul>
+<li>Generated by Equity-Lens on 2026-07-14 from primary sources: SEC EDGAR (as-filed XBRL financials), Yahoo Finance (market data), FRED (macro series).</li>
+<li>All model values are computed deterministically; methodology is versioned in this repository. Analyst overlays are dated and disclosed in the Investment Summary.</li>
+<li>Street consensus figures are shown for benchmarking only and are never model inputs.</li>
+<li>Educational research project. Not investment advice.</li>
+</ul>
+<div class="footer">Equity-Lens — independent equity research, computed
+rather than opined. Educational project; not investment advice.
+Methodology and source code:
+<a href="https://github.com/Jamesheidbreder/equity-lens">github.com/Jamesheidbreder/equity-lens</a></div>
+</div></body></html>

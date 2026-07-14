@@ -450,10 +450,13 @@ def generate_all() -> list:
     REPORTS_DIR.mkdir(exist_ok=True)
     written = []
 
+    from equity_lens.reports import html_report
     for tk, a in results.items():
         path = REPORTS_DIR / f"{tk}_{today}.md"
-        path.write_text(generate_report(a, dashboard, _make_charts(a)))
+        report_md = generate_report(a, dashboard, _make_charts(a))
+        path.write_text(report_md)
         written.append(path)
+        written.append(html_report.write_html(a, report_md, today))
 
     ranked = sorted(results.values(), key=lambda a: a.get("relative_rank", 99))
     lines = [
