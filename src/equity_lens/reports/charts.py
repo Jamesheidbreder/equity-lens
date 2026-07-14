@@ -146,6 +146,40 @@ def sensitivity_heatmap(ticker: str, sens: dict) -> str:
     return _save(fig, f"{ticker}_sensitivity.png")
 
 
+def macro_panel(fedfunds: pd.Series, dgs10: pd.Series, slope: pd.Series,
+                cpi_yoy: pd.Series, unrate: pd.Series) -> str:
+    """2x2 economic backdrop panel, shared by all reports in a run."""
+    fig, axes = plt.subplots(2, 2, figsize=(7, 4.4))
+
+    ax = axes[0][0]
+    ax.plot(fedfunds.index, fedfunds.values, color=C_BLUE, linewidth=1.5,
+            label="Fed funds")
+    ax.plot(dgs10.index, dgs10.values, color=C_AQUA, linewidth=1.5,
+            label="10-year Treasury")
+    ax.set_title("Policy and long rates (%)")
+    ax.legend(frameon=False, fontsize=7.5)
+    _style(ax)
+
+    ax = axes[0][1]
+    ax.plot(slope.index, slope.values, color=C_BLUE, linewidth=1.5)
+    ax.axhline(0, color=INK_MUTED, linewidth=0.9, linestyle="--")
+    ax.set_title("Yield-curve slope, 10y minus 2y (%)")
+    _style(ax)
+
+    ax = axes[1][0]
+    ax.plot(cpi_yoy.index, cpi_yoy.values, color=C_BLUE, linewidth=1.5)
+    ax.set_title("Inflation, CPI % change y/y")
+    _style(ax)
+
+    ax = axes[1][1]
+    ax.plot(unrate.index, unrate.values, color=C_BLUE, linewidth=1.5)
+    ax.set_title("Unemployment rate (%)")
+    _style(ax)
+
+    fig.tight_layout(h_pad=1.6, w_pad=2)
+    return _save(fig, "macro_panel.png")
+
+
 def quarterly_chart(ticker: str, quarterly: dict) -> str:
     rev = quarterly.get("revenue", {})
     if len(rev) < 4:

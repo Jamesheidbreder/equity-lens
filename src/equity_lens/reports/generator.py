@@ -404,8 +404,10 @@ def generate_report(a: dict, dashboard, chart_paths: dict = None) -> str:
     parts = [_header(a)]
     if "price" in c:
         parts.append(_img(c["price"], "Share price, five years"))
-    parts += [_investment_summary(a), _macro_section(a, dashboard),
-              _business_section(a), _financials_section(a)]
+    parts += [_investment_summary(a), _macro_section(a, dashboard)]
+    if "macro" in c:
+        parts.append(_img(c["macro"], "Economic backdrop"))
+    parts += [_business_section(a), _financials_section(a)]
     if "fundamentals" in c:
         parts.append(_img(c["fundamentals"], "Revenue and cash generation"))
     if "margins" in c:
@@ -462,9 +464,23 @@ def generate_all() -> list:
     written = []
 
     from equity_lens.reports import html_report
+
+    # Shared economic-backdrop panel, generated once per run.
+    try:
+        cpi = macro.get_series("CPIAUCSL")
+        macro_chart = charts.macro_panel(
+            macro.get_series("FEDFUNDS"), macro.get_series("DGS10"),
+            macro.get_series("T10Y2Y"), ((cpi / cpi.shift(12) - 1) * 100).dropna(),
+            macro.get_series("UNRATE"))
+    except Exception:
+        macro_chart = None
+
     for tk, a in results.items():
         path = REPORTS_DIR / f"{tk}_{today}.md"
-        report_md = generate_report(a, dashboard, _make_charts(a))
+        chart_paths = _make_charts(a)
+        if macro_chart:
+            chart_paths["macro"] = macro_chart
+        report_md = generate_report(a, dashboard, chart_paths)
         path.write_text(report_md)
         written.append(path)
         written.append(html_report.write_html(a, report_md, today))

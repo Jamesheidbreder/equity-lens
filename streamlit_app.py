@@ -655,9 +655,20 @@ with tab_reports:
     if not files:
         st.info("No reports generated yet.")
     else:
+        import re as _re
         pick = st.selectbox("Choose a report", files,
                             format_func=lambda p: p.stem.replace("_", " — "))
-        st.markdown(pick.read_text())
+        # Split on markdown images so charts render via st.image (relative
+        # paths inside st.markdown don't resolve to files on disk).
+        segments = _re.split(r"!\[[^\]]*\]\(([^)]+)\)", pick.read_text())
+        for i, seg in enumerate(segments):
+            if i % 2 == 0:
+                if seg.strip():
+                    st.markdown(seg)
+            else:
+                img = REPORTS_DIR / seg
+                if img.exists():
+                    st.image(str(img))
 
 
 # ---------- How It Works tab ----------
