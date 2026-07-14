@@ -82,7 +82,8 @@ def analyze(ticker: str) -> dict:
         # payout or windfall year can't set the base), unlike a mean.
         recent_fcf = list(fcf_years.values())[-5:]
         fcf_base = statistics.median(recent_fcf) if recent_fcf else None
-        fcf_basis = "ocf minus all capex (standard)"
+        fcf_basis = ("operating cash flow less all capital expenditure "
+                     "(standard basis)")
 
         # Capex basis is DECLARED by the company profile / sector playbook,
         # never auto-switched: capital-intensive sectors (shipping, energy,
@@ -102,8 +103,9 @@ def analyze(ticker: str) -> dict:
         if profile.get("capex_basis") == "maintenance" and dep_hist and ocf_hist:
             dep_med = statistics.median(dep_hist)
             fcf_base = statistics.median([ocf - dep_med for ocf in ocf_hist])
-            fcf_basis = ("maintenance: ocf minus depreciation (declared by "
-                         "sector playbook; growth capex excluded)")
+            fcf_basis = ("operating cash flow less depreciation (maintenance "
+                         "basis, declared by the sector playbook; growth "
+                         "capital expenditure excluded)")
 
         # Forward-looking growth (consensus) preferred; history as fallback;
         # macro linkages lean on the result within their caps.

@@ -84,12 +84,12 @@ tr:hover td { background: #fafafa; }
 <h1>Apple Inc. <span style="color:var(--muted)">(AAPL)</span></h1>
 <div class="sub">Technology — Consumer Electronics &middot; 2026-07-14 &middot;
 computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
-<div class="banner"><div class="cell rating-cell" style="background:#b3261e"><div class="label">Rating</div><div class="value">SELL</div></div><div class="cell " style=""><div class="label">Price</div><div class="value">$314.75</div></div><div class="cell " style=""><div class="label">Our target</div><div class="value">$228.57</div></div><div class="cell " style=""><div class="label">Implied</div><div class="value">-27.4%</div></div><div class="cell " style=""><div class="label">Street</div><div class="value">$316.76</div></div><div class="cell " style=""><div class="label">Within coverage</div><div class="value">Least Preferred</div></div></div>
+<div class="banner"><div class="cell rating-cell" style="background:#b3261e"><div class="label">Rating</div><div class="value">SELL</div></div><div class="cell " style=""><div class="label">Price</div><div class="value">$314.96</div></div><div class="cell " style=""><div class="label">Our target</div><div class="value">$228.58</div></div><div class="cell " style=""><div class="label">Implied</div><div class="value">-27.4%</div></div><div class="cell " style=""><div class="label">Street</div><div class="value">$316.76</div></div><div class="cell " style=""><div class="label">Within coverage</div><div class="value">Least Preferred</div></div></div>
 <p><img alt="Share price, five years" src="../assets/AAPL_price.png" /></p>
 <h2>Investment Summary</h2>
-<p>We rate AAPL <strong>SELL</strong> with a target of <strong>$228.57</strong> vs. a current price of $314.75 (-27.4% implied). Within our coverage universe the name ranks <strong>Least Preferred</strong>.</p>
-<p>The target blends independent valuation lenses: dcf $153.34, comps $191.32, own multiple $266.74.</p>
-<p><strong>Analyst overlay (2026-07-03, +15.0%):</strong> Partial credit for AI services optionality the base engine refuses to price: street consensus embeds an AI-gateway narrative (est. up to $15B/yr services revenue long-term, per Wedbush). We credit roughly half the gap on the services portion only - hardware replacement-cycle acceleration remains unproven. DRAFT: analyst to confirm or revise. <em>(Review by 2026-10-30.)</em></p>
+<p>We rate AAPL <strong>SELL</strong> with a price target of <strong>$228.58</strong>, against a current price of $314.96 (-27.4% implied return). Within our coverage universe, the name ranks <strong>Least Preferred</strong>.</p>
+<p>The target blends independent valuation lenses: discounted cash flow values the shares at $153.35; peer comparables values the shares at $191.33; own historical multiple values the shares at $266.74.</p>
+<p><strong>Analyst overlay (2026-07-03, +15.0%):</strong> Partial credit for AI services optionality that the base engine, by design, refuses to price. Street consensus embeds a full AI-gateway narrative (estimated at up to $15B per year of services revenue long-term, per Wedbush); pricing that narrative's cash flows directly supports roughly $15-20 per share, probability-weighted. We credit approximately that arithmetic value and no more - the services opportunity is real but unproven, and hardware replacement-cycle acceleration remains speculative. Confirmed by analyst review, 2026-07-08. <em>(Review by 2026-10-30.)</em></p>
 <p>Our target sits -27.8% vs. street consensus of $316.76. The divergence is our documented view, not an input: consensus never enters the models.</p>
 <h2>Macro &amp; Industry Overview</h2>
 <p><strong>Economic backdrop (FRED, latest readings):</strong></p>
@@ -294,7 +294,7 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 </table>
 <p><img alt="Quarterly revenue" src="../assets/AAPL_quarterly.png" /></p>
 <h2>Valuation</h2>
-<p><strong>Dcf: $153.34</strong></p>
+<p><strong>Discounted cash flow: $153.35</strong></p>
 <ul>
 <li>fcf base: $99.6B</li>
 <li>initial growth: 15.00%</li>
@@ -303,16 +303,16 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 <li>exit multiple: 23.88</li>
 <li>projection years: 5.00</li>
 <li>net debt: $42.4B</li>
-<li>fcf basis: ocf minus all capex (standard)</li>
+<li>fcf basis: operating cash flow less all capital expenditure (standard basis)</li>
 <li>capex to depreciation: 96.00%</li>
 </ul>
-<p><strong>Comps: $191.32</strong></p>
+<p><strong>Peer comparables: $191.33</strong></p>
 <ul>
 <li>trailing: eps 8.25; peer median pe 23.09</li>
 <li>forward: eps 9.61; peer median pe 20.00</li>
 <li>peers used: MSFT, GOOGL, DELL, HPQ, SONY</li>
 </ul>
-<p><strong>Own Multiple: $266.74</strong></p>
+<p><strong>Own historical multiple: $266.74</strong></p>
 <ul>
 <li>own avg pe 5y: 27.76</li>
 <li>eps used: 9.61</li>
@@ -333,7 +333,7 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 <tbody>
 <tr>
 <td>13.0%</td>
-<td>201</td>
+<td>202</td>
 <td>199</td>
 <td>196</td>
 <td>194</td>
@@ -374,7 +374,7 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 </tbody>
 </table>
 <h3>DCF walk — the projection, year by year</h3>
-<p>Base free cash flow $99.6B (ocf minus all capex (standard)); growth fades from 15.0% toward 2.5%; discounted at 9.85%.</p>
+<p>The base free cash flow of $99.6B is measured as operating cash flow less all capital expenditure (standard basis). Growth fades from 15.0% toward 2.5%, and each year is discounted at 9.85%.</p>
 <table>
 <thead>
 <tr>
@@ -425,8 +425,8 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 </table>
 <ul>
 <li>Sum of explicit-period value: $510.9B</li>
-<li>Terminal value: average of Gordon growth ($2,103.7B) and exit multiple ($3,602.6B), discounted to $1,783.7B (78% of total value)</li>
-<li>Less net debt $42.4B → equity value $2,252.2B → <strong>$153.34 per share</strong></li>
+<li>Terminal value: average of Gordon growth ($2,103.7B) and exit multiple ($3,602.7B), discounted to $1,783.7B (78% of total value)</li>
+<li>Less net debt $42.4B → equity value $2,252.2B → <strong>$153.35 per share</strong></li>
 </ul>
 <h3>Comparable companies</h3>
 <table>
@@ -445,7 +445,7 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 <tbody>
 <tr>
 <td><strong>AAPL (subject)</strong></td>
-<td>$4,622.8B</td>
+<td>$4,625.9B</td>
 <td>38.2</td>
 <td>32.8</td>
 <td>—</td>
@@ -455,7 +455,7 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 </tr>
 <tr>
 <td>Microsoft Corporation</td>
-<td>$2,876.4B</td>
+<td>$2,876.5B</td>
 <td>23.1</td>
 <td>20.0</td>
 <td>16.0</td>
@@ -465,9 +465,9 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 </tr>
 <tr>
 <td>Alphabet Inc.</td>
-<td>$4,376.4B</td>
-<td>27.4</td>
-<td>24.6</td>
+<td>$4,369.4B</td>
+<td>27.3</td>
+<td>24.5</td>
 <td>26.3</td>
 <td>9.1</td>
 <td>37.9%</td>
@@ -475,11 +475,11 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 </tr>
 <tr>
 <td>Dell Technologies Inc.</td>
-<td>$296.6B</td>
+<td>$296.7B</td>
 <td>36.6</td>
 <td>21.4</td>
 <td>21.1</td>
-<td>-212.2</td>
+<td>-212.3</td>
 <td>6.3%</td>
 <td>—</td>
 </tr>
@@ -487,9 +487,9 @@ computed from SEC EDGAR, Yahoo Finance, and FRED</div></div>
 <td>HP Inc.</td>
 <td>$22.7B</td>
 <td>9.0</td>
-<td>8.3</td>
+<td>8.2</td>
 <td>6.3</td>
-<td>-158.4</td>
+<td>-157.9</td>
 <td>4.4%</td>
 <td>—</td>
 </tr>

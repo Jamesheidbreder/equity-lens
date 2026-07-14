@@ -39,6 +39,15 @@ TRAIT_RISKS = {
 }
 
 
+MODEL_TITLES = {
+    "dcf": "Discounted cash flow",
+    "comps": "Peer comparables",
+    "own_multiple": "Own historical multiple",
+    "justified_pb": "Justified price-to-book",
+    "peer_pb": "Peer price-to-book",
+}
+
+
 def _m(x, pre="$", nd=2):
     return f"{pre}{x:,.{nd}f}" if x is not None else "n/a"
 
@@ -98,16 +107,17 @@ def _header(a: dict) -> str:
 
 def _investment_summary(a: dict) -> str:
     s = a["snapshot"]
-    models_line = ", ".join(
-        f"{name.replace('_', ' ')} {_m(m['per_share'])}"
+    models_line = "; ".join(
+        f"{MODEL_TITLES.get(name, name).lower()} values the shares at "
+        f"{_m(m['per_share'])}"
         for name, m in a["models"].items() if m.get("per_share"))
     out = [
         "## Investment Summary",
         "",
-        f"We rate {a['ticker']} **{a['rating']}** with a target of "
-        f"**{_m(a['target_price'])}** vs. a current price of {_m(s['price'])} "
-        f"({_pct(a['upside'])} implied). Within our coverage universe the name "
-        f"ranks **{a.get('relative_rating', 'n/a')}**.",
+        f"We rate {a['ticker']} **{a['rating']}** with a price target of "
+        f"**{_m(a['target_price'])}**, against a current price of "
+        f"{_m(s['price'])} ({_pct(a['upside'])} implied return). Within our "
+        f"coverage universe, the name ranks **{a.get('relative_rating', 'n/a')}**.",
         "",
         f"The target blends independent valuation lenses: {models_line}.",
     ]
@@ -204,9 +214,10 @@ def _dcf_walk_section(a: dict) -> str:
         return None
     ass = dcf["assumptions"]
     out = ["### DCF walk — the projection, year by year", "",
-           f"Base free cash flow {_bn(ass['fcf_base'])} ({ass.get('fcf_basis', 'standard')}); "
-           f"growth fades from {ass['initial_growth']:.1%} toward "
-           f"{ass['terminal_growth']:.1%}; discounted at {ass['cost_of_equity']:.2%}.",
+           f"The base free cash flow of {_bn(ass['fcf_base'])} is measured as "
+           f"{ass.get('fcf_basis', 'standard')}. Growth fades from "
+           f"{ass['initial_growth']:.1%} toward {ass['terminal_growth']:.1%}, "
+           f"and each year is discounted at {ass['cost_of_equity']:.2%}.",
            "",
            "| Year | Growth | Free cash flow | Discount factor | Present value |",
            "|---|---|---|---|---|"]
@@ -297,7 +308,7 @@ def _esg_section(a: dict) -> str:
 def _valuation_section(a: dict) -> str:
     out = ["## Valuation", ""]
     for name, m in a["models"].items():
-        title = name.replace("_", " ").title()
+        title = MODEL_TITLES.get(name, name.replace("_", " ").title())
         if not m.get("per_share"):
             out += [f"**{title}:** not applicable "
                     f"({m.get('reason', 'no value')}).", ""]
