@@ -6,4 +6,4 @@
 | 2 | MSFT | HOLD | Overweight | $384.93 | $418.59 | +8.7% | $559.86 |
 | 3 | KO | SELL | Neutral | $83.08 | $69.38 | -16.5% | $86.85 |
 | 4 | FITB | SELL | Underweight | $57.05 | $43.75 | -23.3% | $60.80 |
-| 5 | AAPL | SELL | Least Preferred | $314.86 | $227.98 | -27.6% | $316.76 |
+| 5 | AAPL | SELL | Least Preferred | $314.86 | $227.81 | -27.6% | $316.76 |

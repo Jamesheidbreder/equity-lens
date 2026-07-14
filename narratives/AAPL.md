@@ -114,6 +114,23 @@ we do not believe it supports a multiple above the company's own
 historical premium, which is what the current price requires.
 
 <!-- section: management -->
+- **CEO transition (September 1, 2026):** Tim Cook hands the CEO role to
+  John Ternus, SVP of hardware engineering, after fifteen years in which
+  revenue roughly quadrupled and cumulative buybacks approached $1
+  trillion. Ternus, 51, is a 25-year insider who ran engineering for
+  every major hardware line through the Apple-silicon transition; press
+  profiles consistently describe a deliberate, multi-year succession
+  plan. We view the handoff as orderly and well-telegraphed, and we note
+  what it signals: the board has chosen a product engineer over an
+  operator at precisely the moment the AI product question defines the
+  stock. Ternus has no public capital-allocation track record — the
+  buyback's continuity under him is assumed by the market, not yet
+  demonstrated.
+- **Broader turnover:** the CFO (Kevan Parekh, effective January 2025)
+  and COO (Sabih Khan, 2025) seats also changed hands in planned
+  transitions within the past ~18 months. Each transition individually
+  is unremarkable; their simultaneity concentrates institutional-memory
+  risk ahead of a strategically demanding period.
 - **Capital returns:** Apple repurchases ~$100B of stock per year —
   the largest buyback in corporate history — retiring roughly 3% of
   shares outstanding annually, alongside a modest dividend (~0.4%
@@ -138,23 +155,29 @@ historical premium, which is what the current price requires.
 <!-- section: catalysts -->
 Key events and data points, with our expected read-through:
 
-1. **Quarterly earnings (next print expected late July 2026):** the
+1. **CEO transition (September 1, 2026):** John Ternus succeeds Tim
+   Cook. We expect no near-term strategy or capital-return change, but
+   the first Ternus keynote, first guidance cycle, and any early
+   organizational moves will be read closely by the market. Transition
+   quarters historically carry elevated headline risk even when
+   succession is planned.
+2. **Quarterly earnings (next print expected late July 2026):** the
    primary metric is Services growth. We view ≥14% YoY as keeping the
    mix-shift thesis on schedule; deceleration toward single digits
    would undermine the one segment supporting the premium multiple and
    likely pressure the shares.
-2. **AI monetization evidence:** we would raise our overlay on data —
+3. **AI monetization evidence:** we would raise our overlay on data —
    shortened iPhone replacement cycles or paid AI services attach in
    reported results — not on product demonstrations. No revenue
    evidence has been reported to date.
-3. **Google default-placement litigation:** an adverse final ruling
+4. **Google default-placement litigation:** an adverse final ruling
    would remove an estimated $20B+ of near-costless annual revenue
    (roughly 3–4 points of EPS by our estimate). Our target does not
    assume this loss; the risk is asymmetric to the downside.
-4. **China share trajectory:** stabilization against Huawei would
+5. **China share trajectory:** stabilization against Huawei would
    de-risk ~20% of revenue and would cause us to revisit the growth
    assumption in our DCF.
-5. **Rating triggers:** we would revisit the SELL on either (a) price
+6. **Rating triggers:** we would revisit the SELL on either (a) price
    convergence toward our $229 target, or (b) fundamentals closing the
    gap — specifically, a return to sustained double-digit consolidated
    revenue growth with Services holding mid-teens, which would raise
