@@ -67,7 +67,10 @@ def _annual_values(facts: dict, tags: list) -> dict:
         series = {}
         for unit_vals in units.values():
             for item in unit_vals:
-                if item.get("form") != "10-K" or "end" not in item:
+                # 10-K for domestic filers; 20-F/40-F are the annual-report
+                # equivalents for foreign private issuers.
+                if item.get("form") not in ("10-K", "20-F", "40-F") \
+                        or "end" not in item:
                     continue
                 end = item["end"]
                 if "start" in item:  # duration concept: keep full-year periods only
