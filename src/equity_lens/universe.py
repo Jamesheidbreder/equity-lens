@@ -72,6 +72,20 @@ UNIVERSE = {
         # Transport); see DECISIONS.md 2026-07-14.
         "capex_basis": "maintenance",
     },
+    "SBLK": {
+        "name": "Star Bulk Carriers Corp.",
+        "sector": "Industrials",
+        "industry": "Marine Shipping (Dry Bulk)",
+        "method": "dcf_comps",
+        "peers": ["GNK", "SB", "DSX", "PANL"],
+        "cik": "0001386716",
+        "traits": [],
+        "intl_revenue_share": None,  # freight earned in USD
+        # Fleet owner: maintenance basis per SECTOR_PLAYBOOKS.md #5 and the
+        # GSL precedent in DECISIONS.md (2026-07-14). Spot-rate exposure
+        # makes the comps lens the stated anchor.
+        "capex_basis": "maintenance",
+    },
     "BRK-B": {
         "name": "Berkshire Hathaway Inc.",
         "sector": "Financials",
