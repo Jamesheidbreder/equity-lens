@@ -33,6 +33,10 @@ UNIVERSE = {
         "cik": "0000789019",
         "traits": ["enterprise_software"],
         "intl_revenue_share": 0.49,
+        # Explicit, not default: diagnostic flags capex at 2.2x depreciation
+        # (AI datacenter buildout); standard basis kept by dated analyst
+        # decision — see DECISIONS.md 2026-07-14 for reasoning + tripwire.
+        "capex_basis": "standard",
     },
     "KO": {
         "name": "The Coca-Cola Company",
