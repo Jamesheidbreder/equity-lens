@@ -60,28 +60,33 @@ charters.
   rather than a managed number.
 
 <!-- section: industry -->
-- **Demand:** dry bulk demand tracks global industrial activity —
-  iron ore and coal into steel production, grain trades, and minor
-  bulks into construction and manufacturing. Ton-mile demand has been
-  supported by longer routings (trade-pattern shifts and canal/strait
-  disruptions), which absorb fleet capacity independent of cargo
-  volumes.
-- **Supply — the structural case:** the dry bulk orderbook sits near
-  multi-decade lows as a percentage of the sailing fleet, shipyard
-  slots are largely committed to other vessel classes through the
-  late 2020s, and tightening emissions regulation encourages slow
-  steaming and scrapping of older tonnage. Low supply growth is the
-  most durable pillar of the bull case — it does not depend on a
-  demand forecast.
-- **The cyclical honesty:** none of this repeals the cycle. Dry bulk
-  rates are set daily by a commodity market; a Chinese construction
-  downturn or global recession moves them violently, and SBLK's spot
-  exposure transmits that to earnings within a quarter. The 2023
-  revenue trough ($949M) is the live demonstration.
-- **Where SBLK sits:** as the largest, lowest-cost consolidated
-  operator with a modernized fleet, SBLK is built to out-earn peers
-  across the cycle — but it is a better boat on the same ocean, not a
-  different ocean.
+- **Demand:** dry bulk ships carry the raw materials of industry —
+  iron ore and coal for steel mills, grain for food, minor bulks for
+  construction. Demand therefore rises and falls with global
+  industrial activity, and with Chinese construction above all. One
+  further driver matters: distance. When trade routes lengthen, as
+  they have while ships avoid disrupted passages, each cargo occupies
+  a vessel for more days. The same volume of cargo then requires more
+  ships, which tightens the market even when volumes are flat.
+- **Supply, the structural case:** few new dry bulk ships are being
+  built. Ships on order equal a near multi-decade-low share of the
+  fleet already sailing. Shipyards are booked with other vessel types
+  into the late 2020s, so even a rush of new orders could not arrive
+  quickly. Stricter emissions rules push owners to sail slower and
+  scrap older ships, shrinking effective capacity further. This is
+  the most durable pillar of the bull case, because it holds true no
+  matter what demand does.
+- **The honest caveat:** none of this repeals the cycle. Dry bulk
+  rates are set every day by a commodity market. A Chinese
+  construction downturn or a global recession would move them
+  violently, and because SBLK earns spot rates, the damage would
+  reach earnings within a quarter. The 2023 trough, when revenue fell
+  to $949M, shows exactly how fast that happens.
+- **Where SBLK sits:** SBLK is the largest and lowest-cost of the
+  listed dry bulk owners, and its fleet is modern. That should let it
+  earn more than peers at every point in the cycle. It does not
+  exempt the company from the cycle itself: a better boat, same
+  ocean.
 
 <!-- section: moat -->
 We are explicit, as with all commodity shippers: there is no structural
