@@ -167,24 +167,60 @@ def _business_section(a: dict) -> str:
 
 
 def _financials_section(a: dict) -> str:
+    """Key-financials exhibit: metrics as rows, fiscal years as columns —
+    the standard research-note format. Rows appear only when the company
+    reports the underlying data, so banks and industrials each get a table
+    that makes sense for them."""
+    fin = a["financials"]
     per_year = a["ratios"]["per_year"]
-    years = sorted(per_year)[-6:]
+    years = sorted(per_year)[-5:]
+
+    rev = fin["revenue"]
+    growth = {y: rev[y] / rev[p] - 1 for y, p in zip(years[1:], years[:-1])
+              if y in rev and p in rev and rev.get(p)}
+    net_debt = {y: fin["long_term_debt"][y] - fin["cash"].get(y, 0)
+                for y in years if y in fin["long_term_debt"]}
+    fcf = {y: per_year[y]["free_cash_flow"] for y in years
+           if per_year.get(y, {}).get("free_cash_flow") is not None}
+
+    def row(label, series, fmt):
+        if not any(series.get(y) is not None for y in years):
+            return None
+        cells = [fmt(series[y]) if series.get(y) is not None else "—"
+                 for y in years]
+        return f"| {label} | " + " | ".join(cells) + " |"
+
+    pct = lambda v: f"{v:+.1%}" if isinstance(v, float) else "—"
+    pct0 = lambda v: f"{v:.1%}"
+    rows = [
+        row("Revenue", {y: rev.get(y) for y in years}, _bn),
+        row("Revenue growth", growth, pct),
+        row("Operating margin",
+            {y: per_year[y].get("operating_margin") for y in years}, pct0),
+        row("Net income", {y: fin["net_income"].get(y) for y in years}, _bn),
+        row("Net margin",
+            {y: per_year[y].get("net_margin") for y in years}, pct0),
+        row("Diluted EPS", {y: fin["eps_diluted"].get(y) for y in years},
+            lambda v: f"${v:,.2f}"),
+        row("Net interest income",
+            {y: fin.get("net_interest_income", {}).get(y) for y in years}, _bn),
+        row("Free cash flow", fcf, _bn),
+        row("Return on equity",
+            {y: per_year[y].get("roe") for y in years}, pct0),
+        row("Net debt", net_debt, _bn),
+        row("Shareholders' equity",
+            {y: fin["total_equity"].get(y) for y in years}, _bn),
+        row("Dividends paid",
+            {y: fin.get("dividends_paid", {}).get(y) for y in years}, _bn),
+    ]
     out = [
         "## Financial Analysis",
         "",
-        "Annual figures from SEC EDGAR as-filed XBRL data (10-K).",
+        "### Key financials (as filed with the SEC)",
         "",
-        "| Fiscal year | Revenue | Net margin | Op margin | ROE | Free cash flow |",
-        "|---|---|---|---|---|---|",
-    ]
-    for y in years:
-        r = per_year[y]
-        out.append(
-            f"| {y} | {_bn(r.get('revenue'))} "
-            f"| {_pct(r.get('net_margin')) if r.get('net_margin') else 'n/a'} "
-            f"| {_pct(r.get('operating_margin')) if r.get('operating_margin') else 'n/a'} "
-            f"| {_pct(r.get('roe')) if r.get('roe') else 'n/a'} "
-            f"| {_bn(r.get('free_cash_flow'))} |")
+        "| Fiscal year | " + " | ".join(str(y) for y in years) + " |",
+        "|---|" + "---|" * len(years),
+    ] + [r for r in rows if r]
     g = a["ratios"]
     out += ["", f"Revenue CAGR: {_pct(g['revenue_cagr_3y'])} (3y), "
                 f"{_pct(g['revenue_cagr_5y'])} (5y). "

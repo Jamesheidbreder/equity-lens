@@ -44,6 +44,23 @@ def _style(ax, ygrid=True):
     if ygrid:
         ax.grid(axis="y", color=GRID, linewidth=0.8)
         ax.set_axisbelow(True)
+    t = ax.get_title()          # center-slot title
+    if t:
+        ax.set_title("")            # clear center slot
+        ax.set_title(t, loc="left", pad=10)
+
+
+def _label_bars(ax, values, fmt="{:,.0f}"):
+    """Direct value labels on bars; the y-axis then gets out of the way."""
+    for rect, v in zip(ax.patches, values):
+        neg = v < 0
+        ax.annotate(fmt.format(v),
+                    (rect.get_x() + rect.get_width() / 2, rect.get_height()),
+                    ha="center", va="top" if neg else "bottom", fontsize=8,
+                    color=INK_MUTED,
+                    xytext=(0, -2 if neg else 2), textcoords="offset points")
+    ax.set_yticks([])
+    ax.grid(False)
 
 
 def _save(fig, name: str) -> str:
@@ -59,6 +76,13 @@ def price_chart(ticker: str, hist: pd.Series, target: float,
     """5y price with our target and street consensus marked."""
     fig, ax = plt.subplots(figsize=(7, 2.8))
     ax.plot(hist.index, hist.values, color=C_BLUE, linewidth=1.6)
+    ax.fill_between(hist.index, hist.values, hist.values.min(),
+                    color=C_BLUE, alpha=0.06)
+    ax.plot([hist.index[-1]], [hist.values[-1]], "o", color=C_BLUE,
+            markersize=4)
+    ax.annotate(f" ${hist.values[-1]:,.0f}",
+                (hist.index[-1], hist.values[-1]), fontsize=8.5,
+                color=C_BLUE, fontweight="bold", va="center")
     ax.axhline(target, color=INK, linewidth=1.1, linestyle="--")
     ax.annotate(f"  our target ${target:,.0f}", (hist.index[-1], target),
                 color=INK, fontsize=8, va="bottom", ha="right")
@@ -73,23 +97,26 @@ def price_chart(ticker: str, hist: pd.Series, target: float,
 
 def fundamentals_chart(ticker: str, per_year: dict) -> str:
     """Revenue bars + net margin line (own axis-free annotation style)."""
-    years = sorted(per_year)
+    years = sorted(per_year)[-6:]
     rev = [per_year[y].get("revenue") for y in years]
     fig, axes = plt.subplots(1, 2, figsize=(7, 2.6))
 
     ax = axes[0]
-    ax.bar([str(y) for y in years], [r / 1e9 if r else 0 for r in rev],
-           color=C_BLUE, width=0.55)
+    vals = [r / 1e9 if r else 0 for r in rev]
+    ax.bar([str(y) for y in years], vals, color=C_BLUE, width=0.55)
     ax.set_title("Revenue ($B)")
     _style(ax)
+    _label_bars(ax, vals, "{:,.1f}" if max(vals, default=0) < 10 else "{:,.0f}")
 
     ax = axes[1]
     fcf = [(y, per_year[y]["free_cash_flow"] / 1e9) for y in years
            if per_year[y].get("free_cash_flow") is not None]
     if fcf:
-        ax.bar([str(y) for y, _ in fcf], [v for _, v in fcf],
-               color=C_AQUA, width=0.55)
+        fvals = [v for _, v in fcf]
+        ax.bar([str(y) for y, _ in fcf], fvals, color=C_AQUA, width=0.55)
         ax.set_title("Free cash flow ($B)")
+        _style(ax)
+        _label_bars(ax, fvals, "{:,.1f}")
     else:
         roe = [(y, per_year[y]["roe"]) for y in years
                if per_year[y].get("roe") is not None]
@@ -102,7 +129,7 @@ def fundamentals_chart(ticker: str, per_year: dict) -> str:
 
 
 def margins_chart(ticker: str, per_year: dict) -> str:
-    years = sorted(per_year)
+    years = sorted(per_year)[-6:]
     series = {"Net margin": [per_year[y].get("net_margin") for y in years],
               "Operating margin": [per_year[y].get("operating_margin")
                                    for y in years]}
@@ -112,13 +139,16 @@ def margins_chart(ticker: str, per_year: dict) -> str:
         pts = [(str(y), v * 100) for y, v in zip(years, vals) if v is not None]
         if pts:
             ax.plot([p[0] for p in pts], [p[1] for p in pts], color=color,
-                    linewidth=1.8, marker="o", markersize=3, label=label)
+                    linewidth=1.8, marker="o", markersize=3)
+            ax.annotate(f" {label} {pts[-1][1]:.0f}%",
+                        (pts[-1][0], pts[-1][1]), fontsize=8, color=color,
+                        fontweight="bold", va="center")
             plotted = True
     if not plotted:
         plt.close(fig)
         return None
     ax.set_title("Profit margins (%)")
-    ax.legend(frameon=False, fontsize=8, loc="lower right")
+    ax.margins(x=0.14)
     _style(ax)
     return _save(fig, f"{ticker}_margins.png")
 
@@ -186,7 +216,9 @@ def quarterly_chart(ticker: str, quarterly: dict) -> str:
         return None
     labels = [k[2:7] for k in rev]   # 'YY-MM' from ISO dates
     fig, ax = plt.subplots(figsize=(7, 2.3))
-    ax.bar(labels, [v / 1e9 for v in rev.values()], color=C_BLUE, width=0.55)
-    ax.set_title("Quarterly revenue, as filed in 10-Qs ($B)")
+    qvals = [v / 1e9 for v in rev.values()]
+    ax.bar(labels, qvals, color=C_BLUE, width=0.55)
+    ax.set_title("Quarterly revenue, as filed ($B)")
     _style(ax)
+    _label_bars(ax, qvals, "{:,.1f}" if max(qvals, default=0) < 10 else "{:,.0f}")
     return _save(fig, f"{ticker}_quarterly.png")
