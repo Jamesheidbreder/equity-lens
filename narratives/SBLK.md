@@ -68,6 +68,8 @@ charters.
   they have while ships avoid disrupted passages, each cargo occupies
   a vessel for more days. The same volume of cargo then requires more
   ships, which tightens the market even when volumes are flat.
+  **Net effect: favorable today — but this is the volatile side of the
+  market, and it can reverse without warning.**
 - **Supply, the structural case:** few new dry bulk ships are being
   built. Ships on order equal a near multi-decade-low share of the
   fleet already sailing. Shipyards are booked with other vessel types
@@ -75,18 +77,23 @@ charters.
   quickly. Stricter emissions rules push owners to sail slower and
   scrap older ships, shrinking effective capacity further. This is
   the most durable pillar of the bull case, because it holds true no
-  matter what demand does.
+  matter what demand does. **Net effect: positive and durable — supply
+  is the reason to own shipping this decade.**
 - **The honest caveat:** none of this repeals the cycle. Dry bulk
   rates are set every day by a commodity market. A Chinese
   construction downturn or a global recession would move them
   violently, and because SBLK earns spot rates, the damage would
   reach earnings within a quarter. The 2023 trough, when revenue fell
-  to $949M, shows exactly how fast that happens.
+  to $949M, shows exactly how fast that happens. **Net effect: the
+  defining risk of the stock — it argues for sizing the position
+  modestly, not for avoiding it.**
 - **Where SBLK sits:** SBLK is the largest and lowest-cost of the
   listed dry bulk owners, and its fleet is modern. That should let it
   earn more than peers at every point in the cycle. It does not
   exempt the company from the cycle itself: a better boat, same
-  ocean.
+  ocean. **Net effect: positive versus peers, neutral versus the
+  cycle — SBLK is the right vehicle if you want this exposure at
+  all.**
 
 <!-- section: moat -->
 We are explicit, as with all commodity shippers: there is no structural
