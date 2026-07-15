@@ -6,32 +6,34 @@ initiation research. -->
 <!-- section: thesis -->
 **Initiating at BUY, $37 target: a levered bet on a firming dry bulk cycle, paid out in cash as it happens.**
 
-- **Valuation:** our lenses value SBLK at $51 (DCF, maintenance-capex
-  basis), $29 (peer multiples), and $25 (own historical multiple),
-  blending to a $37 target against a $26.56 price (+38%). Street
-  consensus is ~$31. The spread across methods is wide — roughly 2x
-  from bottom lens to top — which per our methodology reads as elevated
-  uncertainty, and we hold the target with moderate conviction.
+- **Valuation:** our three lenses value SBLK at $51 (discounted cash
+  flow on the maintenance-capex basis), $29 (peer multiples), and $25
+  (its own historical multiple). Blended, they produce a $37 target
+  against a $26.56 price, an implied return of +38%. Street consensus
+  is about $31. The gap between our lowest and highest lens is roughly
+  2x. Under our methodology, a spread that wide signals elevated
+  uncertainty, so we hold the target with moderate conviction.
 - **What the spread is telling you:** SBLK earns spot and short-term
-  charter rates, so its results move with the dry bulk market
-  essentially in real time — revenue has swung from $1.44B (2022) to
-  $949M (2023) to $1.27B (2024) to $1.04B (2025) across a single
-  cycle. The market-based lenses ($25–29) price the company on soft
-  trailing earnings; the cash-flow lens ($51) prices the through-cycle
-  cash generation of a 136-vessel fleet. The truth depends on where
-  rates settle, and we weight accordingly.
-- **Why we lean positive:** rates have turned. Q1 2026 time-charter
-  equivalent averaged $18,493/day, up from $12,439 a year earlier —
-  counterseasonal strength across all vessel classes, per management —
-  while the industry orderbook remains historically low relative to an
-  aging global fleet. Trailing earnings understate the run-rate the
-  fleet earns at current rates.
-- **The kicker:** a newly adopted full-payout dividend policy
-  distributes 100% of operating cash flow after capital expenditure and
-  debt service. In a firming rate environment, shareholders receive the
-  cycle directly in cash rather than trusting management to time
-  reinvestment; in a softening one, the dividend falls just as fast.
-  This is a cycle instrument by design, and we rate it as one.
+  charter rates, so its results move with the dry bulk market almost
+  in real time. Revenue swung from $1.44B in 2022, to $949M in 2023,
+  to $1.27B in 2024, to $1.04B in 2025. The two market-based lenses
+  ($25 and $29) price the company on today's soft trailing earnings.
+  The cash-flow lens ($51) prices what a 136-vessel fleet generates
+  across a full cycle. Which lens proves right depends on where rates
+  settle, and we anchor on the market-based pair.
+- **Why we lean positive:** rates have turned. The fleet earned an
+  average of $18,493 per vessel per day in the first quarter of 2026,
+  up from $12,439 a year earlier. Management described the strength as
+  counterseasonal and broad across vessel classes. Few new ships are
+  on order relative to an aging global fleet, so supply should stay
+  tight. Trailing earnings therefore understate what the fleet earns
+  at today's rates.
+- **The kicker:** SBLK adopted a full-payout dividend policy in 2026.
+  The company now distributes 100% of operating cash flow after
+  capital spending and debt service. When rates are strong,
+  shareholders receive the upcycle directly in cash. When rates
+  weaken, the dividend will fall just as quickly. This is a cycle
+  instrument by design, and we rate it as one.
 
 <!-- section: segments -->
 SBLK operates a single business: owning and operating dry bulk carriers
