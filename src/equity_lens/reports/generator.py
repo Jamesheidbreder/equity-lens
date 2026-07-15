@@ -417,6 +417,46 @@ def _risks_section(a: dict) -> str:
     return "\n".join(out)
 
 
+def _conclusion_section(a: dict, narrative: dict) -> str:
+    """Closing decision card: the whole report restated in five lines.
+    Computed from engine output so it can never drift from the numbers."""
+    s = a["snapshot"]
+    vals = [m["per_share"] for m in a["models"].values() if m.get("per_share")]
+    spread = (max(vals) / min(vals)) if vals and min(vals) > 0 else None
+    conviction = ("high" if spread and spread < 1.5 else
+                  "moderate" if spread and spread < 2.5 else "low")
+    lens_line = " / ".join(f"{_m(m['per_share'])}"
+                           for m in a["models"].values() if m.get("per_share"))
+    out = ["## Investment Conclusion", ""]
+    headline = None
+    if narrative.get("thesis"):
+        first = narrative["thesis"].strip().splitlines()[0]
+        if first.startswith("**"):
+            headline = first.strip("* ")
+    if headline:
+        out.append(f"*{headline}*")
+        out.append("")
+    out += [
+        f"- **The call:** {a['rating']} with a {_m(a['target_price'])} target "
+        f"against a {_m(s['price'])} price ({_pct(a['upside'])} implied); "
+        f"street consensus {_m(s['street_target_mean'])}.",
+        f"- **The evidence:** our independent lenses value the shares at "
+        f"{lens_line}; the blended base case is {_m(a['base_target'])}"
+        + (f", adjusted to {_m(a['target_price'])} by the disclosed analyst "
+           f"overlay." if a["overlay"]["overlays"] else "."),
+        f"- **Conviction:** {conviction} — the widest and narrowest lenses "
+        f"differ by {spread:,.1f}x; per our methodology, tighter agreement "
+        f"means higher confidence in the target." if spread else
+        f"- **Conviction:** not assessed (insufficient model coverage).",
+        f"- **Within coverage:** ranked {a.get('relative_rating', 'n/a')} "
+        f"(#{a.get('relative_rank', '—')}) among the names we cover.",
+        "- **Standing review:** the rating is re-examined at every quarterly "
+        "print against the triggers listed under Catalysts; calls and "
+        "targets are logged, dated, and never rewritten.",
+    ]
+    return "\n".join(out)
+
+
 def _disclosures(a: dict) -> str:
     return "\n".join([
         "## Disclosures",
@@ -528,7 +568,8 @@ def generate_report(a: dict, dashboard, chart_paths: dict = None) -> str:
     if "catalysts" in n:
         parts.append("## Catalysts and What Would Change Our Mind\n\n"
                      + n["catalysts"])
-    parts += [_risks_section(a), _esg_section(a), _disclosures(a)]
+    parts += [_risks_section(a), _esg_section(a),
+              _conclusion_section(a, n), _disclosures(a)]
     return "\n\n".join(parts) + "\n"
 
 
