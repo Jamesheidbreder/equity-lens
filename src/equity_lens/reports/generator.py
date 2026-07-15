@@ -180,6 +180,13 @@ def _financials_section(a: dict) -> str:
               if y in rev and p in rev and rev.get(p)}
     net_debt = {y: fin["long_term_debt"][y] - fin["cash"].get(y, 0)
                 for y in years if y in fin["long_term_debt"]}
+    # EBITDA derived the standard way: operating income + D&A. The row
+    # drops automatically for filers (e.g. banks) missing either input.
+    ebitda = {y: fin["operating_income"][y] + fin["depreciation"][y]
+              for y in years
+              if y in fin["operating_income"] and y in fin.get("depreciation", {})}
+    ebitda_margin = {y: ebitda[y] / rev[y] for y in ebitda
+                     if rev.get(y)}
     fcf = {y: per_year[y]["free_cash_flow"] for y in years
            if per_year.get(y, {}).get("free_cash_flow") is not None}
 
@@ -195,6 +202,8 @@ def _financials_section(a: dict) -> str:
     rows = [
         row("Revenue", {y: rev.get(y) for y in years}, _bn),
         row("Revenue growth", growth, pct),
+        row("EBITDA", ebitda, _bn),
+        row("EBITDA margin", ebitda_margin, pct0),
         row("Operating margin",
             {y: per_year[y].get("operating_margin") for y in years}, pct0),
         row("Net income", {y: fin["net_income"].get(y) for y in years}, _bn),
