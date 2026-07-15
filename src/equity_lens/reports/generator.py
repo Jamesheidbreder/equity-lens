@@ -425,8 +425,10 @@ def _conclusion_section(a: dict, narrative: dict) -> str:
     spread = (max(vals) / min(vals)) if vals and min(vals) > 0 else None
     conviction = ("high" if spread and spread < 1.5 else
                   "moderate" if spread and spread < 2.5 else "low")
-    lens_line = " / ".join(f"{_m(m['per_share'])}"
-                           for m in a["models"].values() if m.get("per_share"))
+    lens_vals = [_m(m["per_share"]) for m in a["models"].values()
+                 if m.get("per_share")]
+    lens_line = (", ".join(lens_vals[:-1]) + ", and " + lens_vals[-1]
+                 if len(lens_vals) > 1 else "".join(lens_vals))
     out = ["## Investment Conclusion", ""]
     headline = None
     if narrative.get("thesis"):
@@ -436,22 +438,27 @@ def _conclusion_section(a: dict, narrative: dict) -> str:
     if headline:
         out.append(f"*{headline}*")
         out.append("")
+    overlay_note = (f" A disclosed analyst overlay adjusts this to "
+                    f"{_m(a['target_price'])}." if a["overlay"]["overlays"]
+                    else "")
+    conviction_line = (
+        f"- **Conviction:** {conviction}. The widest and narrowest lenses "
+        f"differ by {spread:,.1f}x. Tighter agreement between independent "
+        f"methods means higher confidence in the target." if spread else
+        "- **Conviction:** not assessed. Too few models produced a value.")
     out += [
-        f"- **The call:** {a['rating']} with a {_m(a['target_price'])} target "
-        f"against a {_m(s['price'])} price ({_pct(a['upside'])} implied); "
-        f"street consensus {_m(s['street_target_mean'])}.",
+        f"- **The call:** {a['rating']}. Our target is {_m(a['target_price'])} "
+        f"against a current price of {_m(s['price'])}, an implied return of "
+        f"{_pct(a['upside'])}. Street consensus stands at "
+        f"{_m(s['street_target_mean'])}.",
         f"- **The evidence:** our independent lenses value the shares at "
-        f"{lens_line}; the blended base case is {_m(a['base_target'])}"
-        + (f", adjusted to {_m(a['target_price'])} by the disclosed analyst "
-           f"overlay." if a["overlay"]["overlays"] else "."),
-        f"- **Conviction:** {conviction} — the widest and narrowest lenses "
-        f"differ by {spread:,.1f}x; per our methodology, tighter agreement "
-        f"means higher confidence in the target." if spread else
-        f"- **Conviction:** not assessed (insufficient model coverage).",
-        f"- **Within coverage:** ranked {a.get('relative_rating', 'n/a')} "
-        f"(#{a.get('relative_rank', '—')}) among the names we cover.",
-        "- **Standing review:** the rating is re-examined at every quarterly "
-        "print against the triggers listed under Catalysts; calls and "
+        f"{lens_line}. The blended base case is "
+        f"{_m(a['base_target'])}.{overlay_note}",
+        conviction_line,
+        f"- **Within coverage:** ranked {a.get('relative_rating', 'n/a')}, "
+        f"#{a.get('relative_rank', '—')} among the names we cover.",
+        "- **Standing review:** we re-examine the rating at every quarterly "
+        "report against the triggers listed under Catalysts. Calls and "
         "targets are logged, dated, and never rewritten.",
     ]
     return "\n".join(out)
