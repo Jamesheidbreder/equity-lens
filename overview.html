@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Equity-Lens — Project Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1d1d1f; --muted: #6e6e73; --hair: #e5e5e2; --accent: #2a78d6;
+  --paper: #ffffff; --wash: #f5f5f7;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--wash); color: var(--ink);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+.sheet {
+  max-width: 860px; margin: 24px auto; background: var(--paper);
+  padding: 48px 56px 40px; border: 1px solid var(--hair);
+  border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,.05),
+                                  0 12px 32px rgba(0,0,0,.05);
+}
+.masthead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 3px solid var(--ink); padding-bottom: 10px;
+  margin-bottom: 22px;
+}
+.masthead .brand {
+  font-family: 'Source Serif 4', Georgia, serif; font-size: 21px;
+  font-weight: 700; letter-spacing: .01em;
+}
+.masthead .kind { color: var(--muted); font-size: 12.5px;
+  text-transform: uppercase; letter-spacing: .14em; }
+.titleblock h1 {
+  font-family: 'Source Serif 4', Georgia, serif; font-size: 30px;
+  line-height: 1.15; margin: 0 0 4px;
+}
+.titleblock .sub { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; }
+.banner {
+  display: flex; gap: 0; border: 1px solid var(--hair); border-radius: 10px;
+  overflow: hidden; margin: 0 0 26px;
+}
+.banner .cell {
+  flex: 1; padding: 12px 16px; border-right: 1px solid var(--hair);
+}
+.banner .cell:last-child { border-right: 0; }
+.banner .label { font-size: 10.5px; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--muted); margin-bottom: 3px; }
+.banner .value { font-size: 19px; font-weight: 650; }
+.banner .rating-cell { color: #fff; }
+.banner .rating-cell .label { color: rgba(255,255,255,.75); }
+h2 {
+  font-family: 'Source Serif 4', Georgia, serif; font-size: 20px;
+  margin: 34px 0 10px; padding-top: 18px; border-top: 1px solid var(--hair);
+}
+h3 { font-size: 15.5px; margin: 22px 0 8px; }
+p, li { max-width: 72ch; }
+a { color: var(--accent); text-decoration: none; }
+img { max-width: 100%; border: 1px solid var(--hair); border-radius: 8px;
+      margin: 8px 0 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px;
+        margin: 12px 0 6px; }
+th { text-align: left; font-size: 11px; text-transform: uppercase;
+     letter-spacing: .08em; color: var(--muted); font-weight: 600;
+     padding: 7px 10px; border-bottom: 2px solid var(--ink); }
+td { padding: 7px 10px; border-bottom: 1px solid var(--hair);
+     font-variant-numeric: tabular-nums; }
+tr:hover td { background: #fafafa; }
+.footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid
+          var(--hair); color: var(--muted); font-size: 12px; }
+@media print {
+  body { background: #fff; }
+  .sheet { box-shadow: none; border: 0; margin: 0; padding: 24px 8px;
+           max-width: 100%; }
+  .banner { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  img, table { break-inside: avoid; }
+}
+</style></head>
+<body><div class="sheet">
+<div class="masthead"><span class="brand">EQUITY-LENS</span>
+<span class="kind">Project Overview</span></div>
+<h1>Equity-Lens: What This Project Is</h1>
+<p><strong>One sentence:</strong> Equity-Lens is a research platform I built that reads a
+company's official financial filings, calculates what its stock is
+actually worth, writes an institutional-style research report about it,
+and keeps a public, dated record of every call it makes.</p>
+<p><strong>Cost to run: $0.</strong> Every data source is free and public. Every
+calculation runs in code I control.</p>
+<hr />
+<h2>What it produces</h2>
+<ul>
+<li><strong>Research reports.</strong> For each covered company: a rating (BUY, HOLD,
+  or SELL), a price target, and a full written report — the same
+  structure Wall Street banks publish, with charts, financial tables, a
+  valuation walk-through, risks, and catalysts.</li>
+<li><strong>A coverage universe.</strong> Seven companies so far, deliberately spread
+  across different kinds of businesses: Apple, Microsoft, Coca-Cola,
+  Fifth Third Bank, Berkshire Hathaway, and two shipping companies
+  (Global Ship Lease and Star Bulk).</li>
+<li><strong>A public scorecard.</strong> Every rating and target is logged with its
+  date and stored in version control, where it cannot be quietly
+  edited later. Right calls and wrong calls both stay on the record.</li>
+</ul>
+<h2>How the valuation engine works</h2>
+<p>The engine answers one question: <strong>what is one share of this company
+actually worth?</strong> It does this with real data and open math — no
+guessing, no black box.</p>
+<p><strong>Step 1 — Gather the facts.</strong> The engine pulls three kinds of data
+automatically: the company's audited financial statements from the SEC
+(the U.S. government filing system), live market prices, and economic
+data from the Federal Reserve (interest rates, inflation, and so on).</p>
+<p><strong>Step 2 — Value the company through three independent lenses.</strong> Each
+lens answers the same question a different way:</p>
+<ol>
+<li><strong>Discounted cash flow.</strong> Add up the cash the business is expected
+   to generate in the future, and translate it into today's dollars.
+   A dollar arriving in five years is worth less than a dollar today,
+   so future cash is discounted using interest rates plus a premium
+   for risk. This lens asks: <em>what are the future profits worth right
+   now?</em></li>
+<li><strong>Peer comparison.</strong> Look at what similar companies cost relative
+   to their earnings, and apply that price level to this company.
+   This lens asks: <em>what would this company cost if it were priced
+   like its competitors?</em></li>
+<li><strong>Own history.</strong> Look at the price level this company itself has
+   commanded over the past five years, and apply it to today's
+   earnings. This lens asks: <em>what would the stock cost if it were
+   priced the way it usually is?</em></li>
+</ol>
+<p><strong>Step 3 — Blend and adjust.</strong> The three answers are blended into one
+target. The economic backdrop leans on the inputs in small, capped
+ways — for example, higher interest rates lower every valuation, and
+rising aluminum prices squeeze a soda maker's margins. If the target
+sits well above the market price, the stock is rated BUY; well below,
+SELL; near it, HOLD.</p>
+<p><strong>Step 4 — Read the disagreement.</strong> If the three lenses roughly agree,
+confidence in the answer is high. If they disagree wildly, that is a
+finding in itself: the company's value is genuinely uncertain, and the
+report says so plainly.</p>
+<p><strong>One size does not fit all.</strong> A bank is not valued like a phone
+maker, and a shipping company is not valued like a soda company. The
+engine assigns each company a sector playbook that picks the right
+methods — banks are valued on their balance sheets, shipping companies
+get their fleet spending treated as investment rather than expense.
+Every methodology choice is written down in a decision journal with
+the reasoning and the evidence that would reverse it.</p>
+<p><strong>Where human judgment fits.</strong> The machine only prices what has
+already happened. Some things haven't happened yet — a new product, an
+AI bet — and crediting them is a judgment call. Those calls are
+allowed, but only through a disclosed, dated adjustment with written
+reasoning that appears in the report. The machine's number and the
+adjusted number are always shown side by side.</p>
+<h2>Why this is different from asking an AI chatbot</h2>
+<p>A chatbot generates plausible-sounding numbers; this engine calculates
+real ones from audited filings, the same way every time, and shows its
+work. A chatbot has no memory; this platform keeps score in public.
+The gap between our targets and Wall Street's is measured and
+explained in every report — their consensus is displayed as a
+benchmark, but it never enters our math.</p>
+<h2>What's under the hood</h2>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data layer</td>
+<td>Pulls SEC filings, market prices, and Fed data; handles U.S. and foreign filing formats</td>
+</tr>
+<tr>
+<td>Valuation engine</td>
+<td>The three lenses, sector playbooks, macro adjustments, conviction grading</td>
+</tr>
+<tr>
+<td>Report generator</td>
+<td>Turns the analysis into styled research reports with charts and tables</td>
+</tr>
+<tr>
+<td>Narratives</td>
+<td>Written analysis (thesis, industry, moat, management) in bank-note style, drafted with research and edited by hand</td>
+</tr>
+<tr>
+<td>Scorecard</td>
+<td>The append-only log of every dated call</td>
+</tr>
+<tr>
+<td>Dashboard</td>
+<td>A local web app for browsing the analysis interactively</td>
+</tr>
+</tbody>
+</table>
+<p>Everything is versioned publicly at
+<a href="https://github.com/Jamesheidbreder/equity-lens">github.com/Jamesheidbreder/equity-lens</a> —
+the commit history is the build log of the entire project.</p>
+<p><em>Educational research project. Not investment advice.</em></p>
+<div class="footer">github.com/Jamesheidbreder/equity-lens &middot;
+Educational research project; not investment advice.</div>
+</div></body></html>
